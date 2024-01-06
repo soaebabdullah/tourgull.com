@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+
+
+        <!-- host.app -->
+        <!-- host_app -->
+        <record model="ir.ui.view" id="host_apps_tree">
+            <field name="name">Host Applications</field>
+            <field name="model">host.app</field>
+            <field name="arch" type="xml">
+                <tree default_order="id desc" decoration-danger="status=='pending'">
+                    <field name="partner_id"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- host.app -->
+        <!-- host_app -->
+        <record model="ir.ui.view" id="host_apps_form_tree">
+            <field name="name">Host Applications</field>
+            <field name="model">host.app</field>
+            <field name="arch" type="xml">
+                <form string="Host Application">
+                    <header>
+                        <button name="approve" type="object" string="Approve"
+                                attrs="{'invisible':[('status','=', 'approved')]}"/>
+                        <button name="pending" type="object" string="Reject"
+                                attrs="{'invisible':[('status','=', 'pending')]}"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="status" invisible="1"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions -->
+        <record model="ir.actions.act_window" id="host_apps_action">
+            <field name="name">Become A Host Request</field>
+            <field name="res_model">host.app</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,472 @@
+<odoo>
+    <template id="home">
+        <t t-call="as_rental.as_layout">
+            <t t-set="head">
+                <title>Home | AvailabilityShare</title>
+                <link rel="stylesheet" href="/as_rental/static/owl-carousel/dist/assets/owl.carousel.min.css"/>
+                <link rel="stylesheet" href="/as_rental/static/owl-carousel/dist/assets/owl.theme.default.css"/>
+                <link rel="stylesheet" href="/as_rental/static/css/home.css?v=11"/>
+            </t>
+            <t t-set="footer">
+                <script type="text/javascript" src="/as_rental/static/owl-carousel/dist/owl.carousel.min.js"></script>
+                <script src="/as_rental/static/js/home.js"></script>
+            </t>
+            <div id="as-body">
+                <!-- carousel -->
+                <!-- carousel -->
+                <div>
+                    <div id="as-carousel" class="carousel" data-ride="carousel" data-interval="10000"
+                         data-pause="false">
+                        <ol class="carousel-indicators">
+                            <li data-target="#as-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#as-carousel" data-slide-to="1"></li>
+                            <li data-target="#as-carousel" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="overlay-form">
+                                <div class="row">
+                                    <div class="col-1 col-sm-3 col-md-4 col-lg-4"></div>
+                                    <div class="col-10 p-3 col-sm-6 col-md-4 col-lg-4">
+                                        <div class="d-flex justify-content-center overlay-form-menu">
+                                            <p class="overlay-form--tabs mr-3 overlay-form-menu-active"
+                                               style="text-transform: uppercase; font-weight: bold;" overlay-tab="1">
+                                                Tours</p>
+                                            <p class="overlay-form--tabs"
+                                               style="text-transform: uppercase; font-weight: bold;" overlay-tab="2">
+                                                Stays</p>
+                                            <p class="overlay-form--tabs d-none"
+                                               style="text-transform: uppercase; font-weight: bold;" overlay-tab="3">
+                                                Flight</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-1 col-sm-3 col-md-4 col-lg-4"></div>
+                                </div>
+
+                                <div class="overlay-tab--contents" id="overlay-content--1">
+                                    <div class="row">
+                                        <div class="col">
+                                            <form action="/event" id="form-event">
+                                                <div class="form-group px-4">
+                                                    <label for="exampleFormControlInput1"
+                                                           style="font-size: 20px; color: black;">Location/Tour</label>
+                                                    <input type="text" class="form-control"
+                                                           id="exampleFormControlInput1" name="event-search"
+                                                           required="1" placeholder="Cox's Bazar"/>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col d-flex justify-content-center mt-2 mb-3">
+                                            <button form="form-event" class="btn btn-primary"
+                                                    style="text-transform: uppercase;">
+                                                Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="c-search-form overlay-tab--contents" id="overlay-content--2"
+                                     style="display: none;">
+                                    <form id="form-search" class="form-prop-search p-0 m-0"
+                                          action="/rental/browse-property"
+                                          enctype="multipart/form-data" autocomplete="off">
+                                        <div class="flex-search-input">
+                                            <div class="search__where" style="position: relative;">
+                                                <label for="location">Where</label>
+                                                <input list="loc-list" class="form-control rm-outline" name="location"
+                                                       required="1" id="location"/>
+                                                <div id="location-suggest" style="display: none;">
+                                                    <ul id="location-ul">
+                                                        <t t-foreach="cities" t-as="city">
+                                                            <li class="city-item" t-esc="city"></li>
+                                                        </t>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="search__checkin">
+                                                <label for="checkin">Check In</label>
+                                                <input type="date" class="form-control" name="checkin" id="checkin"
+                                                       required="1"/>
+                                                <small id="invalid_checkin" class="text-danger" style="display: none;">
+                                                    Invalid
+                                                    date</small>
+                                            </div>
+                                            <div class="search__checkout">
+                                                <label for="checkout">Check Out</label>
+                                                <input type="date" class="form-control" name="checkout" id="checkout"
+                                                       required="1"/>
+                                                <small id="invalid_checkout" class="text-danger" style="display: none;">
+                                                    Invalid
+                                                    date</small>
+                                            </div>
+                                            <div>
+                                                <label for="rooms">Rooms</label>
+                                                <input type="number" class="form-control guests-count" value="1"
+                                                       style="width: 60px;" name="rooms" id="rooms"/>
+                                            </div>
+                                            <div>
+                                                <label for="guests">Adult's</label>
+                                                <input type="number" class="form-control guests-count" value="1"
+                                                       style="width: 60px;" name="adults" id="adults"/>
+                                            </div>
+                                            <div>
+                                                <label for="childs">Child's</label>
+                                                <input type="number" class="form-control guests-count" value="0"
+                                                       style="width: 60px;" name="childs" id="childs"/>
+                                            </div>
+                                            <div style="align-self: end;">
+                                                <br/>
+                                                <button type="submit" class="btn btn-primary">Search</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="text-center overlay-tab--contents flight" id="overlay-content--3"
+                                     style="display: none;">
+                                    <p style="color: black;">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Aliquid, mollitia.</p>
+                                </div>
+
+                            </div>
+                            <t t-set="one_time" t-value="True"/>
+                            <t t-foreach="carousels" t-as="cs">
+                                <div t-if="one_time" class="carousel-item active">
+                                    <img t-att-src="image_data_uri(cs.image)"/>
+                                    <t t-set="one_time" t-value="False"/>
+                                </div>
+                                <div t-else="" class="carousel-item">
+                                    <img t-att-src="image_data_uri(cs.image)"/>
+                                </div>
+                            </t>
+                        </div>
+
+                        <a class="carousel-control-prev" href="#as-carousel" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#as-carousel" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- search form -->
+                <!-- search form -->
+                <div class="container">
+
+                    <!-- banner-1 -->
+                    <div class="mt-5">
+                        <div class="banner-1">
+                            <a href="/event">
+                                <img src="/as_rental/static/images/Banner1.png?v=1"/>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Todays Deals -->
+                    <div class="mt-5 explore-bd">
+
+                        <div class="text-center">
+                            <h4 class="mb-0"><b>Explore Today's Deals</b></h4>
+                            <small class="text-muted d-block pt-2">These amazing deals will blow your mind</small>
+                            <div class="row">
+                                <div class="col-1 col-sm-3 col-md-4 col-lg-4"></div>
+                                <div class="col-10 p-4 col-sm-6 col-md-4 col-lg-4 mid-menu">
+                                    <div class="d-flex justify-content-center mid-menu--content">
+                                        <p class="todays-deals--tabs todays-deals--active mr-3" deals-tab="1"
+                                           style="text-transform: uppercase; font-weight: bold;">Tours</p>
+                                        <p class="todays-deals--tabs mr-3" deals-tab="2"
+                                           style="text-transform: uppercase; font-weight: bold;">Flight</p>
+                                        <p class="todays-deals--tabs" deals-tab="3"
+                                           style="text-transform: uppercase; font-weight: bold;">Stays</p>
+                                    </div>
+                                </div>
+                                <div class="col-1 col-sm-3 col-md-4 col-lg-4"></div>
+                            </div>
+                        </div>
+
+                        <div t-if="deal_events"
+                             class="c-explore-bd mt-2 todays-deals--carousel-1 owl-carousel owl-theme todays-deals--contents"
+                             id="todays-deals--1">
+                            <t t-foreach="deal_events" t-as="event">
+                                <div>
+                                    <div>
+                                        <a class="link" t-att-href="'/event/detail?id=%s' % event.id">
+                                            <img class="stay-img item-img" t-if="event.image_512"
+                                                 t-att-src="image_data_uri(event.image_512)" alt=""/>
+                                        </a>
+                                    </div>
+                                    <div class="pt-3">
+                                        <a class="link" t-att-href="'/event/detail?id=%s' % event.id">
+                                            <h6 class="mb-0"><b t-esc="event.name"></b></h6>
+                                            <small class="text-muted"
+                                                   t-esc="'%s Day, %s Night' % (event.day, event.night)"></small>
+                                        </a>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+
+                        <div t-if="deal_flights"
+                             class="todays-deals--contents todays-deals--carousel-2 owl-carousel owl-theme"
+                             id="todays-deals--2" style="display: none;">
+                            <div>
+                                <div>
+                                    <a class="link" href="/rental/browse-property">
+                                        <img src="/as_rental/static/images/explore-bd/cox_bazar.jpg" alt=""/>
+                                    </a>
+                                </div>
+                                <div class="pt-3">
+                                    <a class="link" href="/rental/browse-property">
+                                        <h6 class="mb-0"><b>Cox's Bazar</b></h6>
+                                        <small class="text-muted">32 Properties</small>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div t-if="deal_stays"
+                             class="todays-deals--contents todays-deals--carousel-3 owl-carousel owl-theme"
+                             id="todays-deals--3" style="display: none">
+                            <t t-foreach="deal_stays" t-as="stay">
+                                <div>
+                                    <div>
+                                        <a class="link" t-att-href="'/rental/browse-property-detail?id=%s' % stay.id">
+                                            <img class="stay-img item-img" t-if="stay.image_512"
+                                                 t-att-src="image_data_uri(stay.image_512)" alt=""/>
+                                        </a>
+                                    </div>
+                                    <div class="pt-3">
+                                        <a class="link" t-att-href="'/rental/browse-property-detail?id=%s' % stay.id">
+                                            <h6 class="mb-0"><b t-esc="stay.name"></b></h6>
+                                            <small class="text-muted"
+                                                   t-esc="'%s adult . %s child . %s bedroom . %s squre feet ' % (stay.rp_adults, stay.rp_childs, stay.rp_bedrooms, stay.rp_square_feet)"></small>
+                                        </a>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+
+                    <!-- Banner 2-->
+                    <div class="mt-5 mb-5">
+                        <div class="banner-2">
+                            <button class="text-uppercase btn btn-primary-2">
+                                <a class="link" href="/become-a-host">List your property</a>
+                            </button>
+                            <img src="/as_rental/static/images/Banner2.png?v=1"/>
+                        </div>
+                    </div>
+
+                    <!-- Explore bangladesh -->
+                    <div class="mt-5 pb-5 explore-bd">
+
+                        <div class="text-center">
+                            <h4 class="mb-0"><b>Explore Bangladesh</b></h4>
+                            <small class="text-muted d-block pt-2">These popular destinations have a lot to
+                                offer</small>
+                            <div class="row">
+                                <div class="col-1 col-sm-3 col-md-4 col-lg-4"></div>
+                                <div class="col-10 p-4 col-sm-6 col-md-4 col-lg-4 mid-menu">
+                                    <div class="d-flex justify-content-center mid-menu--content">
+                                        <p class="explore-bd--tabs explore-bd-active mr-3" explore-tab="1"
+                                           style="text-transform: uppercase; font-weight: bold;">Tours</p>
+                                        <p class="explore-bd--tabs mr-3" explore-tab="2"
+                                           style="text-transform: uppercase; font-weight: bold;">Flight</p>
+                                        <p class="explore-bd--tabs" explore-tab="3"
+                                           style="text-transform: uppercase; font-weight: bold;">Stays</p>
+                                    </div>
+                                </div>
+                                <div class="col-1 col-sm-3 col-md-4 col-lg-4"></div>
+                            </div>
+                        </div>
+
+                        <div t-if="events"
+                             class="c-explore-bd mt-2 explore-bd--contents explore-bd--carousel-1 owl-carousel owl-theme"
+                             id="explore-bd-1">
+                            <t t-foreach="events" t-as="event">
+                                <div>
+                                    <div>
+                                        <a class="link" t-att-href="'/event/detail?id=%s' % event.id">
+                                            <img class="item-img" t-if="event.image_512"
+                                                 t-att-src="image_data_uri(event.image_512)"
+                                                 alt=""/>
+                                        </a>
+                                    </div>
+                                    <div class="pt-3">
+                                        <a class="link" t-att-href="'/event/detail?id=%s' % event.id">
+                                            <h6 class="mb-0"><b t-esc="event.name"></b></h6>
+                                            <small class="text-muted"
+                                                   t-esc="'%s Day, %s Night' % (event.day, event.night)"></small>
+                                        </a>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+
+                        <div t-if="flights"
+                             class="c-explore-bd explore-bd--contents explore-bd--carousel-2 owl-carousel owl-theme"
+                             id="explore-bd-2" style="display: none;">
+                            <div>
+                                <div>
+                                    <a class="link" href="/rental/browse-property">
+                                        <img src="/as_rental/static/images/explore-bd/cox_bazar.jpg" alt=""/>
+                                    </a>
+                                </div>
+                                <div class="pt-3">
+                                    <a class="link" href="/rental/browse-property">
+                                        <h6 class="mb-0"><b>Cox's Bazar</b></h6>
+                                        <small class="text-muted">32 Properties</small>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div t-if="stays"
+                             class="c-explore-bd explore-bd--contents explore-bd--carousel-3 owl-carousel owl-theme"
+                             id="explore-bd-3" style="display: none">
+                            <t t-foreach="stays" t-as="stay">
+                                <div>
+                                    <div>
+                                        <a class="link" t-att-href="'/rental/browse-property-detail?id=%s' % stay.id">
+                                            <img class="stay-img item-img" t-if="stay.image_512"
+                                                 t-att-src="image_data_uri(stay.image_512)" alt=""/>
+                                        </a>
+                                    </div>
+                                    <div class="pt-3">
+                                        <a class="link" t-att-href="'/rental/browse-property-detail?id=%s' % stay.id">
+                                            <h6 class="mb-0"><b t-esc="stay.name"></b></h6>
+                                            <small class="text-muted"
+                                                   t-esc="'%s adult . %s child . %s bedroom . %s squre feet ' % (stay.rp_adults, stay.rp_childs, stay.rp_bedrooms, stay.rp_square_feet)"></small>
+                                        </a>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <!-- Browse by property type -->
+                    <div class="mt-5 mb-5 browse-property">
+                        <div class="text-center">
+                            <h4 class="mb-0"><b>Explore Perfect Stays</b></h4>
+                            <small class="text-muted d-block pt-2">These popular destination display by category</small>
+                            <div class="row">
+                                <div class="col-0 col-sm-2 col-md-2 col-lg-3"></div>
+                                <div class="col-12 p-4 col-sm-8 col-md-8 col-lg-6 mid-menu">
+                                    <div class="d-flex justify-content-center mid-menu--content">
+                                        <p class="browse-property--tabs browse-property--active mr-3" property-tab="1"
+                                           style="text-transform: uppercase; font-weight: bold;">Hotels</p>
+                                        <p class="browse-property--tabs mr-3" property-tab="2"
+                                           style="text-transform: uppercase; font-weight: bold;">Apartments</p>
+                                        <p class="browse-property--tabs mr-3" property-tab="3"
+                                           style="text-transform: uppercase; font-weight: bold;">Resorts</p>
+                                        <p class="browse-property--tabs" property-tab="4"
+                                           style="text-transform: uppercase; font-weight: bold;">Villas</p>
+                                    </div>
+                                </div>
+                                <div class="col-0 col-sm-2 col-md-2 col-lg-3"></div>
+                            </div>
+                        </div>
+
+                        <div t-if="hotels"
+                             class="browse-property--contents mt-2 browse-property--carousel-1 owl-carousel owl-theme browse-property--contents"
+                             id="browse-property--1">
+                            <t t-foreach="hotels" t-as="item">
+                                <div>
+                                    <div>
+                                        <a class="link" t-att-href="'/rental/browse-property-detail?id=%s' % item.id">
+                                            <img class="stay-img item-img" t-if="item.image_512"
+                                                 t-att-src="image_data_uri(item.image_512)" t-att-alt="item.name"/>
+                                        </a>
+                                    </div>
+                                    <div class="pt-3">
+                                        <a class="link" t-att-href="'/rental/browse-property-detail?id=%s' % item.id">
+                                            <h6 class="mb-0"><b t-esc="item.name"></b></h6>
+                                            <small class="text-muted"
+                                                   t-esc="'%s adult . %s child . %s bedroom . %s squre feet ' % (item.rp_adults, item.rp_childs, item.rp_bedrooms, item.rp_square_feet)"></small>
+                                        </a>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+
+                        <div t-if="apartments"
+                             class="browse-property--contents browse-property--carousel-2 owl-carousel owl-theme"
+                             id="browse-property--2" style="display: none;">
+                            <t t-foreach="apartments" t-as="item">
+                                <div>
+                                    <div>
+                                        <a class="link" t-att-href="'/rental/browse-property-detail?id=%s' % item.id">
+                                            <img class="stay-img item-img" t-if="item.image_512"
+                                                 t-att-src="image_data_uri(item.image_512)" t-att-alt="item.name"/>
+                                        </a>
+                                    </div>
+                                    <div class="pt-3">
+                                        <a class="link" t-att-href="'/rental/browse-property-detail?id=%s' % item.id">
+                                            <h6 class="mb-0"><b t-esc="item.name"></b></h6>
+                                            <small class="text-muted"
+                                                   t-esc="'%s adult . %s child . %s bedroom . %s squre feet ' % (item.rp_adults, item.rp_childs, item.rp_bedrooms, item.rp_square_feet)"></small>
+                                        </a>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+
+                        <div t-if="resorts"
+                             class="browse-property--contents browse-property--carousel-3 owl-carousel owl-theme"
+                             id="browse-property--3" style="display: none">
+                            <t t-foreach="resorts" t-as="item">
+                                <div>
+                                    <div>
+                                        <a class="link" t-att-href="'/rental/browse-property-detail?id=%s' % item.id">
+                                            <img class="stay-img item-img" t-if="item.image_512"
+                                                 t-att-src="image_data_uri(item.image_512)" t-att-alt="item.name"/>
+                                        </a>
+                                    </div>
+                                    <div class="pt-3">
+                                        <a class="link" t-att-href="'/rental/browse-property-detail?id=%s' % item.id">
+                                            <h6 class="mb-0"><b t-esc="item.name"></b></h6>
+                                            <small class="text-muted"
+                                                   t-esc="'%s adult . %s child . %s bedroom . %s squre feet ' % (item.rp_adults, item.rp_childs, item.rp_bedrooms, item.rp_square_feet)"></small>
+                                        </a>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+
+                        <div t-if="villas"
+                             class="browse-property--contents browse-property--carousel-4 owl-carousel owl-theme"
+                             id="browse-property--4" style="display: none">
+                            <t t-foreach="villas" t-as="item">
+                                <div>
+                                    <div>
+                                        <a class="link" t-att-href="'/rental/browse-property-detail?id=%s' % item.id">
+                                            <img class="stay-img item-img" t-if="item.image_512"
+                                                 t-att-src="image_data_uri(item.image_512)" t-att-alt="item.name"/>
+                                        </a>
+                                    </div>
+                                    <div class="pt-3">
+                                        <a class="link" t-att-href="'/rental/browse-property-detail?id=%s' % item.id">
+                                            <h6 class="mb-0"><b t-esc="item.name"></b></h6>
+                                            <small class="text-muted"
+                                                   t-esc="'%s adult . %s child . %s bedroom . %s squre feet ' % (item.rp_adults, item.rp_childs, item.rp_bedrooms, item.rp_square_feet)"></small>
+                                        </a>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--<div id="uc">
+                Site is under construction
+            </div>-->
+
+        </t>
+    </template>
+</odoo>

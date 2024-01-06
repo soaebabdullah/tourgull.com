@@ -1,0 +1,308 @@
+<odoo>
+    <template id="guest__layout_01">
+        <t t-set="pt" t-value="request.env['as.def'].get_partner_obj()"/>
+        <t t-set="current_url" t-value="request.httprequest.full_path"/>
+        <t t-set="save_url" t-value="request.env['as.def'].as_visit(current_url)"/>
+        <t t-set="notification" t-value="request.env['as.def'].get_all_notifications()"/>
+
+        <html lang="en">
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+                <link type="image/x-icon" rel="shortcut icon" href="/as_rental/static/images/logo/favicon.png"/>
+
+                <!-- Bootstrap CSS -->
+                <link rel="stylesheet" href="/as_rental/static/css/bootstrap.min.css"/>
+                <link rel="stylesheet" href="/as_rental/static/css/layout/guest__header.css?v=6"/>
+                <link rel="stylesheet" href="/as_rental/static/css/layout/guest__footer.css?v=6"/>
+                <link rel="stylesheet" href="/as_rental/static/css/layout/guest__layout_01.css?v=9"/>
+                <t t-raw="head"/>
+            </head>
+
+            <body>
+                <!-- Guest :: Header -->
+                <header id="as-header">
+                    <div>
+                        <div class="g-c-header">
+                            <div>
+                                <a href="/">
+                                    <img id="g-header-logo" src="/as_rental/static/images/logo/logo.jpg" alt="Logo"/>
+                                </a>
+                            </div>
+                            <div class="layout_01-mobile-menu">
+                                <i id="layout_01-mobile-menu-icon" class="fa fa-bars mobile-icon brand-color"></i>
+                            </div>
+                            <div id="c-c-right-menu" class="">
+                                <div class="d-flex align-items-center">
+                                    <div class="mr-3 click-notification-popup"
+                                         style="cursor: pointer; position: relative;">
+                                        <i class="click-notification-popup2 fa fa-bell"></i>
+                                        <div class="circle svg-data">
+                                            <span t-if="notification and notification.get('nts_unseen_count')"
+                                                  class="circle__content"
+                                                  t-esc="notification.get('nts_unseen_count')"></span>
+                                            <!--                                            <span t-else="" class="circle__content">0</span>-->
+                                        </div>
+                                    </div>
+                                    <div class="mr-3 header-right-top-item">
+                                        <t t-if="pt">
+                                            <t t-if="pt.is_host">
+                                                <a href="/my/switch-to-guest">Switch to guest</a>
+                                            </t>
+                                            <t t-else="">
+                                                <a href="/my/switch-to-host">Switch to hosting</a>
+                                            </t>
+                                        </t>
+                                    </div>
+                                    <div id="c-right-menu">
+                                        <div>
+                                            <!-- <i class="fa fa-list-ul pr-2" style="color: gray"></i> -->
+                                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                                                 style="display: block; fill: none; height: 16px; width: 16px; stroke: currentcolor; stroke-width: 3px; overflow: visible; margin-right: 5px;"
+                                                 aria-hidden="true" focusable="false">
+                                                <g fill="none" fill-rule="nonzero">
+                                                    <path d="m2 16h28"></path>
+                                                    <path d="m2 24h28"></path>
+                                                    <path d="m2 8h28"></path>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <t t-if="pt">
+                                                <img t-if="pt.image_128" class="profile-img"
+                                                     t-att-src="image_data_uri(pt.image_128)"
+                                                     alt="Profile Image"/>
+                                                <img t-else="" src="/as_rental/static/src/image/default_profile.png/"
+                                                     class="profile-img" alt="Profile Image"/>
+                                            </t>
+                                            <t t-else="">
+                                                <img src="/as_rental/static/src/image/default_profile.png/"
+                                                     class="profile-img" alt="Profile Image"/>
+                                            </t>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="right-menu">
+                            <ul class="right-menu-ul">
+                                <t t-if="pt">
+                                    <li>
+                                        <a href="/wishlist">Wishlist</a>
+                                    </li>
+                                    <li>
+                                        <a href="/my">Manage Listing</a>
+                                    </li>
+                                    <li>
+                                        <a href="/contact">Support</a>
+                                    </li>
+                                    <li>
+                                        <a href="/my">Dashboard</a>
+                                    </li>
+                                    <li>
+                                        <a href="/web/session/logout?redirect=/">Log Out</a>
+                                    </li>
+                                </t>
+                                <t t-else="">
+                                    <li>
+                                        <a href="/web/login">Login</a>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+
+                        <!-- notification-popup -->
+                        <div id="notification-popup" style="visibility: hidden;">
+                            <t t-if="notification and notification.get('nts')">
+                                <t t-foreach="notification.get('nts')" t-as="nt">
+                                    <div t-if="nt.url" class="np__item">
+                                        <a class="link" style="color: dodgerblue;" t-att-href="nt.url">
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <i class="fa fa-stop mr-2"></i>
+                                                </div>
+                                                <div class="pl-1">
+                                                    <t t-esc="nt.notification"/>
+                                                    <div class="" style="font-size: 11px;"><t
+                                                            t-esc="nt.create_date.strftime('%d %B %Y')"/></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div t-else="" class="np__item">
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                <i class="fa fa-stop mr-2"></i>
+                                            </div>
+                                            <div class="pl-1">
+                                                <t t-esc="nt.notification"/>
+                                                <div class="" style="font-size: 11px;"><t
+                                                        t-esc="nt.create_date.strftime('%d %B %Y')"/></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="np__item_separator"></div>
+                                </t>
+                            </t>
+                            <t t-else="">
+                                <div class="np__item">
+                                    <i class="fa fa-smile-o mr-2"></i>
+                                    No notifications
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </header>
+
+                <t t-raw="0"/>
+
+                <!-- mobile menu  -->
+                <div id="layout-01-mobile-menu" class="popup layout-01-mobile-menu" style="display: none;">
+                    <div id="layout-01-mobile-menu-left-block">
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    <i class="fa fa-home mr-2"></i>
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/wishlist">
+                                    <i class="fa fa-heart mr-2"></i>
+                                    Wishlist
+                                </a>
+                            </li>
+                            <t t-if="pt">
+                                <t t-if="pt.is_host">
+                                    <li><a href="/my/switch-to-guest">
+                                        <i class="fas fa-retweet mr-2"></i>
+                                        Switch to guest</a></li>
+                                </t>
+                                <t t-else="">
+                                    <li><a href="/my/switch-to-guest">
+                                        <i class="fas fa-retweet mr-2"></i>
+                                        Switch to hosting</a></li>
+                                </t>
+                            </t>
+                            <li>
+                                <a href="/become-a-host">
+                                    <i class="fas fa-list mr-2"></i>
+                                    List Property</a>
+                            </li>
+                            <li>
+                                <a href="/my">
+                                    <i class="fa fa-dashboard mr-2"></i>
+                                    Dashboard</a>
+                            </li>
+                            <li t-if="pt">
+                                <a href="/web/session/logout?redirect=/">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>
+                                    Logout
+                                </a>
+                            </li>
+                            <li t-else="pt">
+                                <a href="/web/login">
+                                    <i class="fa fa-user mr-2"></i>
+                                    Login
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="p-4 text-muted">Please go to home page to explore all services of AvailablityShare</div>
+                    </div>
+                    <div id="layout-01-mobile-menu-right-block"></div>
+                </div>
+
+                <!-- as-footer -->
+                <footer id="as-footer">
+                    <!-- Desktop version -->
+                    <div class="c-footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <ul class="bp__footer-ul">
+                                        <li><a href="#" class="footer-head"><b>Support</b></a></li>
+                                        <li><a href="#">Sample</a></li>
+                                        <li><a href="#">Sample</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col">
+                                    <ul class="bp__footer-ul">
+                                        <li><a href="#" class="footer-head"><b>Community</b></a></li>
+                                        <li><a href="#">Sample</a></li>
+                                        <li><a href="#">Sample</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col">
+                                    <ul class="bp__footer-ul">
+                                        <li><a href="#" class="footer-head"><b>Hosting</b></a></li>
+                                        <li><a href="#">Sample</a></li>
+                                        <li><a href="#">Sample</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col">
+                                    <ul class="bp__footer-ul">
+                                        <li><a href="#" class="footer-head"><b>AvailableShare</b></a></li>
+                                        <li><a href="#">Sample</a></li>
+                                        <li><a href="#">Sample</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="builder">
+                                <span>Design &amp; Developed by
+                                    <a class="link" href="https://www.xsellencebdltd.com">Xsellence Bangladesh Ltd</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- mobile footer -->
+                    <div id="block-gm-footer">
+                        <div class="gm-c-footer">
+                            <div>
+                                <a href="/">
+                                    <i class="fa fa-home"></i>
+                                    Home
+                                </a>
+                            </div>
+                            <div>
+                                <a href="/wishlist">
+                                    <i class="fa fa-heart"></i>
+                                    Wishlist
+                                </a>
+                            </div>
+                            <div>
+                                <a href="/contact">
+                                    <i class="fa fa-envelope"></i>
+                                    Support
+                                </a>
+                            </div>
+                            <div>
+                                <a href="/my">
+                                    <i class="fa fa-user"></i>
+                                    Dashboard
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Optional JavaScript -->
+                    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                    <script src="/as_rental/static/js/jquery-3.6.0.min.js"></script>
+                    <script src="/as_rental/static/js/popper.min.js"></script>
+                    <script src="/as_rental/static/js/bootstrap.min.js"></script>
+                    <script src="/as_rental/static/js/font-awesome.js"></script>
+                    <script src="/as_rental/static/js/layout/guest-layout-01.js?v=5"></script>
+
+                    <!-- Custom Javascript -->
+                    <t t-raw="footer"/>
+                </footer>
+
+                <!--<div id="uc">
+                    Site is under construction
+                </div>-->
+            </body>
+        </html>
+    </template>
+</odoo>

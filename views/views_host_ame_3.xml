@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+
+
+        <!-- tree - host.ame_3 -->
+        <!-- tree - host_ame_3 -->
+        <record model="ir.ui.view" id="host_ame_3_tree_id">
+            <field name="name">host_ame_3_tree</field>
+            <field name="model">host.ame_3</field>
+            <field name="arch" type="xml">
+                <tree default_order="id desc">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- form -->
+        <record model="ir.ui.view" id="host_ame_3_form_id">
+            <field name="name">host_ame_3_form</field>
+            <field name="model">host.ame_3</field>
+            <field name="arch" type="xml">
+                <form default_order="id desc">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group></group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- actions -->
+        <record model="ir.actions.act_window" id="host_ame_3_action">
+            <field name="name">Host Ame 3</field>
+            <field name="res_model">host.ame_3</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+    </data>
+</odoo>

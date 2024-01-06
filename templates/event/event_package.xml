@@ -1,0 +1,264 @@
+<odoo>
+
+    <template id="event_package_detail" name="Tour Details">
+        <t t-call="as_rental.guest__layout_01">
+            <t t-set="head">
+                <title>Tour Details | AvailabilityShare</title>
+                <link rel="stylesheet" href="/as_rental/static/css/event/event_package_detail.css"/>
+            </t>
+
+            <div id="as-body">
+                <div class="pb-5">
+                    <div class="row no-gutters">
+                        <div class="col-12 col-sm-12 col-lg-8 col-xl-8 pt-5">
+                            <div class="container">
+                                <div class="ev_detail__container">
+                                    <div t-raw="event.detail"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-lg-4 col-xl-4 pt-5">
+                            <div class="container">
+                                <div id="right-block">
+                                    <div class="p-3 text-center2 book">
+                                        <div class="seats_available"
+                                             t-esc="'%s %s' % (event.maximum_attendees, 'Person\'s Package')"></div>
+                                        <div class="ticket_price">Package Price <b
+                                                t-esc="'%s %s' % (currency.name, event.list_price)"></b></div>
+
+                                        <hr/>
+                                        <div class="mt-2">
+                                            <form action="/event/package/payment">
+                                                <input type="hidden" name="event_id" t-att-value="event.id"/>
+                                                <div class="form-group">
+                                                    <label class="text-left">Your Tour Date</label>
+                                                    <input class="form-control" name="event-package-date" type="date"
+                                                           required="1" t-att-min="date_today"/>
+                                                </div>
+                                                <button class="btn_book" type="submit">Book Package</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="event__details_right_panel">
+                                        <div t-if="event.event_date">
+                                            <i class="fa fa-calendar"></i>
+                                            Date :
+                                            <b t-esc="'%s' % event.event_date.strftime('%d %B %Y')"></b>
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-clock"></i>
+                                            Duration : <b><t t-esc="event.day"/></b> day <b><t t-esc="event.night"/></b>
+                                            night
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-users"></i>
+                                            Package size : <b t-esc="event.maximum_attendees"/>
+                                        </div>
+                                        <div>
+                                            <i class="fab fa-tencent-weibo"></i>
+                                            Tour destination : <b t-esc="event.destination"/>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            Arrival from : <b t-esc="event.event_from"/>
+                                        </div>
+                                        <div id="transport">
+                                            <i class="fa fa-car"></i>
+                                            Transport : <b t-esc="event.transport"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="event_package_payment">
+        <t t-call="as_rental.guest__layout_01">
+            <t t-set="head">
+                <title>Payment | AvailabilityShare</title>
+                <link rel="stylesheet" href="/as_rental/static/css/payment.css"/>
+                <link rel="stylesheet" href="/as_rental/static/css/event-package-payment.css"/>
+            </t>
+
+            <!-- as-body -->
+            <div id="as-body">
+
+                <div class="container pb-5">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 pt-5">
+                            <div>
+                                <div class="container">
+                                    <h5 class="pb-3">Payment Method</h5>
+                                    <form>
+                                        <div class="radio">
+                                            <label><input type="radio" name="payment-method" checked="1"/> Cash On
+                                                Delivery</label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 pt-5">
+                            <div class="w-100">
+                                <table class="cart__table">
+                                    <tr>
+                                        <th colspan="2">Service</th>
+                                        <th>Item</th>
+                                        <th>Quantity</th>
+                                        <th class="text-right">Price</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img t-if="event.image_128" class="cart__img"
+                                                 t-att-src="image_data_uri(event.image_128)"
+                                                 alt=""/>
+                                            <img t-else="" class="cart__img"
+                                                 src="/as_rental/static/src/image/default.png" alt=""/>
+                                        </td>
+                                        <td>
+                                            <div class="cart__product-name" t-esc="'%s' % event.name">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="cart__quantity"
+                                                  t-esc="'%s%s' % (currency.symbol, event.list_price)"></span>
+                                        </td>
+                                        <td>
+                                            <span class="cart__quantity">1</span>
+                                        </td>
+
+                                        <td>
+                                            <div class="cart__price text-right"
+                                                 t-esc="'%s%s' % (currency.symbol, event.list_price)"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right text-muted" colspan="2"><b>Total</b></td>
+                                        <td class="text-right text-muted" colspan="3"><b
+                                                t-esc="'%s%s' % (currency.symbol, event.list_price)"></b></td>
+                                    </tr>
+                                </table>
+
+                                <div class="cart-mobile">
+                                    <div>
+                                        <img t-if="event.image_512" class="cart-mobile-img"
+                                             t-att-src="image_data_uri(event.image_512)"
+                                             alt=""/>
+                                        <img t-else="" class="cart-mobile-img"
+                                             src="/as_rental/static/src/image/default.png" alt=""/>
+                                    </div>
+                                    <table class="cart-mobile-table">
+                                        <tr>
+                                            <td>Service</td>
+                                            <td> <t t-esc="'%s' % event.name"/> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Item</td>
+                                            <td> <t t-esc="'%s%s' % (currency.symbol, event.list_price)"/> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Quantity</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Price</td>
+                                            <td> <t t-esc="'%s%s' % (currency.symbol, event.list_price)"/> </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="pt-3">
+                                    <a class="btn btn-primary btn-block"
+                                       t-att-href="'/event/package/payment/process?event_id=%s&amp;event_package_date=%s' % (event.id, event_package_date)">
+                                        Process</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row pt-4">
+                        <div class="col">
+                            <div class="text-right">
+                                .
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </t>
+    </template>
+
+    <template id="event_package_confirmation" name="event_package_confirmation">
+        <t t-call="as_rental.guest__layout_01">
+            <t t-set="head">
+                <title>Order Confirmation | AvailableShare</title>
+                <link rel="stylesheet" href="/as_rental/static/css/confirmation.css"/>
+            </t>
+
+            <!-- as-body -->
+            <div id="as-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="py-4 py-lg-5">
+                                <div class="status__box">
+                                    <div class="text-center pb-3">
+                                        <i class="fa fa-check-circle" style="color: green;font-size: 25px;"></i>
+                                    </div>
+                                    <h6 class="text-center"><b>Congratulations</b></h6>
+                                    <p class="text-center">Your order has been placed</p>
+                                    <div>
+                                        <table class="status__table">
+                                            <tr>
+                                                <td>Service</td>
+                                                <td>
+                                                    <t t-esc="event_id.name"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Order Number</td>
+                                                <td>
+                                                    <t t-if="so" t-esc="so.name"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total Price</td>
+                                                <td>
+                                                    <t t-esc="'%s%s' % (currency.symbol, so.amount_total)"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div>
+                                        <div class="py-3">
+                                            <small>To track order status please check your dashboard</small>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div></div>
+                                            <div>
+                                                <a href="/my" class="btn btn-outline-primary">My Account</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+</odoo>

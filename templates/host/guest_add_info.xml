@@ -1,0 +1,66 @@
+<odoo>
+    <template id="guest_add_info" name="Addition info">
+        <t t-call="website.layout">
+            <style>
+                .red {color: red;}
+            </style>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"></div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                    <div class="container py-5">
+                        <form class="bg-light rounded p-3" action="" method="post" enctype="multipart/form-data">
+                            <h4 class="text-center">Please add this to continue</h4>
+                            <span class="red d-block text-center">Star (*) marks are required field</span>
+                            <hr/>
+                            <div class="form-group">
+                                <label for="profile_img">Profile Image <span class="red">*</span></label>
+                                <input class="form-control"
+                                       type="file"
+                                       name="profile_img"
+                                       id="profile_img"
+                                       required="1"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="nid_pass_img">NID/Passport Image <span class="red">*</span></label>
+                                <input class="form-control"
+                                       type="file"
+                                       name="nid_pass_img"
+                                       id="nid_pass_img"
+                                       required="1"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="pt_img_1">Partner Image 01</label>
+                                <input class="form-control"
+                                       type="file"
+                                       name="pt_img_1"
+                                       id="pt_img_1"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="pt_img_2">Partner Image 02</label>
+                                <input class="form-control"
+                                       type="file"
+                                       name="pt_img_2"
+                                       id="pt_img_2"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="pt_img_3">Partner Image 03</label>
+                                <input class="form-control"
+                                       type="file"
+                                       name="pt_img_3"
+                                       id="pt_img_3"/>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div></div>
+                                <div>
+                                    <button class="btn btn-primary" type="submit">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"></div>
+            </div>
+
+        </t>
+    </template>
+</odoo>

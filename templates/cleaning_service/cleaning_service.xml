@@ -1,0 +1,68 @@
+<odoo>
+
+    <template id="cleaning_service_request" name="Cleaning Service Request">
+        <t t-call="website.layout">
+
+            <!-- Custom stylesheet -->
+            <link rel="stylesheet" href="/as_rental/static/css/common.css"/>
+            <link rel="stylesheet" href="/as_rental/static/css/security-service-registration.css"/>
+
+            <div class="top-box">
+                <div class="detail-title">Cleaning Service Request</div>
+            </div>
+
+            <div class="container py-3">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-2 col-lg-3 col-xl-3"></div>
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6">
+
+                        <form class="form" action="/cleaning-service/request/status">
+                            <div class="form-group">
+                                <label for="cs_name">Your Name</label>
+                                <input type="text" class="form-control" name="cs_name"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="cs_address">Your Address</label>
+                                <textarea class="form-control" name="cs_address"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="cs_service_address">Service Address (Where service need)</label>
+                                <textarea class="form-control" name="cs_service_address"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="cs_days">Total days to service</label>
+                                <input type="number" class="form-control" name="cs_days"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="cs_peoples_count">Cleaning people count</label>
+                                <input type="number" class="form-control" name="cs_peoples_count"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="cs_start_date">Date from</label>
+                                <input type="date" class="form-control" name="cs_start_date"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="cs_end_date">Date to</label>
+                                <input type="date" class="form-control" name="cs_end_date"/>
+                            </div>
+                            <div class="form-group">
+                                <div class="d-flex justify-content-between">
+                                    <div></div>
+                                    <div>
+                                        <button class="btn btn-primary" type="submit">Request</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 col-lg-3 col-xl-3"></div>
+                </div>
+            </div>
+
+            <!-- Optional JavaScript -->
+
+        </t>
+    </template>
+
+</odoo>

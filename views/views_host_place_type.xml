@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+
+
+        <!-- tree - host.place_type -->
+        <!-- tree - host_place_type -->
+        <record model="ir.ui.view" id="host_place_type_tree_id">
+            <field name="name">host_property_type_tree</field>
+            <field name="model">host.place_type</field>
+            <field name="arch" type="xml">
+                <tree default_order="id desc">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- form -->
+        <record model="ir.ui.view" id="host_place_type_form_id">
+            <field name="name">host_property_type_form</field>
+            <field name="model">host.place_type</field>
+            <field name="arch" type="xml">
+                <form default_order="id desc">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group></group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- actions -->
+        <record model="ir.actions.act_window" id="host_place_type_action">
+            <field name="name">Host Place Type</field>
+            <field name="res_model">host.place_type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+    </data>
+</odoo>

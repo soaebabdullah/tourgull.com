@@ -1,0 +1,134 @@
+<odoo>
+    <template id="family_member_edit" name="Family member edit">
+        <t t-call="as_rental.guest__layout_01">
+            <t t-set="head">
+                <title>Family member edit</title>
+                <!--<link rel="stylesheet" href="/as_rental/static/css/message.css"/>-->
+            </t>
+
+            <!-- as-body -->
+            <div id="as-body">
+                <div class="container py-5">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                            <form action="/my/family-member/edit-status" method="post" enctype="multipart/form-data">
+
+                                <div class="form-group">
+                                    <label for="first_name">First Name <span class="required">
+                                        *</span></label>
+                                    <input type="text" name="first_name" id="first_name"
+                                           class="form-control" required="1" t-att-value="member.first_name"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="last_name">Last Name <span class="required">
+                                        *</span></label>
+                                    <input type="text" name="last_name" id="last_name"
+                                           class="form-control" required="1" t-att-value="member.last_name"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="date_of_birth">Date Of Birth</label>
+                                    <input type="date" name="date_of_birth" id="date_of_birth"
+                                           class="form-control" t-att-value="member.date_of_birth"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">Gender</label>
+                                    <select name="gender" id="gender" class="form-control">
+                                        <t t-foreach="genders" t-as="gender">
+                                            <option t-att-value="gender[0]" t-att-selected="member.gender == gender[0]"
+                                                    t-esc="gender[1]"></option>
+                                        </t>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <t t-if="member.image_1920">
+                                        <label for="image_1920">Photo <span class="required">*</span></label> <br/>
+                                        <img t-att-src="image_data_uri(member.image_1920)"
+                                             style="width: 100px; height: auto;"
+                                        />
+                                        <br/>
+                                        <label class="pt-1" for="image_1920">Change Photo</label>
+                                        <input type="file" name="image_1920" id="image_1920"
+                                               class="form-control"/>
+                                    </t>
+                                    <t t-else="">
+                                        <label for="image_1920">Photo <span class="required">
+                                            *</span></label>
+                                        <input type="file" name="image_1920" id="image_1920"
+                                               class="form-control" required="1"/>
+                                    </t>
+                                </div>
+                                <div class="form-group">
+                                    <label for="date_of_birth">Relationship</label>
+                                    <select name="relationship" id="relationship"
+                                            class="form-control">
+                                        <t t-foreach="relationships" t-as="relationship">
+                                            <option t-att-value="relationship[0]"
+                                                    t-att-selected="member.relationship == relationship[0]"
+                                                    t-esc="relationship[1]"></option>
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="language">Language</label>
+                                    <select name="language" id="language"
+                                            class="form-control">
+                                        <t t-foreach="languages" t-as="language">
+                                            <option t-att-value="language.id"
+                                                    t-att-selected="member.language.id == language.id"
+                                                    t-esc="language.name"></option>
+                                        </t>
+                                    </select>
+                                </div>
+                                <!--<div class="form-check">
+                                    <label for="parental_responsibility"
+                                           class="form-check-label">
+                                        <input type="checkbox" name="parental_responsibility"
+                                               id="parental_responsibility"
+                                               class="form-check-input"/>
+                                        Do they have parental responsibility?
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label for="up_drop" class="form-check-label">
+                                        <input type="checkbox" name="up_drop" id="up_drop"
+                                               class="form-check-input"/>
+                                        Can they up/drop of mr./mrs xyz?
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label for="live_with" class="form-check-label">
+                                        <input type="checkbox" name="live_with" id="live_with"
+                                               class="form-check-input"/>
+                                        Do they live with mr./mrs xyz?
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="notes">Notes</label>
+                                    <textarea name="notes" id="notes" cols="30" rows="3"
+                                              class="form-control"/>
+                                </div>
+                                <div class="form-group text-right">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>-->
+                                <div class="form-group text-right">
+                                    <input type="hidden" name="id" t-att-value="member.id" />
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </t>
+    </template>
+</odoo>

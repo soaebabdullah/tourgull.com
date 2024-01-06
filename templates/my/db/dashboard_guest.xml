@@ -1,0 +1,1123 @@
+<odoo>
+    <template id="dashboard_guest" name="Guest Dashboard">
+        <t t-call="as_rental.guest__layout_01">
+            <t t-set="head">
+                <title>Guest Dashboard | AvailablityShare</title>
+            </t>
+            <link rel="stylesheet" href="/as_rental/static/css/dashboard/dashboard.css?v=2"/>
+            <link rel="stylesheet" href="/as_rental/static/css/dashboard/dashboard-guest.css?v=1"/>
+            <link rel="stylesheet" href="/as_rental/static/css/dashboard/invite-a-friend.css"/>
+            <t t-set="nf_count" t-value="request.env['as.def'].get_notification_count()"/>
+            <t t-set="msg_count" t-value="request.env['as.def'].get_message_count()"/>
+
+            <div class="container-db" style="overflow-x: hidden;">
+                <div class="dashboard">
+
+                    <!-- top -->
+                    <div class="row no-gutters ">
+                        <div class="col-12 col-sm-12 col-lg-6 col-xl-6 bg-info2">
+                            <div class="d-flex">
+                                <div>
+                                    <a href="/as/my/account">
+                                        <img t-if="pt.image_128" class="img-profile"
+                                             t-att-src="image_data_uri(pt.image_128)"
+                                             alt="Profile Image"/>
+                                        <img t-else="" class="img-profile"
+                                             src="/as_rental/static/src/image/default_profile.png"
+                                             alt="Profile Image"/>
+                                    </a>
+                                </div>
+                                <div class="ml-3">
+                                    <a class="link" href="/as/my/account">
+                                        <h5><b t-esc="full_name"></b></h5>
+                                    </a>
+                                    <h6>
+                                        <a class="link" href="/as/my/account/info">View Profile</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-lg-6 col-xl-6 bg-info2">
+                            <div class="row no-gutters container-message">
+                                <div class="col">
+                                    <div class="text-muted text-right">
+                                        <div style="font-style: italic;"><b>You are in guest mode</b>,<br/>
+                                            <small>To get host related options switch account to hosting</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- body -->
+                    <div class="pt-3 container-tab">
+                        <div t-if="kw.get('msg')" class="msg">
+                            <i class="fas fa-info-circle"></i>
+                            <t t-esc="kw.get('msg')"/>
+                        </div>
+                        <div class="row no-gutters">
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                <div id="manu-tabs">
+                                    <!--<div class="tab" tab-data="my-property">My Property</div>-->
+                                    <div class="tab tab-selected" tab-data="orders-booking">
+                                        <i class="fa fa-bars tab-icon"></i>
+                                        Booking/Order
+                                    </div>
+                                    <!--<div class="tab" tab-data="history">
+                                        <i class="fas fa-user-clock tab-icon"></i>
+                                        History
+                                    </div>-->
+                                    <div class="tab" tab-data="financial-dashboard">
+                                        <i class="fa fa-money tab-icon"></i>
+                                        Financial Dashboard
+                                    </div>
+                                    <!--<div class="tab" tab-data="business-profile">Business Profile</div>-->
+                                    <div class="tab" tab-data="family">
+                                        <i class="fa fa-users tab-icon"></i>
+                                        Family
+                                    </div>
+                                    <!--<div class="tab" tab-data="rewards">Rewards</div>-->
+                                    <!--<div class="tab" tab-data="gift-card">Gift Card</div>-->
+                                    <!--<div class="tab" tab-data="linked-accounts">Linked Account</div>-->
+                                    <!--<div class="tab" tab-data="invite-a-friend">Invite A Friend</div>-->
+                                    <div class="tab" tab-data="support">
+                                        <i class="fa fa-user-md tab-icon"></i>
+                                        Support
+                                    </div>
+                                    <div class="tab" tab-data="settings">
+                                        <i class="fa fa-gear tab-icon"></i>
+                                        Setting</div>
+                                </div>
+                            </div>
+
+                            <!-- Content column -->
+                            <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9 bg-white">
+                                <div class="container-content">
+
+                                    <!-- Orders/Booking -->
+                                    <div id="orders-booking" class="content" style="display: none2;">
+                                        <!-- reservations -->
+                                        <div class="pt-3">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="h5">Your Reservations</div>
+                                                <div style="font-size: 14px; cursor: pointer;" id="all-reservations">
+                                                    <!--All Reservations(<span t-esc="len(all_reservations)"></span>)-->
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-wrap reservations_flex pt-2">
+                                                <div class="tab-reserve tab-reserve-selected"
+                                                     tab-data="orders-booking2">
+                                                    <i class="fa fa-bars"></i>
+                                                    Booking/Orders
+                                                </div>
+                                                <div class="tab-reserve" tab-data="check-in">
+                                                    <i class="fas fa-user-clock"></i>
+                                                    Checking In (
+                                                    <t t-esc="len(check_in)"/>)
+                                                </div>
+                                                <div class="tab-reserve" tab-data="guest-review">
+                                                    <i class="fas fa-user-edit"></i>
+                                                    Guest Review
+                                                    (
+                                                    <t t-esc="len(reviewable_books)"/>)
+                                                </div>
+                                                <div class="tab-reserve" tab-data="checking-out">
+                                                    <i class="fas fa-user-check"></i>
+                                                    Checking out
+                                                    (
+                                                    <t t-esc="len(check_out)"/>)
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Orders/Booking -->
+                                        <div class="pt-4 tab-reserve-content" id="orders-booking2">
+                                            <!-- Alert -->
+                                            <t t-if="not my_orders">
+                                                <div class="pt-3">
+                                                    <div class="alert__no-alert">
+                                                        <i class="fa fa-info-circle" style="font-size:16px;"></i>
+                                                        You don't have any Order/Bookings
+                                                    </div>
+                                                </div>
+                                            </t>
+                                            <t t-else="">
+                                                <div>
+
+                                                    <div>
+                                                        <t t-foreach="my_orders" t-as="my_order">
+                                                            <!--
+                                                            <th>Order Number</th>
+                                                            <th>Service</th>
+                                                            <th>Order DateTime</th>
+                                                            <th>Status</th>
+                                                            -->
+                                                            <div class="guest-booking">
+                                                                <div>
+                                                                    <div t-if="my_order.get('so').order_line and my_order.get('so').order_line[0].product_id">
+                                                                        <i class="fas fa-puzzle-piece mr-1"
+                                                                           style="color: dodgerblue;"></i>
+                                                                        <b>Product/Service:</b>
+                                                                        <div class="guest-booking-text"
+                                                                             t-esc="my_order.get('so').order_line[0].product_id.name"/>
+                                                                    </div>
+
+                                                                    <div t-if="my_order.get('so')" class="pt-2">
+                                                                        <i class="fas fa-sort-numeric-down mr-1"
+                                                                           style="color: dodgerblue;"></i>
+                                                                        <b>Order Number:</b>
+                                                                        <div class="guest-booking-text"
+                                                                             t-esc="my_order.get('so').name"/>
+                                                                    </div>
+
+                                                                    <div t-if="my_order.get('so')" class="pt-2">
+                                                                        <i class="fa fa-calendar mr-1"
+                                                                           style="color: dodgerblue;"></i>
+                                                                        <b>Order Date:</b>
+                                                                        <div class="guest-booking-text"
+                                                                             t-esc="my_order.get('so').date_order.strftime('%d %b %Y')"/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="guest-booking-right-block">
+                                                                    <div t-if="my_order.get('state') and my_order.get('so').order_line and my_order.get('so').order_line[0].product_id">
+
+                                                                        <t t-set="state"
+                                                                           t-value="my_order.get('state')"/>
+
+                                                                        <div>
+                                                                            <div>Order/Booking Status:</div>
+                                                                            <small class="guest-booking-text">
+                                                                                <t t-esc="my_order.get('state')"/></small>
+                                                                        </div>
+
+                                                                        <div t-if="my_order.get('so') and state == 'Pending'"
+                                                                             class="pt-2">
+                                                                            <a t-att-href="'/rental/browse-property-detail?id=%s' % my_order.get('so').order_line[0].product_id.id"
+                                                                               class="d-block">
+                                                                                <i class="fa fa-eye mr-2"></i>
+                                                                                View on website</a>
+                                                                            <a t-att-href="'/guest/order/cancel?soid=%s' % my_order.get('so').id"
+                                                                               class="btn btn-danger btn-sm btn-block mt-3">
+                                                                                Cancel Order</a>
+                                                                        </div>
+                                                                        <div t-if="my_order.get('so') and state == 'Canceled'"
+                                                                             class="pt-2">
+                                                                            <a t-att-href="'/rental/browse-property-detail?id=%s' % my_order.get('so').order_line[0].product_id.id"
+                                                                               class="d-block">
+                                                                                <i class="fa fa-eye mr-2"></i>
+                                                                                View on website</a>
+                                                                        </div>
+                                                                        <div t-if="my_order.get('so') and state == 'Processing'"
+                                                                             class="pt-2">
+                                                                            <a t-att-href="'/rental/browse-property-detail?id=%s' % my_order.get('so').order_line[0].product_id.id"
+                                                                               class="d-block">
+                                                                                <i class="fa fa-eye mr-2"></i>
+                                                                                View on website</a>
+                                                                            <a t-att-href="'/guest/order/cancel?soid=%s' % my_order.get('so').id"
+                                                                               class="btn btn-danger btn-sm btn-block mt-3">
+                                                                                Cancel Order</a>
+                                                                        </div>
+                                                                        <div t-if="my_order.get('so') and state == 'Completed'"
+                                                                             class="pt-2">
+                                                                            <a t-att-href="'/rental/browse-property-detail?id=%s' % my_order.get('so').order_line[0].product_id.id"
+                                                                               class="d-block">
+                                                                                <i class="fa fa-eye mr-2"></i>
+                                                                                View on website</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </t>
+                                                    </div>
+
+                                                    <!-- Separator -->
+
+                                                    <!--<table class="table">
+                                                        <tr>
+                                                            <th>Order Number</th>
+                                                            <th>Service</th>
+                                                            <th>Order DateTime</th>
+                                                            <th>Status</th>
+                                                        </tr>
+
+                                                        <t t-foreach="my_orders" t-as="my_order">
+                                                            <tr>
+                                                                <td>
+                                                                    <div t-if="my_order.get('so')"
+                                                                         t-esc="my_order.get('so').name"></div>
+                                                                    <div t-else="">-</div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div t-if="my_order.get('so').order_line"
+                                                                         t-esc="my_order.get('so').order_line[0].product_id.name"></div>
+                                                                    <div t-else="">-</div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div t-if="my_order.get('so')"
+                                                                         t-esc="my_order.get('so').date_order.strftime('%d %b %Y')"></div>
+                                                                    <div t-else="">-</div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div t-if="my_order.get('state')">
+                                                                        <t t-set="state"
+                                                                           t-value="my_order.get('state')"/>
+                                                                        <div t-esc="my_order.get('state')"></div>
+
+                                                                        <div t-if="state == 'Pending'" class="pt-2">
+                                                                            <button class="btn btn-danger btn-sm">
+                                                                                Cancel</button>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div t-else="">-</div>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+
+                                                    </table>-->
+                                                </div>
+                                            </t>
+                                        </div>
+
+                                        <!-- CheckIn -->
+                                        <div class="pt-4 tab-reserve-content" id="check-in" style="display: none;">
+                                            <!--<h5 class="pb-2">Checking In</h5>-->
+
+                                            <!-- Alert -->
+                                            <t t-if="not check_in">
+                                                <div class="pt-3">
+                                                    <div class="alert__no-alert">
+                                                        <i class="fa fa-info-circle" style="font-size:16px;"></i>
+                                                        You don't have any Service here
+                                                    </div>
+                                                </div>
+                                            </t>
+                                            <t t-else="">
+                                                <div>
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>Service</th>
+                                                            <th class="text-right">Checking In</th>
+                                                        </tr>
+                                                        <t t-foreach="check_in" t-as="chk_in">
+                                                            <tr>
+                                                                <td t-esc="chk_in.product.name"></td>
+                                                                <td class="text-right" t-esc="chk_in.check_in"></td>
+                                                            </tr>
+                                                        </t>
+                                                    </table>
+                                                </div>
+                                            </t>
+                                        </div>
+
+                                        <!-- pending-review  -->
+                                        <div class="pt-4 tab-reserve-content" id="guest-review" style="display: none;">
+                                            <!-- Alert -->
+                                            <t t-if="not reviewable_books">
+                                                <div class="pt-3">
+                                                    <div class="alert__no-alert">
+                                                        <i class="fa fa-info-circle" style="font-size:16px;"></i>
+                                                        You don't have any items here.
+                                                    </div>
+                                                </div>
+                                            </t>
+                                            <t t-else="">
+                                                <h6 class="py-1">
+                                                    Product/Services Available for review
+                                                </h6>
+                                                <!--<small class="py-1 d-block">Product/Services Available for
+                                                    review</small>-->
+                                                <div>
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>Services</th>
+                                                            <th>Date</th>
+                                                            <th class="text-right">Write</th>
+                                                        </tr>
+                                                        <t t-foreach="reviewable_books" t-as="review_book">
+                                                            <tr>
+                                                                <td>
+                                                                    <a class="link"
+                                                                       t-att-href="'/make-review?bk_id=%s' % review_book.id"
+                                                                       t-esc="review_book.product.name"></a>
+                                                                </td>
+                                                                <td>
+                                                                    <a class="link"
+                                                                       t-att-href="'/make-review?bk_id=%s' % review_book.id"
+                                                                       t-esc="review_book.date"></a>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <a class="link btn btn-primary btn-sm"
+                                                                       t-att-href="'/make-review?bk_id=%s' % review_book.id">
+                                                                        Write a review
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </table>
+                                                </div>
+                                            </t>
+
+                                            <!-- My Reviews -->
+                                            <div class="mt-5">
+                                                <h6>My Reviews</h6>
+
+                                                <!-- Alert -->
+                                                <t t-if="not my_reviews">
+                                                    <div class="pt-3">
+                                                        <div class="alert__no-alert">
+                                                            <i class="fa fa-info-circle" style="font-size:16px;"></i>
+                                                            You don't posted any reviews
+                                                        </div>
+                                                    </div>
+                                                </t>
+
+                                                <t t-foreach="my_reviews" t-as="review">
+                                                    <div class="pt-1">
+                                                        <a class="link" href="#">
+                                                            <div class="d-flex justify-content-between">
+                                                                <div>
+                                                                    <t t-foreach="int(review.star)" t-as="star">
+                                                                        <i class="fa fa-star my-review-star"></i>
+                                                                    </t>
+                                                                </div>
+                                                                <div>
+                                                                    <t t-esc="review.date"/>
+                                                                </div>
+                                                            </div>
+                                                            <div t-esc="review.product_id.name"></div>
+                                                            <div t-esc="review.review">
+
+                                                            </div>
+                                                            <div>
+                                                                <div class="my-review__review-images">
+                                                                    <t t-foreach="review.images" t-as="image">
+                                                                        <div>
+                                                                            <!--                                                                            <img t-att-src="image_data_uri(image.image_128)"-->
+                                                                            <!--                                                                                 alt="Review Image"/>-->
+                                                                        </div>
+                                                                    </t>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </t>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Checking out -->
+                                        <div class="pt-4 tab-reserve-content" id="checking-out" style="display: none;">
+
+                                            <!-- Alert -->
+                                            <t t-if="not check_out">
+                                                <div class="pt-3">
+                                                    <div class="alert__no-alert">
+                                                        <i class="fa fa-info-circle" style="font-size:16px;"></i>
+                                                        You don't have any items here.
+                                                    </div>
+                                                </div>
+                                            </t>
+                                            <t t-else="">
+                                                <div>
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>Item</th>
+                                                            <th class="text-right">Checking Out</th>
+                                                        </tr>
+                                                        <t t-foreach="check_out" t-as="chk_out">
+                                                            <tr>
+                                                                <td t-esc="chk_out.product.name"></td>
+                                                                <td class="text-right" t-esc="chk_out.check_out"></td>
+                                                            </tr>
+                                                        </t>
+                                                    </table>
+                                                </div>
+                                            </t>
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- History -->
+                                    <div id="history" class="content" style="display: none;">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <div class="h6">History |
+                                                <small>All</small>
+                                            </div>
+                                            <div></div>
+                                        </div>
+                                        <div id="history-content">
+                                            <!--<t t-foreach="visits" t-as="visit">
+                                                <div class="d-flex pb-2">
+                                                    <div>
+                                                        <i class="fa fa-clock-o"></i>
+                                                    </div>
+                                                    <div class="pl-3">
+                                                        <a class="link" t-att-href="visit.url" t-esc="visit.url">
+                                                            AvailabilityShare</a>
+                                                        <div class="text-muted"
+                                                             style="font-size: 12px; cursor: pointer;"
+                                                             t-esc="visit.datetime"></div>
+                                                    </div>
+                                                </div>
+                                            </t>-->
+                                            <table class="table">
+                                                <tr>
+                                                    <th>Service</th>
+                                                    <th>Invoice Date</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                                <t t-foreach="account_moves" t-as="move">
+                                                    <tr>
+                                                        <t t-if="move.invoice_line_ids">
+                                                            <td t-esc="move.invoice_line_ids[0].product_id.name"></td>
+                                                            <td t-esc="move.invoice_date"></td>
+                                                            <td t-esc="move.amount_total"></td>
+                                                        </t>
+                                                    </tr>
+                                                </t>
+                                            </table>
+                                        </div>
+
+                                        <div id="history-footer">
+                                            <div class="d-none">
+                                                <i class="fa fa-trash mr-2"></i>
+                                                <a class="link" href="/visit/clear-all">Clear all history</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Financial Dashboard -->
+                                    <div id="financial-dashboard" class="content" style="display: none;">
+                                        <!-- Alert -->
+                                        <t t-if="not my_orders2">
+                                            <div class="pt-3">
+                                                <div class="alert__no-alert">
+                                                    <i class="fa fa-info-circle" style="font-size:16px;"></i>
+                                                    You don't have any items here
+                                                </div>
+                                            </div>
+                                        </t>
+                                        <t t-else="">
+                                            <div>
+                                                <table class="table table-sm">
+                                                    <tr>
+                                                        <th>Order</th>
+                                                        <th>Service</th>
+                                                        <th>Order DateTime</th>
+                                                        <th>Status</th>
+                                                        <th>Amount</th>
+                                                    </tr>
+
+                                                    <t t-foreach="my_orders2" t-as="my_order">
+                                                        <tr>
+                                                            <td t-if="my_order.get('so')"
+                                                                t-esc="my_order.get('so').name"></td>
+                                                            <td t-else="">-</td>
+
+                                                            <td t-if="my_order.get('so').order_line"
+                                                                t-esc="my_order.get('so').order_line[0].product_id.name"></td>
+                                                            <td t-else="">-</td>
+
+                                                            <td t-if="my_order.get('so')"
+                                                                t-esc="my_order.get('so').date_order"></td>
+                                                            <td t-else="">-</td>
+
+                                                            <td t-if="my_order.get('state')"
+                                                                t-esc="my_order.get('state')"></td>
+                                                            <td t-else="">-</td>
+
+                                                            <td t-if="my_order.get('so')"
+                                                                t-esc="'%s%s' % (currency.symbol, my_order.get('so').amount_total)"></td>
+                                                            <td t-else="">-</td>
+                                                        </tr>
+                                                    </t>
+
+                                                </table>
+                                            </div>
+                                        </t>
+
+
+                                    </div>
+
+                                    <!-- family -->
+                                    <div id="family" class="content" style="display: none;">
+                                        <style>
+                                            .family_flex>div {
+                                            border: 1px solid rgb(166, 166, 166);
+                                            border-radius: 15px;
+                                            padding: 3px 10px;
+                                            font-size: 14px;
+                                            margin-right: 10px;
+                                            margin-bottom: 10px;
+                                            cursor: pointer;
+                                            }
+                                            .family-content-selected {
+                                            display: block;
+                                            }
+                                            .family-tab-selected {
+                                            background-color: rgb(221, 219, 219);
+                                            }
+                                        </style>
+                                        <div class="d-flex family_flex">
+                                            <div class="family-tab family-tab-selected" tab-data="family-members">
+                                                <i class="fa fa-users"></i>
+                                                Members
+                                            </div>
+                                            <div class="family-tab" tab-data="family-add">
+                                                <i class="fa fa-user-plus"></i>
+                                                Add New Member
+                                            </div>
+                                        </div>
+                                        <div class="family-content" id="family-members" style="display: none2;">
+                                            <div>
+                                                <!-- Alert -->
+                                                <t t-if="not family_members">
+                                                    <div class="pt-3">
+                                                        <div class="alert__no-alert">
+                                                            <i class="fa fa-info-circle" style="font-size:16px;"></i>
+                                                            You have not added family members
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </div>
+
+                                            <div class="pt-4">
+                                                <table class="table table-hover">
+                                                    <tr>
+                                                        <th>First Name</th>
+                                                        <th>Last Name</th>
+                                                        <th>Gender</th>
+                                                        <th>Relationship</th>
+                                                        <th class="text-right">Option</th>
+                                                    </tr>
+                                                    <tr t-foreach="family_members" t-as="member">
+                                                        <td t-if="member.first_name" t-esc="member.first_name"></td>
+                                                        <td t-else="">-</td>
+
+                                                        <td t-if="member.last_name" t-esc="member.last_name"></td>
+                                                        <td t-else="">-</td>
+
+                                                        <td t-if="member.gender" t-esc="member.gender"></td>
+                                                        <td t-else="">-</td>
+
+                                                        <td t-if="member.relationship" t-esc="member.relationship"></td>
+                                                        <td t-else="">-</td>
+                                                        <td class="text-right">
+                                                            <a class="link" target="_blank"
+                                                               t-att-href="'/my/family-member/edit?id=%s' % member.id">
+                                                                <i class="fa fa-pencil-square mr-2"></i>Edit
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="family-content" id="family-add" style="display: none;">
+                                            <form action="/my/family-status" method="post"
+                                                  enctype="multipart/form-data">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="first_name">First Name
+                                                                <span class="required">
+                                                                    *
+                                                                </span>
+                                                            </label>
+                                                            <input type="text" name="first_name" id="first_name"
+                                                                   class="form-control" required="1"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="last_name">Last Name
+                                                                <span class="required">
+                                                                    *
+                                                                </span>
+                                                            </label>
+                                                            <input type="text" name="last_name" id="last_name"
+                                                                   class="form-control" required="1"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="date_of_birth">Date Of Birth</label>
+                                                            <input type="date" name="date_of_birth" id="date_of_birth"
+                                                                   class="form-control"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="gender">Gender</label>
+                                                            <select name="gender" id="gender" class="form-control">
+                                                                <option value="male">male</option>
+                                                                <option value="female">Female</option>
+                                                                <option value="other">Other</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="image_1920">Photo
+                                                                <span class="required">
+                                                                    *
+                                                                </span>
+                                                            </label>
+                                                            <input type="file" name="image_1920" id="image_1920"
+                                                                   class="form-control" required="1"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="date_of_birth">Relationship</label>
+                                                            <select name="relationship" id="relationship"
+                                                                    class="form-control">
+                                                                <option value="father">Father</option>
+                                                                <option value="mother">Mother</option>
+                                                                <option value="brother">Brother</option>
+                                                                <option value="sister">Sister</option>
+                                                                <option value="wife">Wife</option>
+                                                                <option value="friend">Friend</option>
+                                                                <option value="other">Other</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="language">Language</label>
+                                                            <select name="relationship" id="relationship"
+                                                                    class="form-control">
+                                                                <t t-foreach="languages" t-as="language">
+                                                                    <option t-att-value="language.id"
+                                                                            t-esc="language.name"></option>
+                                                                </t>
+                                                            </select>
+                                                        </div>
+                                                        <!--<div class="form-check">
+                                                            <label for="parental_responsibility"
+                                                                   class="form-check-label">
+                                                                <input type="checkbox" name="parental_responsibility"
+                                                                       id="parental_responsibility"
+                                                                       class="form-check-input"/>
+                                                                Do they have parental responsibility?
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label for="up_drop" class="form-check-label">
+                                                                <input type="checkbox" name="up_drop" id="up_drop"
+                                                                       class="form-check-input"/>
+                                                                Can they up/drop of mr./mrs xyz?
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label for="live_with" class="form-check-label">
+                                                                <input type="checkbox" name="live_with" id="live_with"
+                                                                       class="form-check-input"/>
+                                                                Do they live with mr./mrs xyz?
+                                                            </label>
+                                                        </div>-->
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="notes">Notes</label>
+                                                    <textarea name="notes" id="notes" cols="30" rows="3"
+                                                              class="form-control"/>
+
+                                                </div>
+                                                <div class="form-group text-right">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="fa fa-user"></i>
+                                                        Add family member
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <!-- rewards -->
+                                    <div id="rewards" class="content" style="display: none;">
+                                        <div>
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <h6 class="d-inline-block">Rewards Summary</h6>
+                                                </div>
+                                                <div>
+                                                    <h6 class="d-inline-block">Points Total -
+                                                        <t t-esc="point"/>
+                                                    </h6>
+                                                </div>
+
+                                            </div>
+
+                                            <style>
+                                                .c-point-store>div {
+                                                margin-right: 10px;
+                                                margin-bottom: 10px;
+                                                padding: 10px;
+                                                border: 1px solid rgb(244, 244, 244);
+                                                width: 200px;
+                                                text-align: center;
+                                                box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+                                                background-color: #f9f9f9;
+                                                }
+
+                                                .point-title {
+                                                line-height: 15px;
+                                                max-height: 30px;
+                                                overflow-y: hidden;
+                                                text-align: center;
+                                                font-size: 14px;
+                                                }
+
+                                            </style>
+
+                                            <h6 class="pt-3 pb-2">Points Store</h6>
+                                            <div class="d-flex flex-wrap c-point-store">
+                                                <t t-foreach="point_stores" t-as="store">
+                                                    <div>
+                                                        <div class="point-title" t-esc="store.title"></div>
+                                                        <div class="text-center py-5">
+                                                            <img t-if="store.image_128"
+                                                                 t-att-src="image_data_uri(store.image_128)"
+                                                                 alt=""/>
+                                                            <img t-else="" src="/as_rental/static/src/image/default.png"
+                                                                 alt="default"/>
+                                                        </div>
+                                                        <div style="font-weight: bold;"
+                                                             t-esc="'%s Points' % store.point">
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </div>
+
+                                            <!--<h6 class="pt-3 pb-2">Earn Points</h6>
+                                            <div>
+                                                Earn 150 Points by share with
+                                            </div>
+                                            <div>
+                                                Earn 200 Points to share in your website
+                                            </div>-->
+
+                                            <div class="pt-2">
+                                                <div>
+                                                    <b>Your invitation link:</b>
+                                                </div>
+                                                <div class="pt-2">
+                                                    <input type="text"
+                                                           t-att-value="'www.availabilityshare.com/invite/%s' % pt.invite_code"
+                                                           class="form-control"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- gift cards -->
+                                    <div id="gift-card" class="content" style="display: none;">
+                                        <div class="gift-content" id="gift" style="display: none2;">
+                                            <form action="/my/gift-process" method="post"
+                                                  enctype="multipart/form-data">
+
+                                                <!-- Gift Receiver's form -->
+                                                <input type="hidden" name="csrf_token"
+                                                       t-att-value="request.csrf_token()"/>
+                                                <div class="mb-3">
+                                                    <h6>Gift Receiver's Information</h6>
+                                                </div>
+                                                <div class="row">
+                                                    <!-- gift left -->
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                        <div class="form-group">
+                                                            <label for="amount_of_gift_card">Amount Of Gift Card (<t
+                                                                    t-esc="currency.name"/>)
+                                                                <span
+                                                                        class="required">
+                                                                    *
+                                                                </span>
+                                                            </label>
+                                                            <input type="number" name="amount_of_gift_card"
+                                                                   id="amount_of_gift_card"
+                                                                   class="form-control" required="1"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="first_name">First Name
+                                                                <span class="required">
+                                                                    *
+                                                                </span>
+                                                            </label>
+                                                            <input type="text" name="first_name" id="first_name"
+                                                                   class="form-control" required="1"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="last_name">Last Name
+                                                                <span class="required">
+                                                                    *
+                                                                </span>
+                                                            </label>
+                                                            <input type="text" name="last_name" id="last_name"
+                                                                   class="form-control" required="1"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="shipping_address">Shipping Address
+                                                                <span
+                                                                        class="required">
+                                                                    *
+                                                                </span>
+                                                            </label>
+                                                            <textarea class="form-control" name="shipping_address"
+                                                                      id="shipping_address" required="1"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="shipping_address_2">Shipping Address 02</label>
+                                                            <textarea class="form-control" name="shipping_address_2"
+                                                                      id="shipping_address_2"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- gift right -->
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                        <div class="form-group">
+                                                            <label for="city">City
+                                                                <span class="required">
+                                                                    *
+                                                                </span>
+                                                            </label>
+                                                            <input type="text" name="city" id="city"
+                                                                   class="form-control" required="1"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="region">Region</label>
+                                                            <input type="text" name="region" id="region"
+                                                                   class="form-control"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="zip">Zip</label>
+                                                            <input type="number" name="zip" id="zip"
+                                                                   class="form-control"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="country_id">Country</label>
+                                                            <select name="country_id" id="country_id"
+                                                                    class="form-control">
+                                                                <t t-foreach="countries" t-as="country">
+                                                                    <option t-att-value="country.id"
+                                                                            t-att-selected="country.code == 'BD'"
+                                                                            t-esc="country.name"></option>
+                                                                </t>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="mobile">Mobile</label>
+                                                            <input type="text" name="mobile" id="mobile"
+                                                                   class="form-control"/>
+                                                        </div>
+                                                        <div class="form-group text-right">
+                                                            <button type="submit" class="btn btn-primary">
+                                                                <i class="fa fa-gift"></i>
+                                                                Gift/Order
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- purchaser's form -->
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <!-- linked accounts -->
+                                    <!--<div id="linked-accounts" class="content" style="display: none;">
+                                        <div>
+                                            <p class="text-muted">Coming soon ...</p>
+                                        </div>
+                                    </div>-->
+
+                                    <!-- invite_a_friend -->
+                                    <div id="invite-a-friend" class="content" style="display: none;">
+                                        <div class="container">
+                                            <div class="c-in">
+                                                <div class="text-center h4">
+                                                    Tell your friends
+                                                </div>
+                                                <div class="text-center pt-3">
+                                                    Receive 500 points when friends make their first
+                                                    purchase
+                                                    <br/>
+                                                    Share your referral URL with friends
+                                                </div>
+                                                <div class="pt-3">
+                                                    <div class="pb-1">
+                                                        Your Referral URL
+                                                    </div>
+                                                    <div t-if="pt.invite_code" class="c-ref-link">
+                                                        <div>
+                                                            <input type="text"
+                                                                   t-att-value="'www.availabilityshare.com/invite/%s' % pt.invite_code"
+                                                                   id="input_ref"/>
+                                                        </div>
+                                                        <div>
+                                                            <div id="ref-copy">
+                                                                <i class="fa fa-copy"></i>
+                                                                Copy
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-wrap ref__c-social">
+                                                        <div>
+                                                            <a class="bg_fb" href="https://www.facebook.com/">
+                                                                <i class="fa fa-facebook"></i>
+                                                                Share via facebook
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <a class="bg_twitter" href="https://twitter.com/">
+                                                                <i class="fa fa-twitter"></i>
+                                                                Share via twitter
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <a class="bg_instagram" href="https://www.instagram.com">
+                                                                <i class="fa fa-instagram"></i>
+                                                                Share via Instagram
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- support -->
+                                    <div id="support" class="content" style="display: none;">
+                                        <div>
+                                            <style>
+                                                .support__fa-icon {
+                                                font-size: 40px;
+                                                color: dodgerblue;
+                                                display: block;
+                                                }
+
+                                                .support__row .col div {
+                                                display: inline-block;
+                                                text-align: center;
+                                                }
+                                            </style>
+                                            <div>
+                                                <div class="row support__row">
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                                                        <div class="pb-3">
+                                                            <div class="text-left">
+                                                                <div>Reach us by email</div>
+                                                                <div class="pt-1 text-muted">
+                                                                    <i class="fa fa-envelope-o mr-2"></i>
+                                                                    <t t-esc="setting.support_email"/>
+                                                                </div>
+
+                                                                <div class="pt-3">
+                                                                    <a class="btn btn-outline-primary btn-sm"
+                                                                       t-att-href="'mailto:%s' % setting.support_email">
+                                                                        Email us
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                                                        <div>
+                                                            <div class="text-left">
+                                                                <div>Talk with us over the
+                                                                    phone
+                                                                </div>
+                                                                <div class="pt-1 text-muted">
+                                                                    <i class="fa fa-phone mr-2"></i>
+                                                                    <t t-esc="setting.support_phone"/>
+                                                                </div>
+                                                                <div class="pt-3">
+                                                                    <a class="btn btn-outline-primary btn-sm"
+                                                                       t-att-href="'tel:%s' % setting.support_phone">
+                                                                        Call us
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- settings -->
+                                    <div id="settings" class="content" style="display: none;">
+                                        <div>
+                                            <h5>Account setting</h5>
+                                            <a href="/my/change_password" class="btn btn-primary btn-sm">Change Account
+                                                Password
+                                            </a>
+                                        </div>
+                                        <!--<hr/>
+                                        <div>
+                                            <form action="/setting/save" method="post">
+                                                <input type="hidden" name="csrf_token"
+                                                       t-att-value="request.csrf_token()"/>
+                                                <div class="form-check">
+                                                    <label class="form-check-label" for="check1">
+                                                        <input type="checkbox" class="form-check-input"
+                                                               id="notification"
+                                                               name="notification" value="something"
+                                                               t-att-checked="pt.setting_notification"/>Notification
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <label class="form-check-label" for="check2">
+                                                        <input type="checkbox" class="form-check-input" id="message"
+                                                               name="message" value="something"
+                                                               t-att-checked="pt.setting_message"/>Messages
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <div class="d-flex justify-content-end">
+                                                        <div>
+                                                            <button type="submit" class="btn btn-primary">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>-->
+
+                                        <hr/>
+
+                                        <div>
+                                            <h5>Account information</h5>
+                                            <div style="font-size: 15px;">Account Create Date:
+                                                <b
+                                                        t-esc="pt.create_date.strftime('%d %B %Y')"/>
+                                            </div>
+                                            <div style="font-size: 15px;">Last Update Date:
+                                                <b
+                                                        t-esc="pt.write_date.strftime('%d %B %Y')"/>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <!-- end container-content -->
+                        </div>
+                        <!-- end Content column -->
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Custom Javascript -->
+            <script src="/as_rental/static/js/jquery-3.6.0.min.js"></script>
+            <script src="/as_rental/static/js/dashboard/dashboard.js"></script>
+
+        </t>
+    </template>
+</odoo>

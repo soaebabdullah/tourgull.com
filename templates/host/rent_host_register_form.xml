@@ -1,0 +1,40 @@
+<odoo>
+    <template id="rent_host_register_form">
+        <t t-call="as_rental.guest__layout_01">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-4"></div>
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-4">
+
+
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="/rent/host/register" method="post">
+                                    <div class="text-center">
+                                        <i class="fas fa-layer-group" style="color: dodgerblue;"></i>
+                                    </div>
+                                    <h5 class="pt-2">Request for Become a host</h5>
+                                    <div class="text-muted">
+                                        To list a property in <b>availableshare</b> your account need be verified by
+                                        availableshare team.
+                                    </div>
+                                    <div class="text-muted">
+                                        If you have any query please contact us.
+                                    </div>
+                                    <input type="hidden" name="host" id="host" value="123"/>
+                                    <div class="text-right pt-3">
+                                        <button type="submit" class="btn btn-primary btn-block font-weight-bold">Request
+                                            Now</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-4"></div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

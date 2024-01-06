@@ -1,0 +1,107 @@
+<odoo>
+    <template id="my_booking_list" name="Booking list">
+        <t t-call="website.layout">
+
+            <style>
+                body {
+                background-color: rgb(239, 239, 239);
+                }
+
+                .my_card {
+                border: 1px solid rgb(234, 234, 234);
+                border-radius: 5px;
+                background-color: white;
+                padding: 10px;
+                margin-bottom: 10px;
+                }
+
+                .m-card-img {
+                /* width: 100%; */
+                min-width: 100%;
+                height: auto;
+                }
+
+                .card-info {
+                color: rgb(101, 101, 101);
+                }
+
+                .span-info {
+                display: block;
+                }
+
+                .a-card {
+                text-decoration: none;
+                }
+
+                .a-card:link {
+                text-decoration: none;
+                }
+
+                /* visited link */
+                .a-card:visited {
+                text-decoration: none;
+                }
+
+                /* mouse over link */
+                .a-card:hover {
+                text-decoration: none;
+                }
+
+                /* selected link */
+                .a-card:active {
+                text-decoration: none;
+                }
+            </style>
+
+
+            <div class="container py-3">
+
+                <h4>My booking list</h4>
+                <hr/>
+
+                <div class="card-container">
+
+                    <t t-if="book_products">
+
+                        <h6 t-esc="'Properties (%s)' % len(book_products)"></h6>
+                        <hr/>
+
+                        <div t-foreach="book_products" t-as="product" class="my_card">
+                            <a class="a-card" t-att-href="'/rental/browse-property-detail?id=%s' % product.get('product').id">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img class="m-card-img" t-att-src="image_data_uri(product.get('product').image_256)"
+                                             alt=""/>
+                                    </div>
+                                    <div class="col-8">
+                                        <h5 t-esc="product.get('product').name"></h5>
+                                        <div class="card-info">
+                                            <span t-if="product.get('product').rp_host" class="span-info" t-esc="'Host : %s' % product.get('product').rp_host.name"></span>
+                                            <span class="span-info" t-esc="'Start Date : %s' % product.get('product').rp_start_date"></span>
+                                            <span class="span-info" t-esc="'End Date : %s' % product.get('product').rp_end_date"></span>
+                                            <span class="span-info" t-esc="'Order Number : %s' % product.get('order').name"></span>
+                                            <span class="span-info" t-esc="'Order Date : %s' % product.get('order').date_order"></span>
+                                            <span class="span-info" t-esc="'State : %s' % product.get('order').state"></span>
+                                        </div>
+                                        <div t-if="product.get('order').state == 'cancel'">
+                                            <a class="btn btn-primary" t-att-href="'/rental/browse-property-detail?id=%s' % product.get('product').id">
+                                                View in website</a>
+                                        </div>
+                                        <div t-else="">
+                                            <a class="btn btn-danger" t-att-href="'/my/booking-list/cancel?id=%s' % product.get('order').id">
+                                                Cancel Booking</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </t>
+
+                </div>
+
+            </div>
+
+
+        </t>
+    </template>
+</odoo>

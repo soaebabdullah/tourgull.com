@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+
+
+        <!-- tree - as.visit -->
+        <!-- tree - as_visit -->
+        <record model="ir.ui.view" id="as_visit_tree_id">
+            <field name="name">Visit</field>
+            <field name="model">as.visit</field>
+            <field name="arch" type="xml">
+                <tree default_order="id desc">
+                    <field name="url"/>
+                    <field name="datetime"/>
+                    <field name="partner_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- form - as.visit -->
+        <!-- form - as_visit -->
+        <record model="ir.ui.view" id="as_visit_form_id">
+            <field name="name">Visit</field>
+            <field name="model">as.visit</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="url" widget="url"/>
+                                <field name="datetime"/>
+                                <field name="partner_id"/>
+                            </group>
+                            <group></group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="as_visit_action">
+            <field name="name">Visit</field>
+            <field name="res_model">as.visit</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

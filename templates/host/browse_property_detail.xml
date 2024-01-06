@@ -1,0 +1,1012 @@
+<odoo>
+    <template id="rental_browse_property_detail">
+        <t t-set="notification" t-value="request.env['as.def'].get_all_notifications()"/>
+        <html lang="en">
+
+            <head>
+                <title>Property Detail | AvailabilityShare</title>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <link type="image/x-icon" rel="shortcut icon" href="/as_rental/static/images/logo/favicon.png"/>
+
+                <!-- Bootstrap CSS -->
+                <link rel="stylesheet" href="/as_rental/static/css/bootstrap.min.css"/>
+
+                <!-- Custom -->
+                <script src="/as_rental/static/js/font_awesome.js"></script>
+                <link rel="stylesheet" href="/as_rental/static/css/global.css?v=1"/>
+                <link rel="stylesheet" href="/as_rental/static/css/rp-common-u1.css?v=1"/>
+                <link rel="stylesheet" href="/as_rental/static/css/browse-property-detail-old.css?v=1"/>
+                <link rel="stylesheet" href="/as_rental/static/css/browse-property-detail.css?v=8"/>
+                <link rel="stylesheet" href="/as_rental/static/css/image-viewer-u4.css"/>
+                <link rel="stylesheet" href="/as_rental/static/css/available_share_grid_photo.css?v=1"/>
+            </head>
+
+            <body>
+
+                <!-- SECTION HEADER-->
+                <header>
+                    <div class="container-fluid c-header">
+                        <div class="row py-3 py-sm-2 py-md-3 py-lg-3 no-gutters align-items-center">
+                            <div class="col-4 col-sm-2 col-md-4 col-lg-4 bg-info2">
+                                <a id="logo__container" href="/">
+                                    <img class="logo-prop-home" src="/as_rental/static/images/logo/as_logo_tr.png"
+                                         alt=""/>
+                                </a>
+                                <a id="logo_only__container" href="/" style="display: none2;">
+                                    <img id="logo_only" style="height: 50px;" class="xxxxxx"
+                                         src="/as_rental/static/images/logo/logo_only.png"/>
+                                </a>
+                            </div>
+                            <div class="col-4 col-sm-8 col-md-4 col-lg-4 pl-2 pl-md-0 pl-lg-0 bg-warning2">
+                                <style>
+                                    .ph-c-search>div {
+                                    cursor: pointer;
+                                    }
+
+                                    #when {
+                                    border-left: 1px solid rgb(186, 186, 186);
+                                    border-right: 1px solid rgb(186, 186, 186);
+                                    }
+                                </style>
+                                <div class="ph-c-search">
+                                    <div class="ph-search-flex d-flex justify-content-center">
+                                        <!--<div id="explore-search">
+                                                <i class="fa fa-search pr-2"></i>
+                                                SEARCH
+                                            </div>-->
+                                        <div id="where">
+                                            <b>Where</b>
+                                        </div>
+                                        <div id="when">
+                                            <b>When</b>
+                                        </div>
+                                        <div id="guest">Guest</div>
+                                        <!-- <div id="explore-filter" class="explore-filter">
+                                            <i class="fas fa-sliders-h pr-2"></i>
+                                            FILTER
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 col-sm-2 col-md-4 col-lg-4 bg-info2">
+                                <div class="d-flex flex-row-reverse align-items-center">
+                                    <div class="float-right2">
+                                        <div t-if="login">
+
+                                            <div id="c-right-menu">
+                                                <div>
+                                                    <i class="fa fa-bars pr-2" style="color: gray"></i>
+                                                </div>
+                                                <div>
+                                                    <img t-if="pt_obj.image_128" class="profile-img"
+                                                         t-att-src="image_data_uri(pt_obj.image_128)"
+                                                         alt="Profile image"/>
+                                                    <img t-else="" class="profile-img" title="My account"
+                                                         src="/as_rental/static/images/profile/default_profile_image.jpg"
+                                                         alt="profile image"/>
+                                                </div>
+
+                                            </div>
+
+                                            <div id="bp-mb-menu-icon" class="mobile-icon">
+                                                <i id="bp-mb-menu-icon-bars" class="fa fa-bars brand-color"></i>
+                                            </div>
+
+                                        </div>
+                                        <div t-else="">
+                                            <a href="/web/login">Login</a>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <!-- notification-popup -->
+                                        <div class="mr-4 click-notification-popup"
+                                             style="cursor: pointer; position: relative;">
+                                            <i class="click-notification-popup2 fa fa-bell"></i>
+                                            <div class="circle svg-data">
+                                                <span t-if="notification and notification.get('nts_unseen_count')"
+                                                      class="circle__content"
+                                                      t-esc="notification.get('nts_unseen_count')"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search property (sp) -->
+                    <style>
+                        .flex-search-input>div {
+                        padding-left: 10px;
+                        }
+                    </style>
+
+                    <div class="c-search-form" style="display: none;">
+                        <form id="sp__form" action="/rental/browse-property" enctype="multipart/form-data"
+                              autocomplete="off">
+                            <div class="sp__flex">
+                                <div class="sp__flex-item-where">
+                                    <span>Where</span>
+                                    <input type="text" class="form-control" id="location" name="location" required="1"/>
+                                    <div id="sp__location-suggest" style="display: none;">
+                                        <ul id="sp__location-suggest-ul">
+                                            <t t-foreach="cities" t-as="city">
+                                                <li class="city-item" t-esc="city"></li>
+                                            </t>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>Check In</span>
+                                    <input type="date" class="form-control" id="checkin" name="checkin"
+                                           t-att-min="date_today" required="1"/>
+                                    <small id="invalid_checkin" class="sp__invalid-input-small text-danger"
+                                           style="display: none;">Invalid
+                                        date</small>
+                                </div>
+                                <div>
+                                    <span>Check Out</span>
+                                    <input type="date" class="form-control" id="checkout" name="checkout"
+                                           t-att-min="date_today" required="1"/>
+                                    <small id="invalid_checkout" class="sp__invalid-input-small text-danger"
+                                           style="display: none;">Invalid
+                                        date</small>
+                                </div>
+                                <div class="sp__input-sm">
+                                    <span>Room's</span>
+                                    <input type="number" class="form-control" id="rooms" name="rooms" value="1"
+                                           min="1" required="1"/>
+                                </div>
+                                <div class="sp__input-sm">
+                                    <span>Adult's</span>
+                                    <input type="number" class="form-control" id="adults" name="adults" value="1"
+                                           min="1" required="1"/>
+                                </div>
+                                <div class="sp__input-sm">
+                                    <span>Child's</span>
+                                    <input type="number" class="form-control" id="childs" name="childs" value="0"
+                                           min="0" required="1"/>
+                                </div>
+                                <div class="sp__input-sm" style="align-self: end; padding-bottom: 2px;">
+                                    <button type="submit" class="sp__submit-btn btn-block btn btn-default">
+                                        <i class="fas fa-search-location"></i>
+                                        Search</button>
+                                    <small id="invalid-btn" class="text-danger" style="display: none; color: #eaeaea">
+                                        .</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </header>
+
+                <!-- SECTION_BODY -->
+                <div class="inner-body">
+                    <div class="body-container container pt-4">
+                        <h2 class="title" t-esc="product.name"></h2>
+                        <input id="pid" type="hidden" t-att-value="product.id"/>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <div class="d-flex">
+                                    <div>
+                                        <span t-if="product.rp_place_categ_id" class="mr-2 label__category"
+                                              t-esc="product.rp_place_categ_id.name">
+                                        </span>
+                                    </div>
+                                    <div>
+
+                                        <t t-if="rating">
+                                            <a class="link" href="#reviews">
+                                                <div class="pb-2">
+                                                    <t t-set="a" t-value="float(rating)"/>
+                                                    <t t-set="b" t-value="int(a)"/>
+                                                    <t t-foreach="b" t-as="c">
+                                                        <i class="fa fa-star color-star" style="font-size: 13px;"></i>
+                                                    </t>
+                                                    <span class="pb-2" style="font-size: 15px;">
+                                                        <t t-esc="rating"/>
+                                                        (
+                                                        <t t-esc="request.env['rent.property.review'].get_review_count(product.id)"/>
+                                                        ) - Review
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </t>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="d-flex align-items-center">
+                                    <div id="popup_msg" style="display: none;">
+                                        <!-- popup_msg -->
+                                        Message
+                                    </div>
+                                    <div>
+                                        <t t-if="pd_info.get('wishlist') == True">
+                                            <div id="ws_enable" class="ws_click">
+                                                <i class="fa fa-heart"
+                                                   style="font-size:25px; color: red; cursor: pointer"></i>
+                                            </div>
+                                            <div id="ws_disable" class="ws_click" style="display: none">
+                                                <i class="fa fa-heart"
+                                                   style="font-size:25px; color: gray; cursor: pointer;"></i>
+                                            </div>
+                                        </t>
+                                        <t t-else="">
+                                            <div id="ws_enable" class="ws_click" style="display: none">
+                                                <i class="fa fa-heart"
+                                                   style="font-size:25px; color: red; cursor: pointer;"></i>
+                                            </div>
+                                            <div id="ws_disable" class="ws_click">
+                                                <i class="fa fa-heart"
+                                                   style="font-size:25px; color: gray; cursor: pointer"></i>
+                                            </div>
+                                        </t>
+                                    </div>
+                                    <div>
+                                        <a href="#prices" class="link anchor__book" style="color: white;">Book</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="pt-4"></div>
+                        <div style="background-color: #baffcf;padding: 5px;">
+                            <div class="title__location">
+                                <i class="fas fa-map-marker-alt" style="color: dodgerblue;"></i>
+                                <t t-esc="title_location"/>
+                            </div>
+                        </div>
+                        <div class="anchor pt-3">
+                            <div>
+                                <a class="link" href="#summery">Summery</a>
+                            </div>
+                            <div class="anchor_div_last">
+                                <a class="link" href="#prices">Prices</a>
+                            </div>
+                            <div>
+                                <a class="link" href="#place_offers">What this place offers</a>
+                            </div>
+                            <div class="anchor_div_last anchor_div_last_last">
+                                <a class="link" href="#reviews">Reviews</a>
+                            </div>
+                        </div>
+
+                        <!-- Image grid -->
+                        <div class="container2 pt-3">
+                            <div class="row no-gutters">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 left main--col-1">
+                                    <img class="click_viewer" data_img_index="0"
+                                         t-att-src="image_data_uri(product.image_512)"
+                                         t-att-alt="product.name"/>
+                                </div>
+                                <div class="col-12 6 col-sm-12 col-md-12 col-lg-12 col-xl-6 right main--col-2">
+                                    <div class="row right--col-row__1 no-gutters">
+                                        <div class="col-12 col-sm-12 col-md-6 col-md-12 col-lg-12 col-xl-6 right--upper-left div-1">
+                                            <img class="click_viewer" data_img_index="1"
+                                                 t-att-src="image_data_uri(product.rp_image_2_512)"
+                                                 t-att-alt="product.name"/>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-md-12 col-lg-12 col-xl-6 right--upper-right div-2">
+                                            <img class="click_viewer" data_img_index="2"
+                                                 t-att-src="image_data_uri(product.rp_image_3_512)"
+                                                 t-att-alt="product.name"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="row right--col-row__2 no-gutters">
+                                        <div class="col-12 col-sm-12 col-md-6 col-md-12 col-lg-12 col-xl-6 right--lower-left div-1">
+                                            <img class="click_viewer" data_img_index="3"
+                                                 t-att-src="image_data_uri(product.rp_image_4_512)"
+                                                 t-att-alt="product.name"/>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-md-12 col-lg-12 col-xl-6 right--lower-right div-2">
+                                            <img class="click_viewer" data_img_index="4"
+                                                 t-att-src="image_data_uri(product.rp_image_5_512)"
+                                                 t-att-alt="product.name"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="im">
+                            <div class="im__inner">
+                                <div class="row no-gutters _h-lg-100">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 p-1">
+                                        <div class="container-img-details">
+                                            <img class="img-details click_viewer" data_img_index="0"
+                                                 t-att-src="image_data_uri(product.image_512)"
+                                                 t-att-alt="product.name"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 _h-lg-100">
+                                        <div>
+                                            <div class="row no-gutters _h-lg-50">
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 p-1">
+                                                    <div>
+                                                        <img class="img-details-sm click_viewer" data_img_index="1"
+                                                             t-att-src="image_data_uri(product.rp_image_2_512)"
+                                                             t-att-alt="product.name"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 p-1">
+                                                    <div>
+                                                        <img class="img-details-sm r-top-right click_viewer"
+                                                             data_img_index="2"
+                                                             t-att-src="image_data_uri(product.rp_image_3_512)"
+                                                             t-att-alt="product.name"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row no-gutters _h-lg-50 pt-1">
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 p-1">
+                                                    <div>
+                                                        <img class="img-details-sm click_viewer" data_img_index="3"
+                                                             t-att-src="image_data_uri(product.rp_image_4_512)"
+                                                             t-att-alt="product.name"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 p-1">
+                                                    <div>
+                                                        <img class="img-details-sm r-bottom-right click_viewer"
+                                                             data_img_index="4"
+                                                             t-att-src="image_data_uri(product.rp_image_5_512)"
+                                                             t-att-alt="product.name"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+
+                        <!-- details -->
+                        <div class="pt-4">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-lg-8 col-xl-8">
+                                    <div>
+                                        <h3 id="summery" class="title as-h3">
+                                            Summery
+                                            <!--<t t-esc="product.rp_host.name"/>-->
+                                        </h3>
+                                        <p>
+                                            <t t-esc="product.rp_adults"/> adult .
+                                            <t t-esc="product.rp_childs"/> child .
+                                            <t t-esc="product.rp_bedrooms"/> bedroom .
+                                            <t t-esc="product.rp_beds"/>
+                                            bed .
+                                            <t t-esc="product.rp_bathrooms"/> bathroom
+                                            <t t-if="product.rp_square_feet"
+                                               t-esc="' . %s square feet' % product.rp_square_feet"/>
+                                        </p>
+                                        <hr/>
+                                        <div t-esc="product.rp_place_desc"></div>
+                                        <h3 id="place_offers" class="title as-h3 mt-3">What this place offers</h3>
+
+                                        <style>
+                                            .flex-ame>div {
+                                            min-width: 50%;
+                                            padding-top: 15px;
+                                            }
+                                        </style>
+
+                                        <div class="d-flex flex-wrap flex-ame">
+                                            <t t-foreach="ame_list" t-as="ame">
+                                                <div>
+                                                    <i class="fas fa-feather-alt" style="font-size: 16px"></i>
+                                                    <span class="pl-3">
+                                                        <t t-esc="ame"/>
+                                                    </span>
+                                                </div>
+                                            </t>
+                                        </div>
+
+                                        <!-- reviews -->
+                                        <div id="reviews" class="c-review">
+                                            <hr/>
+                                            <div class="py-3" style="font-size: 25px">
+                                                <t t-if="rating">
+                                                    <div class="pb-2">
+                                                        <t t-set="a" t-value="float(rating)"/>
+                                                        <t t-set="b" t-value="int(a)"/>
+                                                        <t t-foreach="b" t-as="c">
+                                                            <i class="fa fa-star color-star"
+                                                               style="font-size: 18px;"></i>
+                                                        </t>
+                                                        <span class="pb-2">
+                                                            <t t-esc="rating"/>
+                                                            (
+                                                            <t
+                                                                    t-esc="request.env['rent.property.review'].get_review_count(product.id)"/>
+                                                            ) - Review
+                                                        </span>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                        <div class="container c-rating">
+                                            <div class="row">
+                                                <div style="width: 100%;">
+                                                    <div class="side">
+                                                        <div>5 star</div>
+                                                    </div>
+                                                    <div class="middle">
+                                                        <div class="bar-container">
+                                                            <div class="bar-5"
+                                                                 t-att-style="'width: %s%s;' % (bar5_percent,'%')"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="side right">
+                                                        <div t-esc="review.get('rate_five')"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div style="width: 100%;">
+                                                    <div class="side">
+                                                        <div>4 star</div>
+                                                    </div>
+                                                    <div class="middle">
+                                                        <div class="bar-container">
+                                                            <div class="bar-4"
+                                                                 t-att-style="'width: %s%s;' % (bar4_percent,'%')"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="side right">
+                                                        <div t-esc="review.get('rate_four')"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div style="width: 100%;">
+                                                    <div class="side">
+                                                        <div>3 star</div>
+                                                    </div>
+                                                    <div class="middle">
+                                                        <div class="bar-container">
+                                                            <div class="bar-3"
+                                                                 t-att-style="'width: %s%s;' % (bar3_percent,'%')"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="side right">
+                                                        <div t-esc="review.get('rate_three')"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div style="width: 100%;">
+                                                    <div class="side">
+                                                        <div>2 star</div>
+                                                    </div>
+                                                    <div class="middle">
+                                                        <div class="bar-container">
+                                                            <div class="bar-2"
+                                                                 t-att-style="'width: %s%s;' % (bar2_percent,'%')"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="side right">
+                                                        <div t-esc="review.get('rate_two')"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div style="width: 100%;">
+                                                    <div class="side">
+                                                        <div>1 star</div>
+                                                    </div>
+                                                    <div class="middle">
+                                                        <div class="bar-container">
+                                                            <div class="bar-1"
+                                                                 t-att-style="'width: %s%s;' % (bar1_percent,'%')"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="side right">
+                                                        <div t-esc="review.get('rate_one')"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <style>
+                                                .reviews > div {
+                                                width: 100%;
+                                                }
+                                            </style>
+                                            <div class="reviews d-flex flex-wrap pt-4">
+                                                <t t-foreach="review_records" t-as="rr">
+                                                    <div class="">
+                                                        <div class="d-flex">
+                                                            <div class="c-profile-review-img">
+                                                                <img t-if="rr.partner_id.image_128" class="profile-review-img rounded-circle"
+                                                                     t-att-src="image_data_uri(rr.partner_id.image_128)"
+                                                                     alt="Review - Profile Image"/>
+                                                            </div>
+                                                            <div class="pl-2">
+                                                                <div style="font-size: 20px;"
+                                                                     t-esc="rr.partner_id.name">
+                                                                </div>
+                                                                <div t-if="rr.date" class="text-muted" style="line-height: 12px;"
+                                                                     t-esc="rr.date.strftime('%d %B %Y')"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="pt-3 fs-17 black-80">
+                                                            <t t-foreach="int(rr.star)" t-as="my_star">
+                                                                <i class="fa fa-star browse-detail-star"></i>
+                                                            </t>
+                                                        </div>
+                                                        <div class="pt-2 pb-1 fs-17 black-80" t-esc="rr.review"></div>
+                                                    </div>
+
+                                                    <!-- review images -->
+                                                    <div t-if="rr.images" class="pb-2">
+                                                        <div class="my-review__review-images">
+                                                            <div t-foreach="rr.images" t-as="image">
+                                                                <!--<img class="review-tab"
+                                                                     t-att-data-tab="'%s%s' % (rr.id, image.id)"
+                                                                     t-att-src="image_data_uri(image.image_1920)"
+                                                                     alt=""/>-->
+                                                            </div>
+                                                        </div>
+                                                        <div t-foreach="rr.images" t-as="image">
+                                                            <!--<img class="review-full-image"
+                                                                 t-att-id="'%s%s' % (rr.id, image.id)"
+                                                                 t-att-src="image_data_uri(image.image_512)"
+                                                                 style="display: block; display: none; max-width: 100%;"
+                                                                 alt=""/>-->
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                        <!-- rating end -->
+
+                                        <!-- hosted by -->
+                                        <div>
+                                            <hr/>
+                                            <div>
+                                                <div class="d-flex">
+                                                    <div class="c-profile-review-img">
+                                                        <t t-if="product.rp_host.id">
+                                                            <img t-if="product.rp_host.image_128" class="profile-review-img rounded-circle"
+                                                                 t-att-src="image_data_uri(product.rp_host.image_128)"
+                                                                 alt="Host profile image"/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <img class="profile-review-img rounded-circle"
+                                                                 src="/as_rental/static/images/profile/default.png"
+                                                                 alt="Host profile image"/>
+                                                        </t>
+                                                    </div>
+                                                    <div class="pl-2">
+                                                        <div style="font-size: 20px;">
+                                                            Hosted By:
+                                                            <t t-esc="product.rp_host.name"/>
+                                                        </div>
+                                                        <div class="text-muted" style="line-height: 12px;">
+                                                            <t t-if="product.rp_host.create_date">
+                                                                Joined in
+                                                                <t t-esc="product.rp_host.create_date.date().strftime('%d %B %Y')"/>
+                                                            </t>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="pt-3 fs-17 black-80">
+                                                    Response rate: Normal <br/>
+                                                    Response time: within an hour
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--  -->
+
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-lg-4 col-xl-4">
+                                    <div id="prices" class="sticky-top55 sticky-top-pc55 pt-4">
+                                        <div class="book">
+                                            <div class="d-flex22 justify-content-between22">
+                                                <div>
+                                                    <t t-if="rating">
+                                                        <a class="link" href="#reviews">
+                                                            <div class="pb-2">
+                                                                <t t-set="a" t-value="float(rating)"/>
+                                                                <t t-set="b" t-value="int(a)"/>
+                                                                <t t-foreach="b" t-as="c">
+                                                                    <i class="fa fa-star color-star"
+                                                                       style="font-size: 13px;"></i>
+                                                                </t>
+                                                                <span class="pb-2" style="font-size: 15px;">
+                                                                    <t t-esc="rating"/>
+                                                                    (
+                                                                    <t
+                                                                            t-esc="request.env['rent.property.review'].get_review_count(product.id)"/>
+                                                                    ) - Review
+                                                                </span>
+                                                            </div>
+                                                        </a>
+                                                    </t>
+                                                </div>
+                                                <div>
+                                                    <span class="book-price">
+                                                        <span t-esc="'%s%s' % (setting.currency_symbol, product.list_price)"></span>
+                                                    </span>
+                                                    <span class="pl-2 text-muted">Per Night</span>
+                                                </div>
+
+                                            </div>
+
+                                            <t t-if="book_temp_minutes">
+                                                <p>Booking in process, if not confirm order will cancel in
+                                                    <t t-esc="book_temp_minutes"/> Minutes</p>
+                                            </t>
+
+                                            <t t-elif="pt and pt.is_host">
+                                                <h5>It's not allow to booking from host account</h5>
+                                            </t>
+
+                                            <t t-elif="product.rp_host and pt and product.rp_host.id == pt.id">
+                                                <h5>You can't book your own product</h5>
+                                            </t>
+
+                                            <t t-else="">
+                                                <!-- Edited by Umme Huzaifa -->
+                                                <div class="bg-info2 pt-2">
+                                                    <div>
+                                                        <div>Check In</div>
+                                                        <input type="date" class="form-control form-control-sm"
+                                                               name="checkin"
+                                                               id="input1"
+                                                               t-att-min="date.today()"
+                                                               t-att-max="product.rp_end_date"
+                                                               t-att-value="kw.get('check_in')"
+                                                               required="1"
+                                                        />
+                                                    </div>
+                                                    <div class="pt-2">
+                                                        <div>Check Out</div>
+                                                        <input type="date" class="form-control form-control-sm"
+                                                               name="checkout"
+                                                               id="input2"
+                                                               t-att-min="check_out_min_selection"
+                                                               t-att-max="product.rp_end_date"
+                                                               t-att-value="kw.get('check_out')"
+                                                               required="1"
+                                                        />
+                                                    </div>
+                                                    <div class="row pt-2">
+                                                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                                                            <div>Room</div>
+                                                            <input type="number"
+                                                                   id="input3"
+                                                                   class="form-control form-control-sm guests-count w-100"
+                                                                   style="width: 60px;"
+                                                                   t-att-value="kw.get('rooms', product.rp_bedrooms)"
+                                                                   name="rooms"
+                                                                   min="0"
+                                                                   t-att-max="product.rp_bedrooms"
+                                                                   required="1"
+                                                            />
+                                                        </div>
+                                                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                                                            <div>Adult</div>
+                                                            <input type="number"
+                                                                   id="input4"
+                                                                   class="form-control form-control-sm guests-count w-100"
+                                                                   t-att-value="kw.get('adults', product.rp_adults)"
+                                                                   style="width: 60px;"
+                                                                   name="adults"
+                                                                   min="0"
+                                                                   t-att-max="product.rp_adults"
+                                                                   required="1"
+                                                            />
+                                                        </div>
+                                                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                                                            <div>Child</div>
+                                                            <input type="number"
+                                                                   id="input5"
+                                                                   class="form-control form-control-sm guests-count w-100"
+                                                                   t-att-value="kw.get('childs', product.rp_childs if not product.rp_childs == 0 else '0')"
+                                                                   style="width: 60px;" name="children"
+                                                                   min="0"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-3">
+                                                        <div id="book_alert_danger" class="text-danger"
+                                                             style="display: none;">
+                                                            <p>Not available with this requirements</p>
+                                                        </div>
+                                                        <div id="btn_book"
+                                                             t-att-data-href="'/order/payment-method?service_type=property&amp;pdid=%s' % product.id">
+                                                            Book
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-none">
+
+                                                    <div style="display: none;">
+                                                        <div class="row no-gutters">
+                                                            <div class="col-6">$147 x 5 nights</div>
+                                                            <div class="col-6 text-right">$735</div>
+                                                        </div>
+                                                        <div style="height: 1px; background-color: #e3e3e3;margin: 8px 0px;"></div>
+                                                    </div>
+
+                                                    <div class="row no-gutters">
+                                                        <div class="col-6">
+                                                            <b>Total</b>
+                                                        </div>
+                                                        <div class="col-6 text-right">
+                                                            <b>$839</b>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--End of Edition-->
+
+                                            </t>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Related Properties -->
+                        <div t-if="products" class="as-h3 mt-4" style="font-size: 20px;">
+                            Related Properties:
+                        </div>
+
+                        <!-- Products -->
+                        <div id="flex-products" class="d-flex flex-wrap py-2 pt-4 flex-place">
+                            <t t-foreach="products" t-as="product">
+                                <div>
+                                    <!--<a class="a-place" t-att-href="'/rental/browse-property-detail?id=%s&amp;check_in=%s' % (product.id, check_in)">-->
+                                    <a class="a-place"
+                                       t-att-href="'/rental/browse-property-detail?id=%s&amp;check_in=%s&amp;check_out=%s&amp;rooms=%s&amp;adults=%s&amp;childs=%s' % (product.id, check_in, check_out, rooms, adults, childs)">
+                                        <div class="container_prop_img">
+                                            <img t-if="product.image_512" class="prop_img"
+                                                 t-att-src="image_data_uri(product.image_512)" alt=""/>
+                                        </div>
+                                        <div class="pt-2">
+                                            <!--<t t-if="rating.get(product.id)">
+                                                <div class="pb-2">
+                                                    <t t-set="a" t-value="float(rating.get(product.id))"/>
+                                                    <t t-set="b" t-value="int(a)"/>
+                                                    <t t-foreach="b" t-as="c">
+                                                        <i class="fa fa-star" style="font-size: 13px;"></i>
+                                                    </t>
+                                                    <span class="pb-2" style="font-size: 15px;">
+                                                        <t t-esc="rating.get(product.id)"/>
+                                                        (
+                                                        <t
+                                                                t-esc="request.env['rent.property.review'].get_review_count(product.id)"/>
+                                                        )
+                                                    </span>
+                                                </div>
+                                            </t>-->
+
+                                            <span class="prop-tilte" t-esc="product.name"></span>
+                                            <span class="h6 d-block m-0 mt-2 text-muted">
+                                                <t t-esc="product.rp_place_categ_id.name"/> in
+                                                <t t-esc="product.rp_city"/>
+                                            </span>
+                                            <p class="text-muted mb-1">
+                                                <t t-esc="product.rp_adults"/> adult .
+                                                <t t-esc="product.rp_childs"/> child .
+                                                <t t-esc="product.rp_bedrooms"/> bedroom .
+                                                <t t-esc="product.rp_beds"/> bed
+                                                <t t-if="product.rp_square_feet"
+                                                   t-esc="'%s . square feet' % product.rp_square_feet"/>
+                                            </p>
+                                            <p><span class="h5 font-weight-bold" style="color: black;">
+                                                <t t-esc="setting.currency_symbol"/>
+                                                <t t-esc="product.list_price"/>
+                                            </span> <span class="h5 text-muted">Night</span></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </t>
+                        </div>
+
+                    </div>
+                </div>
+
+                <style>
+                </style>
+                <div id="right-menu">
+                    <ul class="right-menu-ul">
+                        <li>
+                            <a href="/wishlist">Wishlist</a>
+                        </li>
+                        <li>
+                            <a href="/my">Manage Listing</a>
+                        </li>
+                        <li>
+                            <a href="/my">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="/web/session/logout?redirect=/">Log Out</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- viewer__container -->
+                <div id="viewer__container-pre" style="display: none;">
+                    <div id="viewer__container">
+                        <div class="px-3 py-3">
+                            <div class="row">
+                                <div class="col">
+                                    <!--<div id="viewer__index">*</div>-->
+                                </div>
+                                <div class="col text-center">
+                                    <div id="viewer__counter"></div>
+                                </div>
+                                <div class="col text-right">
+                                    <div id="viewer__close">Close</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="viewer_wrap">
+                            <img id="viewer" src="static/images/1.jpg" alt=""/>
+                            <div id="no_more_img" class="text-center" style="display: none;">No more image
+                                available</div>
+                        </div>
+
+                        <div id="btn_prev" class="viewer__btn-color">&lt;</div>
+                        <div id="btn_next" class="viewer__btn-color">&gt;</div>
+                    </div>
+                </div>
+
+                <!-- notification-popup -->
+                <div id="notification-popup" style="visibility: hidden;">
+                    <t t-if="notification and notification.get('nts')">
+                        <t t-foreach="notification.get('nts')" t-as="nt">
+                            <div t-if="nt.url" class="np__item">
+                                <a class="link" style="color: dodgerblue;" t-att-href="nt.url">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <i class="fa fa-stop mr-2"></i>
+                                        </div>
+                                        <div class="pl-1">
+                                            <t t-esc="nt.notification"/>
+                                            <div class="" style="font-size: 11px;"><t
+                                                    t-esc="nt.create_date"/></div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div t-else="" class="np__item">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <i class="fa fa-stop mr-2"></i>
+                                    </div>
+                                    <div class="pl-1">
+                                        <t t-esc="nt.notification"/>
+                                        <div class="" style="font-size: 11px;"><t
+                                                t-esc="nt.create_date"/></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="np__item_separator"></div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="np__item">
+                            <i class="fa fa-smile-o mr-2"></i>
+                            No notifications
+                        </div>
+                    </t>
+                </div>
+
+                <!-- mobile footer -->
+                <div id="block-gm-footer">
+                    <div class="gm-c-footer">
+                        <div>
+                            <a href="/">
+                                <i class="fa fa-home"></i>
+                                Home
+                            </a>
+                        </div>
+                        <div>
+                            <a href="/wishlist">
+                                <i class="fa fa-heart"></i>
+                                Wishlist
+                            </a>
+                        </div>
+                        <div>
+                            <a href="/contact">
+                                <i class="fa fa-envelope"></i>
+                                Support
+                            </a>
+                        </div>
+                        <div>
+                            <a href="/my">
+                                <i class="fa fa-user"></i>
+                                Dashboard
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- mobile menu  -->
+                <div id="layout-01-mobile-menu" class="popup layout-01-mobile-menu" style="display: none;">
+                    <div id="layout-01-mobile-menu-left-block">
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    <i class="fa fa-home mr-2"></i>
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/wishlist">
+                                    <i class="fa fa-heart mr-2"></i>
+                                    Wishlist
+                                </a>
+                            </li>
+                            <t t-if="pt">
+                                <t t-if="pt.is_host">
+                                    <li><a href="/my/switch-to-guest">
+                                        <i class="fas fa-retweet mr-2"></i>
+                                        Switch to guest</a></li>
+                                </t>
+                                <t t-else="">
+                                    <li><a href="/my/switch-to-guest">
+                                        <i class="fas fa-retweet mr-2"></i>
+                                        Switch to hosting</a></li>
+                                </t>
+                            </t>
+                            <li>
+                                <a href="/become-a-host">
+                                    <i class="fas fa-list mr-2"></i>
+                                    List Property</a>
+                            </li>
+                            <li>
+                                <a href="/my">
+                                    <i class="fa fa-dashboard mr-2"></i>
+                                    Dashboard</a>
+                            </li>
+                            <li t-if="pt">
+                                <a href="/web/session/logout?redirect=/">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>
+                                    Logout
+                                </a>
+                            </li>
+                            <li t-else="pt">
+                                <a href="/web/login">
+                                    <i class="fa fa-user mr-2"></i>
+                                    Login
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="p-4 text-muted">Please go to home page to explore all services of
+                            AvailablityShare</div>
+                    </div>
+                    <div id="layout-01-mobile-menu-right-block"></div>
+                </div>
+
+                <!-- SECTION_FOOTER -->
+                <footer>
+                    <t t-call="as_rental.rp_footer"/>
+                </footer>
+
+                <!-- Optional JavaScript -->
+                <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                <script src="/as_rental/static/js/jquery-3.6.0.min.js"></script>
+                <script src="/as_rental/static/js/popper.min.js"></script>
+                <script src="/as_rental/static/js/bootstrap.min.js"></script>
+                <script src="/as_rental/static/js/browse-property-detail.js?v=1"></script>
+                <script src="/as_rental/static/js/brows_details_search_availability-u1.js?v=3"></script>
+                <script src="/as_rental/static/js/image-viewer-u3.js"></script>
+
+            </body>
+
+        </html>
+
+
+    </template>
+</odoo>

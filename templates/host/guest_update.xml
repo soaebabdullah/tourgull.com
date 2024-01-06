@@ -1,0 +1,118 @@
+<odoo>
+    <template id="guest_update" name="Account update (guest)">
+        <t t-call="as_rental.guest__layout_01">
+            <t t-set="head">
+                <title>Account Update | AvailabilityShare</title>
+            </t>
+
+            <style>
+                .guest-form {
+                background-color: white;
+                padding: 20px;
+                }
+                .profile-img {
+                padding: 5px;
+                border: 1px solid #ddd;
+                margin-bottom: 5px;
+                }
+            </style>
+
+
+            <div class="container w-sm-100 w-lg-50 py-3">
+
+                <h5>Account update</h5>
+
+                <div class="guest-form">
+                    <form action="/guest/web/update/status" method="post" enctype="multipart/form-data">
+                        <input type="hidden" t-att-value="pt.id" name="id"/>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <label for="name">Name *</label>
+                                    <input type="text" class="form-control form-control-sm" name="name"
+                                           t-att-value="pt.name" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="text" class="form-control form-control-sm" name="email"
+                                           t-att-value="pt.email" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mobile">Mobile *</label>
+                                    <input type="text" class="form-control form-control-sm" name="mobile"
+                                           t-att-value="pt.mobile" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="street">Address *</label>
+                                    <input type="text" class="form-control form-control-sm" name="street"
+                                           t-att-value="pt.street" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City *</label>
+                                    <input type="text" class="form-control form-control-sm" name="city"
+                                           t-att-value="pt.city" required="1"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <label for="country_id">Country *</label>
+                                    <select type="text" class="form-control form-control-sm" name="country_id"
+                                            required="1">
+
+                                        <t t-if="country_id">
+                                            <t t-foreach="countries" t-as="country">
+                                                <option t-att-value="country.id"
+                                                        t-att-selected="country_id == country.id"
+                                                        t-esc="country.name"></option>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-foreach="countries" t-as="country">
+                                                <option t-att-value="country.id" t-esc="country.name"></option>
+                                            </t>
+                                        </t>
+
+                                    </select>
+                                </div>
+
+                                <div t-if="not pt.image_1920" class="form-group">
+                                    <label for="image_1920">Account Image *</label>
+                                    <input type="file" class="form-control form-control-sm" name="image_1920"
+                                           required="1"/>
+                                </div>
+
+                                <div t-if="not pt.nid_passport_front" class="form-group">
+                                    <label for="nid_passport_front">Nid/Passport front *</label>
+                                    <input type="file" class="form-control form-control-sm"
+                                           name="nid_passport_front"
+                                           required="1"/>
+                                </div>
+
+                                <div t-if="not pt.nid_passport_back" class="form-group">
+                                    <label for="nid_passport_back">Nid/Passport back *</label>
+                                    <input type="file" class="form-control form-control-sm"
+                                           name="nid_passport_back"
+                                           required="1"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="d-flex justify-content-between">
+                                        <div></div>
+                                        <div>
+                                            <button type="submit" class="btn btn-primary" name="password"
+                                                    required="1">Update</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+
+        </t>
+    </template>
+</odoo>

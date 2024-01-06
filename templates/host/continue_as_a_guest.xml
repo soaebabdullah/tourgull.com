@@ -1,0 +1,74 @@
+<odoo>
+    <template id="continue_as_a_guest" name="Continue As A Guest">
+        <t t-call="website.layout">
+
+            <style>
+                body {
+                background-color: rgb(248, 248, 248);
+                }
+                .guest-form {
+                background-color: white;
+                padding: 20px;
+                }
+            </style>
+
+            <div class="container w-sm-100 w-lg-50 py-3">
+
+                <h6 class="pl-3">Continue As A Guest</h6>
+
+                <div class="guest-form">
+                    <form action="/guest/continue_as_a_guest/status" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <label for="first_name">First Name *</label>
+                                    <input type="text" class="form-control" name="first_name"
+                                           required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="middle_name">Middle Name *</label>
+                                    <input type="text" class="form-control" name="middle_name"
+                                           required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="last_name">Last Name *</label>
+                                    <input type="text" class="form-control" name="last_name"
+                                           required="1"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="text" class="form-control" name="email" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mobile">Mobile *</label>
+                                    <input type="text" class="form-control" name="mobile" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password *</label>
+                                    <input type="text" class="form-control" name="password"
+                                           required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <div class="d-flex justify-content-between">
+                                        <div></div>
+                                        <div>
+                                            <button type="submit" class="btn btn-primary" name="password"
+                                                    required="1">Continue</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+
+        </t>
+    </template>
+</odoo>

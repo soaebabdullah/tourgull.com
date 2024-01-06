@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+        <!-- Tree view of - as.notification -->
+        <record model="ir.ui.view" id="as_notification_tree_id">
+            <field name="name">Notification</field>
+            <field name="model">as.notification</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="partner_id"/>
+                    <field name="notification"/>
+                    <field name="seen"/>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Form view of - as.notification -->
+        <record model="ir.ui.view" id="as_notification_form_id">
+            <field name="name">Notification</field>
+            <field name="model">as.notification</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="notification"/>
+                                <field name="url"/>
+                                <field name="seen"/>
+                            </group>
+                            <group>
+                                <field name="create_date"/>
+                                <field name="write_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="as_notification_action">
+            <field name="name">Notification</field>
+            <field name="res_model">as.notification</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

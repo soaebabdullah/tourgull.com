@@ -1,0 +1,58 @@
+<odoo>
+    <template id="rp_footer">
+        <style>
+            .c-footer {
+            background-color: #F7F7F7;
+            padding: 40px 0px;
+            border-top: 1px solid rgb(223, 223, 223);
+            }
+
+            .bp__footer-ul {
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+            }
+
+            .bp__footer-ul li a {
+            display: block;
+            padding: 8px 0px;
+            text-decoration: none;
+            color: inherit;
+            }
+        </style>
+        <div class="c-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <ul class="bp__footer-ul">
+                            <li><a href="#"><b>Support</b></a></li>
+                            <li><a href="#">Sample</a></li>
+                            <li><a href="#">Sample</a></li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul class="bp__footer-ul">
+                            <li><a href="#"><b>Community</b></a></li>
+                            <li><a href="#">Sample</a></li>
+                            <li><a href="#">Sample</a></li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul class="bp__footer-ul">
+                            <li><a href="#"><b>Hosting</b></a></li>
+                            <li><a href="#">Sample</a></li>
+                            <li><a href="#">Sample</a></li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul class="bp__footer-ul">
+                            <li><a href="#"><b>AvailableShare</b></a></li>
+                            <li><a href="#">Sample</a></li>
+                            <li><a href="#">Sample</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

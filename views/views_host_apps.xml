@@ -1,0 +1,70 @@
+<odoo>
+    <data>
+
+
+        <!-- tree - rent.car.app -->
+        <record model="ir.ui.view" id="host_applications_tree">
+            <field name="name">host_applications_tree</field>
+            <field name="model">rent.host.app</field>
+            <field name="arch" type="xml">
+                <tree default_order="id desc" decoration-danger="rp_is_host_prop == False">
+                    <field name="partner_id"/>
+                    <field name="product_id"/>
+                    <field name="rp_is_host_prop"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- form - rent.car.app -->
+        <record id="host_applications_form" model="ir.ui.view">
+            <field name="name">host_applications_form</field>
+            <field name="model">rent.host.app</field>
+            <field name="arch" type="xml">
+                <form string="Host Application">
+                    <header>
+                        <button name="publish" type="object" string="Publish"
+                                attrs="{'invisible':[('rp_is_host_prop','=', True)]}"/>
+                        <button name="un_publish" type="object" string="Un-Publish"
+                                attrs="{'invisible':[('rp_is_host_prop','=', False)]}"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="product_id"/>
+                                <field name="rp_is_host_prop"/>
+                            </group>
+                        </group>
+
+                        <div>
+                            <div>
+                                <i class="fa fa-info-circle"></i>
+                            </div>
+                            <h5>List property Request</h5>
+                            <p>
+                                Please verify customer by clicking <b>Customer</b> <br/>
+                                and product by clicking <b>Product</b> <br/>
+                                before publish.
+                            </p>
+                        </div>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions - rent.car.app -->
+        <record model="ir.actions.act_window" id="host_applications_action">
+            <field name="name">List Property Request</field>
+            <field name="res_model">rent.host.app</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+    </data>
+</odoo>

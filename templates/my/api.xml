@@ -1,0 +1,35 @@
+<odoo>
+    <template id="api" name="Api">
+        <t t-call="website.layout">
+
+            <input id="input" type="text" style="width: 100%;"/>
+
+            <div id="map" style="height: 1000px; width: 1000px;"></div>
+
+            <script>
+                function initGoogle() {
+                var location = {
+                lat: 23.7609595,
+                lng: 90.4068525
+                }
+                var options = {
+                center: location,
+                zoom: 16
+                }
+                map = new google.maps.Map(document.getElementById("map"), options);
+
+                autocomplete = new google.maps.places.Autocomplete(document.getElementById("input"),
+                {
+                componentRestrictions: {'country': ['bd']},
+                fields: ['geometry', 'name'],
+                types: ['establishment']
+                })
+                }
+            </script>
+
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7S5kVU4rqEqtWX92GpC_zCHVke61ahL8&amp;libraries=places&amp;callback=initGoogle">
+            </script>
+
+        </t>
+    </template>
+</odoo>

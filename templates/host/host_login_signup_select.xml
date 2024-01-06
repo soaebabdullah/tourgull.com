@@ -1,0 +1,24 @@
+<odoo>
+    <template id="host_login_signup_select" name="Go">
+        <t t-call="as_rental.as_layout">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-4"></div>
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-4">
+                        <h6>Already have an account</h6>
+                        <a href="/web/login" class="btn btn-primary d-block">Login</a>
+                        <br/>
+                        <span>Or</span>
+                         <br/>
+                         <br/>
+                        <h6>Create a host account</h6>
+                        <a href="/host/web/signup" class="btn btn-primary d-block">Create account</a>
+                    </div>
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-4"></div>
+                </div>
+
+
+            </div>
+        </t>
+    </template>
+</odoo>

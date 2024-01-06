@@ -1,0 +1,64 @@
+<odoo>
+    <template id="rent_host_register">
+        <t t-call="as_rental.guest__layout_01">
+            <t t-set="head">
+                <title>Application - Become a host</title>
+            </t>
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-4"></div>
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-4">
+
+                        <t t-if="host_dic.get('is_already_requested') and host_dic.get('host_app').status == 'pending'">
+                            <div class="card">
+
+                                <div class="card-header"><b>Application - Become a host</b></div>
+
+                                <div class="card-body">
+                                    <div>Application status: <span class="text-danger"
+                                                                   t-esc="host_dic.get('host_app').status"></span></div>
+                                    <div t-esc="'Submit Date: %s' % host_dic.get('host_app').create_date.date()"></div>
+                                    <div class="pt-4">
+                                        Thanks for requesting to become a host in <b>AvailablityShare</b>
+                                        Please give us a session of time to process and wait for confirmation.
+                                    </div>
+                                </div>
+                                <div class="card-footer text-right">
+                                    <small>AvailablityShare</small>
+                                </div>
+                                <div>
+
+                                </div>
+                            </div>
+                        </t>
+
+                        <t t-if="host_dic.get('is_already_requested') and host_dic.get('host_app').status == 'approved'">
+                            <div class="card">
+                                <div class="card-header"><b>Application - Become a host</b></div>
+                                <div class="card-body">
+                                    <div>Application status: <span class="text-success"
+                                                                   t-esc="host_dic.get('host_app').status"></span></div>
+                                    <div t-esc="'Date: %s' % host_dic.get('host_app').create_date.date()"></div>
+                                    <div class="pt-4">
+                                        Welcome, <br/>
+                                        Your are approved by AvailablityShare to list property.
+                                        Submit your property and reach a big community of people.
+                                    </div>
+                                    <div class="pt-4">
+                                        <a class="btn btn-success btn-block" href="/submit-a-property">Submit a
+                                            property</a>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-right">
+                                    <small>AvailablityShare</small>
+                                </div>
+                            </div>
+                        </t>
+
+                    </div>
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-4"></div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

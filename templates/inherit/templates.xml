@@ -1,0 +1,5 @@
+<odoo>
+    <template id="test_nine" name="Test nine">
+        <h1>Hello world</h1>
+    </template>
+</odoo>

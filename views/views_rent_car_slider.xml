@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+
+
+        <!-- tree - rent.car.slider -->
+        <!-- tree - rent_car_slider -->
+        <record model="ir.ui.view" id="rent_car_slider_tree_id">
+            <field name="name">rent_car_slider_tree</field>
+            <field name="model">rent.car.slider</field>
+            <field name="arch" type="xml">
+                <tree default_order="id desc">
+                    <field name="image"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- form -->
+        <record model="ir.ui.view" id="rent_car_slider_form_id">
+            <field name="name">rent_car_slider_form</field>
+            <field name="model">rent.car.slider</field>
+            <field name="arch" type="xml">
+                <form default_order="id desc">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="image" widget="image" class="oe_avatar" />
+                            </group>
+                            <group></group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- actions -->
+        <record model="ir.actions.act_window" id="car_slider_action">
+            <field name="name">Slider</field>
+            <field name="res_model">rent.car.slider</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+    </data>
+</odoo>

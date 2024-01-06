@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+
+
+        <!-- tree - rent.car.type -->
+        <record model="ir.ui.view" id="rent_car_type_tree_id">
+            <field name="name">rent_car_type_tree</field>
+            <field name="model">rent.car.type</field>
+            <field name="arch" type="xml">
+                <tree default_order="id desc">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- form - rent.car.app -->
+        <record model="ir.ui.view" id="rent_car_type_form_id">
+            <field name="name">rent_car_type_form</field>
+            <field name="model">rent.car.type</field>
+            <field name="arch" type="xml">
+                <form default_order="id desc">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group></group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="car_type_action">
+            <field name="name">Car Type</field>
+            <field name="res_model">rent.car.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+    </data>
+</odoo>

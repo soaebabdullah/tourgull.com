@@ -1,0 +1,135 @@
+<odoo>
+
+    <template id="category_selection" name="Category selection">
+        <t t-call="as_rental.guest__layout_01">
+
+            <t t-set="head">
+                <title>Category | AvailabilityAhare</title>
+            </t>
+
+            <link rel="stylesheet" href="/as_rental/static/css/become-a-host-category.css?v=2"/>
+
+            <div class="container py-3">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-lg-2 col-xl-2"></div>
+                    <div class="col-12 col-md-12 col-lg-8 col-xl-8">
+                        <div class="py-5 py-md-1 py-lg-1 py-xl-1">
+                            <form action="/become-a-host/category/step-b" method="post">
+                                <input id="level_1_item_id" name="level_1_item_id" type="hidden" value=""/>
+                                <div style="padding-left: 2%;">
+                                    <div class="font-weight-bold">AvailablityShare Service category</div>
+                                    <div>
+                                        <small class="text-muted">Please select one from below and click next to forward</small>
+                                    </div>
+                                    <p id="demo"></p>
+                                </div>
+
+                                <!-- level -->
+                                <div id="abc" class="d-flex flex-wrap c-item">
+
+                                    <t t-foreach="categories" t-as="category">
+                                        <div t-if="category.url" t-att-id="category.id" class="level"
+                                             t-att-url="category.url">
+                                            <i t-if="category.fa_class" t-att-class="category.fa_class"
+                                               style="font-size:15px"></i>
+                                            <i t-else="" class="fa fa-align-justify" style="font-size:15px"></i>
+                                            <span class="ml-2" t-esc="category.name"></span>
+                                        </div>
+                                        <div t-else="" t-att-id="category.id" class="level" url="false">
+                                            <i t-if="category.fa_class" t-att-class="category.fa_class"
+                                               style="font-size:15px"></i>
+                                            <i t-else="" class="fa fa-align-justify" style="font-size:15px"></i>
+                                            <span class="ml-2" t-esc="category.name"></span>
+                                        </div>
+                                    </t>
+
+                                </div>
+
+                                <div>
+                                    <div class="d-flex2 justify-content-between2">
+                                        <div class="text-right">
+                                            <a id="a_next" href="#" disabled="1" class="btn btn-primary w-50" style="display: none;">
+                                                Next
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-lg-2 col-xl-2"></div>
+                </div>
+            </div>
+
+            <script src="/as_rental/static/js/jquery-3.6.0.min.js"></script>
+            <script src="/as_rental/static/js/become-a-host-category.js?v=1"></script>
+        </t>
+    </template>
+
+    <template id="category_selection_step" name="Category selection step-B">
+        <t t-call="website.layout">
+
+            <link rel="stylesheet" href="/as_rental/static/css/become-a-host-category.css"/>
+
+            <div class="container py-3">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-lg-2 col-xl-2"></div>
+                    <div class="col-12 col-md-12 col-lg-8 col-xl-8">
+                        <div class="pt-4">
+                            <form action="/become-a-host/category/step-b" method="post">
+                                <input id="level_1_item_id" name="level_1_item_id" type="hidden" value=""/>
+                                <div>
+                                    <h4>Service category</h4>
+                                    <p id="demo"></p>
+                                    <hr/>
+                                </div>
+
+                                <!-- level -->
+                                <div id="abc" class="d-flex flex-wrap c-item">
+
+                                    <t t-foreach="categories" t-as="category">
+                                        <div t-if="category.url" t-att-id="category.id" class="level"
+                                             t-att-url="category.url">
+                                            <i t-if="category.fa_class" t-att-class="category.fa_class"
+                                               style="font-size:15px"></i>
+                                            <i t-else="" class="fa fa-align-justify" style="font-size:15px"></i>
+                                            <span class="ml-2" t-esc="category.name"></span>
+                                        </div>
+                                        <div t-else="" t-att-id="category.id" class="level" url="false">
+                                            <i t-if="category.fa_class" t-att-class="category.fa_class"
+                                               style="font-size:15px"></i>
+                                            <i t-else="" class="fa fa-align-justify" style="font-size:15px"></i>
+                                            <span class="ml-2" t-esc="category.name"></span>
+                                        </div>
+                                    </t>
+
+                                </div>
+
+                                <div>
+                                    <div>
+                                        <hr/>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div></div>
+                                        <div>
+                                            <a id="a_next" href="#" class="btn btn-primary" style="display: none;">
+                                                NEXT</a>
+                                            <button type="submit" id="btn-level-next" class="btn-next">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-lg-2 col-xl-2"></div>
+                </div>
+            </div>
+
+            <script src="/as_rental/static/js/jquery-3.6.0.min.js"></script>
+            <script src="/as_rental/static/js/become-a-host-category.js"></script>
+        </t>
+    </template>
+
+</odoo>

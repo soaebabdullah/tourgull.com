@@ -1,0 +1,7 @@
+<odoo>
+    <template id="trtt" inherit_id="website_sale.product" name="New Name">
+        <xpath expr="." position="replace">
+
+        </xpath>
+    </template>
+</odoo>

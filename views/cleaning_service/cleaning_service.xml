@@ -1,0 +1,55 @@
+<odoo>
+    <!-- Tree view of - as.cleaning_service.request -->
+    <record model="ir.ui.view" id="as_cleaning_service_request_tree_id">
+        <field name="name">Request</field>
+        <field name="model">as.cleaning_service.request</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id"/>
+                <field name="date"/>
+                <field name="cs_name"/>
+                <field name="cs_address"/>
+                <field name="cs_service_address"/>
+                <field name="cs_days"/>
+                <field name="cs_peoples_count"/>
+                <field name="cs_start_date"/>
+                <field name="cs_end_date"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form view of - as.cleaning_service.request -->
+    <record model="ir.ui.view" id="as_cleaning_service_request_form_id">
+        <field name="name">Request</field>
+        <field name="model">as.cleaning_service.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="date"/>
+                            <field name="cs_name"/>
+                            <field name="cs_address"/>
+                            <field name="cs_service_address"/>
+                            <field name="cs_days"/>
+                            <field name="cs_peoples_count"/>
+                            <field name="cs_start_date"/>
+                            <field name="cs_end_date"/>
+                        </group>
+                        <group></group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="as_cleaning_service_request_action">
+        <field name="name">Request</field>
+        <field name="res_model">as.cleaning_service.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

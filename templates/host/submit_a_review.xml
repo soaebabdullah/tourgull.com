@@ -1,0 +1,59 @@
+<odoo>
+    <template id="submit_a_review" name="Submit A Review">
+        <t t-call="website.layout">
+            <style>
+                .red {color: red;}
+            </style>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"></div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                    <div class="container py-5">
+
+                        <t t-if="msg.get('success')">
+                            <div class="alert alert-success">
+                                <span t-esc="msg.get('success')"></span>
+                            </div>
+                        </t>
+
+                        <t t-else="">
+                            <form class="rounded p-3" action="" method="post" enctype="multipart/form-data">
+                                <h4 class="text-center">Submit a review</h4>
+                                <!--<span class="red d-block text-center">Star (*) marks are required field</span>-->
+                                <hr/>
+                                <div class="form-group">
+                                    <label for="review_text">Star <span class="red">*</span></label>
+                                    <select class="form-control"
+                                            name="rate"
+                                            id="rate"
+                                            required="1">
+                                        <option value="five">5 Star</option>
+                                        <option value="four">4 Star</option>
+                                        <option value="three">3 Star</option>
+                                        <option value="two">2 Star</option>
+                                        <option value="one">1 Star</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="review_text">Review Text <span class="red">*</span></label>
+                                    <textarea class="form-control"
+                                              name="review"
+                                              id="review"
+                                              required="1"/>
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <div></div>
+                                    <div>
+                                        <button class="btn btn-primary" type="submit">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </t>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"></div>
+            </div>
+
+        </t>
+    </template>
+</odoo>

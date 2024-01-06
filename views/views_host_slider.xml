@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+
+        <!-- tree - rent.property.slider -->
+        <!-- tree - rent_property_slider -->
+        <record model="ir.ui.view" id="rent_property_slider_tree_id">
+            <field name="name">Slider</field>
+            <field name="model">rent.property.slider</field>
+            <field name="arch" type="xml">
+                <tree default_order="id desc">
+                    <field name="image"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form - rent.property.slider -->
+        <!-- form - rent_property_slider -->
+        <record model="ir.ui.view" id="rent_property_slider_form_id">
+            <field name="name">Slider</field>
+            <field name="model">rent.property.slider</field>
+            <field name="arch" type="xml">
+                <form default_order="id desc">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="image" widget="image" class="oe_avatar"/>
+                            </group>
+                            <group></group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="property_slider_action">
+            <field name="name">Slider</field>
+            <field name="res_model">rent.property.slider</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

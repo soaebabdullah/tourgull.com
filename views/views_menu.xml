@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="as_rental_root"
+                  name="Rental Service"
+                  groups="as_rental.group_rental_service_admin"
+                  sequence="100"/>
+
+        <menuitem id="host_property"
+                  name="Property"
+                  parent="as_rental.as_rental_root"
+                  sequence="0"/>
+
+        <!--<menuitem id="rent_a_car"
+                  name="Rent A Car"
+                  parent="as_rental.as_rental_root"
+                  sequence="1"/>-->
+
+        <menuitem id="as_event_menu_id"
+                  name="Event"
+                  parent="as_rental.as_rental_root"
+                  sequence="1"/>
+
+        <menuitem id="as_events_menu_id"
+                  name="Events"
+                  parent="as_rental.as_event_menu_id"
+                  action="as_event_action"
+                  sequence="0"/>
+
+        <menuitem id="menu_tour_guide"
+                  name="Tour guide"
+                  parent="as_rental.as_rental_root"
+                  sequence="2"/>
+
+        <menuitem id="menu_security_service"
+                  name="Security Service"
+                  parent="as_rental.as_rental_root"
+                  sequence="3"/>
+
+        <menuitem id="menu_cleaning_service"
+                  name="Cleaning Service"
+                  parent="as_rental.as_rental_root"
+                  sequence="4"/>
+
+        <menuitem id="menu_tourist_attraction"
+                  name="Tourist Attraction"
+                  parent="as_rental.as_rental_root"
+                  sequence="5"/>
+
+        <menuitem id="menu_tourist_attraction_a"
+                  name="Tourist Attraction"
+                  parent="as_rental.menu_tourist_attraction"
+                  action="as_rental.as_tourist_attraction_action"/>
+
+        <menuitem id="menu_cleaning_service_request"
+                  name="Cleaning Service Request"
+                  parent="as_rental.menu_cleaning_service"
+                  action="as_rental.as_cleaning_service_request_action"/>
+
+        <menuitem id="menu_security_service_request"
+                  name="Security service request"
+                  parent="as_rental.menu_security_service"
+                  action="as_rental.as_security_service_request_action"
+                  sequence="0"/>
+
+        <menuitem id="menu_tour_guide_hire"
+                  name="Hire Requests"
+                  parent="as_rental.menu_tour_guide"
+                  action="as_rental.av_tour_guide_hire_action"
+                  sequence="0"/>
+
+        <menuitem id="as_rental_config"
+                  name="Configuration"
+                  parent="as_rental.as_rental_root"
+                  sequence="50"/>
+
+        <menuitem id="host_property_lbl"
+                  name="Configuration"
+                  parent="as_rental.host_property"
+                  sequence="10"/>
+
+        <menuitem id="host_ame_1_menu_id"
+                  name="Amenities"
+                  parent="as_rental.host_property_lbl"
+                  sequence="0"
+                  action="host_ame_1_action"/>
+
+        <menuitem id="prop_slider"
+                  name="Property sliders"
+                  parent="as_rental.host_property_lbl"
+                  sequence="1"
+                  action="property_slider_action"/>
+
+        <menuitem id="host_property_type_menu_id"
+                  name="Property Type"
+                  parent="as_rental.host_property_lbl"
+                  sequence="2"
+                  action="host_property_type_action"/>
+
+        <menuitem id="host_place_type_menu_id"
+                  name="Place Type"
+                  parent="as_rental.host_property_lbl"
+                  sequence="3"
+                  action="host_place_type_action"/>
+
+        <menuitem id="id_service_category"
+                  name="Service Category"
+                  parent="as_rental.host_property_lbl"
+                  sequence="4"
+                  action="as_service_category_action"/>
+
+        <!-- MenuItem of - as.place_category -->
+        <menuitem id="as_place_category_menu_id"
+                  name="Property Category"
+                  parent="as_rental.host_property_lbl"
+                  sequence="5"
+                  action="as_place_category_action_id"/>
+
+        <!-- MenuItem of - as.hotel -->
+        <menuitem id="as_hotel_menu_id"
+                  name="Hotels"
+                  parent="as_rental.host_property_lbl"
+                  sequence="6"
+                  action="as_hotel_action_id"/>
+
+        <!-- MenuItem of - as.hotel.amenities -->
+        <menuitem id="as_hotel_amenities_menu_id"
+                  name="Hotel-Amenities"
+                  parent="as_rental.host_property_lbl"
+                  sequence="7"
+                  action="as_hotel_amenities_action_id"/>
+
+        <!-- MenuItem of - as.hotel.facility -->
+        <menuitem id="as_hotel_facility_menu_id"
+                  name="Hotel-Facility"
+                  parent="as_rental.host_property_lbl"
+                  sequence="8"
+                  action="as_hotel_facility_action_id"/>
+
+        <!-- MenuItem of - as.hotel.service -->
+        <menuitem id="as_hotel_service_menu_id"
+                  name="Hotel-Service"
+                  parent="as_rental.host_property_lbl"
+                  sequence="9"
+                  action="as_hotel_service_action_id"/>
+
+        <!-- MenuItem of - as.hotel.policy -->
+        <menuitem id="as_hotel_policy_menu_id"
+                  name="Hotel-Policies"
+                  parent="as_rental.host_property_lbl"
+                  sequence="10"
+                  action="as_hotel_policy_action_id"/>
+
+        <!-- MenuItem of - as.hotel.accept_payment_method -->
+        <menuitem id="as_hotel_accept_payment_method_menu_id"
+                  name="Accepted-Payment-Methods"
+                  parent="as_rental.host_property_lbl"
+                  sequence="11"
+                  action="as_hotel_accept_payment_method_action_id"/>
+
+        <!-- MenuItem of - as.hotel.review -->
+        <menuitem id="as_hotel_review_menu_id"
+                  name="Hotel-Reviews"
+                  parent="as_rental.host_property_lbl"
+                  sequence="12"
+                  action="as_hotel_review_action_id"/>
+
+        <!-- MenuItem of - as.hotel.cancellation_policy -->
+        <menuitem id="as_hotel_cancellation_policy_menu_id"
+                  name="Hotel-Cancellation-Policy"
+                  parent="as_rental.host_property_lbl"
+                  sequence="13"
+                  action="as_hotel_cancellation_policy_action_id"/>
+
+        <!-- MenuItem of - as.hotel.extra -->
+        <menuitem id="as_hotel_extra_menu_id"
+                  name="Hotel-Extra"
+                  parent="as_rental.host_property_lbl"
+                  sequence="14"
+                  action="as_hotel_extra_action_id"/>
+
+        <!-- MenuItem of - as.hotel.nearby -->
+        <menuitem id="as_hotel_nearby_menu_id"
+                  name="Hotel-Nearby"
+                  parent="as_rental.host_property_lbl"
+                  sequence="15"
+                  action="as_hotel_nearby_action_id"/>
+
+        <!-- MenuItem of - as.stay.service -->
+        <menuitem id="stay_lbl"
+                  name="Stays"
+                  parent="as_rental.host_property"
+        />
+
+        <menuitem id="as_stay_menu_id"
+                  name="Stays"
+                  parent="as_rental.stay_lbl"
+                  sequence="0"
+                  action="as_stay_action_id"/>
+
+        <menuitem id="stay_item_menu_id"
+                  name="stay-item"
+                  parent="as_rental.stay_lbl"
+                  sequence="1"
+                  action="stay_item_action_id"/>
+
+        <!-- MenuItem of - hotel.breakfast_type -->
+        <menuitem id="hotel_breakfast_type_menu_id"
+                  name="hotel-breakfast_type"
+                  parent="as_rental.stay_lbl"
+                  sequence="2"
+                  action="hotel_breakfast_type_action_id"/>
+
+        <!-- MenuItem of - hotel.room -->
+        <menuitem id="hotel_room_menu_id"
+                  name="Hotel room"
+                  parent="as_rental.stay_lbl"
+                  sequence="3"
+                  action="hotel_room_action_id"/>
+
+        <!-- MenuItem of - hotel.room_name -->
+        <menuitem id="hotel_room_name_menu_id"
+                  name="hotel-room_name"
+                  parent="as_rental.stay_lbl"
+                  sequence="4"
+                  action="hotel_room_name_action_id"/>
+
+        <!-- MenuItem of - hotel.room_bed_type -->
+        <menuitem id="hotel_room_bed_type_menu_id"
+                  name="hotel-room_bed_type"
+                  parent="as_rental.stay_lbl"
+                  sequence="5"
+                  action="hotel_room_bed_type_action_id"/>
+
+        <menuitem id="property_book"
+                  name="Booking"
+                  parent="as_rental.host_property"
+                  sequence="0"
+                  action="property_book_action"/>
+
+        <menuitem id="host_app"
+                  name="List Property Request"
+                  parent="as_rental.host_property"
+                  sequence="1"
+                  action="host_applications_action"/>
+
+        <menuitem id="host_app_menu_id"
+                  name="Become A Host Request"
+                  parent="as_rental.host_property"
+                  sequence="2"
+                  action="host_apps_action"/>
+
+        <menuitem id="event_lbl"
+                  name="Event"
+                  parent="as_rental.as_event_menu_id"
+                  sequence="1"/>
+
+        <menuitem id="as_event_registration_menu_id"
+                  name="Event Registration"
+                  parent="as_rental.event_lbl"
+                  action="as_event_registration_action"/>
+
+        <menuitem id="as_event_category_menu_id"
+                  name="Event Category"
+                  parent="as_rental.event_lbl"
+                  action="as_event_category_action_id"/>
+
+        <menuitem id="deal_lbl"
+                  name="Today's Deals"
+                  parent="as_rental.as_rental_config"
+                  sequence="5"/>
+
+        <!-- MenuItem of - as.deal.event -->
+        <menuitem id="as_deal_event_menu_id"
+                  name="Deal-Event"
+                  parent="as_rental.deal_lbl"
+                  sequence="0"
+                  action="as_deal_event_action_id"/>
+
+        <!-- MenuItem of - as.deal.stay -->
+        <menuitem id="as_deal_stay_menu_id"
+                  name="Deal-Stay"
+                  parent="as_rental.deal_lbl"
+                  sequence="1"
+                  action="as_deal_stay_action_id"/>
+
+        <menuitem id="other_lbl"
+                  name="Common"
+                  parent="as_rental.as_rental_config"
+                  sequence="6"/>
+
+        <menuitem id="wishlist_menu_id"
+                  name="Wishlist"
+                  parent="as_rental.other_lbl"
+                  sequence="0"
+                  action="as_wishlist_action"/>
+
+        <menuitem id="prop_review_id"
+                  name="Review"
+                  parent="as_rental.other_lbl"
+                  sequence="1"
+                  action="rent_property_review_action2"/>
+
+        <menuitem id="as_visit_menu_id"
+                  name="Visit"
+                  parent="as_rental.other_lbl"
+                  sequence="2"
+                  action="as_visit_action"/>
+
+        <menuitem id="as_notification_menu_id"
+                  name="Notification"
+                  parent="as_rental.other_lbl"
+                  sequence="3"
+                  action="as_notification_action"/>
+
+        <menuitem id="as_message_menu_id"
+                  name="Message"
+                  parent="as_rental.other_lbl"
+                  sequence="4"
+                  action="as_message_action"/>
+
+        <menuitem id="as_family_menu_id"
+                  name="Family"
+                  parent="as_rental.other_lbl"
+                  sequence="5"
+                  action="as_family_action"/>
+
+        <menuitem id="as_point_menu_id"
+                  name="Point"
+                  parent="as_rental.other_lbl"
+                  sequence="6"
+                  action="as_point_action"/>
+
+        <menuitem id="as_point_store_menu_id"
+                  name="Point Store"
+                  parent="as_rental.other_lbl"
+                  sequence="7"
+                  action="as_point_store_action"/>
+
+        <menuitem id="as_gift_card_menu_id"
+                  name="Gift Card"
+                  parent="as_rental.other_lbl"
+                  sequence="8"
+                  action="as_gift_card_action"/>
+
+        <menuitem id="as_payment_acquirer_id"
+                  name="Payment Acquirer"
+                  parent="as_rental.other_lbl"
+                  sequence="9"
+                  action="as_payment_acquirer_action"/>
+
+        <menuitem id="as_setting_menu_id"
+                  name="Setting"
+                  parent="as_rental.other_lbl"
+                  sequence="10"
+                  action="as_setting_action"/>
+
+        <menuitem id="as_image_menu_id"
+                  name="Image"
+                  parent="as_rental.other_lbl"
+                  sequence="11"
+                  action="as_image_action"/>
+
+        <menuitem id="as_payment_menu_id"
+                  name="Payment"
+                  parent="as_rental.other_lbl"
+                  sequence="15"
+                  action="as_payment_action_id"/>
+
+        <menuitem id="as_checking_out_menu_id"
+                  name="Checking Out"
+                  parent="as_rental.other_lbl"
+                  sequence="16"
+                  action="as_checking_out_action_id"/>
+
+        <menuitem id="as_search_menu_id"
+                  name="Searches"
+                  parent="as_rental.other_lbl"
+                  sequence="17"
+                  action="as_search_action_id"/>
+
+        <!-- MenuItem of - fa.class -->
+        <menuitem id="fa_class_menu_id"
+                  name="Font-Awesome"
+                  parent="as_rental.other_lbl"
+                  sequence="18"
+                  action="fa_class_action_id"/>
+
+        <!-- MenuItem of - as.service -->
+        <menuitem id="as_service_menu_id"
+                  name="As-Services"
+                  parent="as_rental.other_lbl"
+                  sequence="19"
+                  groups="as_rental.group_rental_service_developer"
+                  action="as_service_action_id"/>
+
+        <!-- MenuItem of - as.alert -->
+        <menuitem id="as_alert_menu_id"
+                  name="as-alert"
+                  parent="as_rental.other_lbl"
+                  sequence="20"
+                  action="as_alert_action_id"/>
+
+        <menuitem id="website_menu"
+                  name="Website Menu"
+                  parent="as_rental.as_rental_config"
+                  sequence="2"
+                  action="as_website_menu_action"/>
+    </data>
+</odoo>

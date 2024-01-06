@@ -1,0 +1,782 @@
+<odoo>
+    <template id="become_a_host">
+        <html lang="en">
+
+            <head>
+                <!-- Required meta tags -->
+                <title>Become A Host</title>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+                <!-- Bootstrap CSS -->
+                <link rel="stylesheet" href="/as_rental/static/css/bootstrap.min.css"/>
+
+                <!-- Custom -->
+                <link rel="stylesheet" href="/as_rental/static/css/common.css"/>
+                <link rel="stylesheet" href="/as_rental/static/css/become_a_host2.css"/>
+            </head>
+
+            <body>
+
+                <!-- BODY_CONTENT -->
+                <div>
+
+                    <!-- SECTION_BODY -->
+                    <!-- Car Registration -->
+                    <div class="section-body">
+                        <div class="container-body">
+
+                            <div class="container-fluid p-0">
+
+
+                                <!-- row -->
+                                <!-- 1. Become a Host -->
+                                <div id="a_1" class="row no-gutters" style="display: none999;">
+                                    <!-- left_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="left_block">
+                                            <div>
+                                                <img class="img_1" src="/as_rental/static/images/host/2.jpg" alt=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- right_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div id="1" class="right_block">
+
+                                            <!-- Close Button -->
+                                            <div class="btn-close">
+                                                <a class="a-btn-close" href="/">Exit</a>
+                                            </div>
+
+                                            <!-- div-90 -->
+                                            <div class="div-90">
+                                                <div class="div-90-header"></div>
+                                                <div class="p-5">
+                                                    <h1 class="a_1_title">Become a Host in some easy steps.</h1>
+                                                    <h5>Join us. We'll help you every step of the way.</h5>
+                                                </div>
+                                            </div>
+
+                                            <!-- div-10 -->
+                                            <div class="div-10">
+                                                <div class="d-flex justify-content-between">
+                                                    <div></div>
+                                                    <div><a id="btn_a_1" class="mr-5 btn btn-primary" href="#">Let's
+                                                        go!</a></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- end right_block -->
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <!-- end row -->
+
+
+                                <!-- row -->
+                                <!-- 2 What kind of place will you host? -->
+                                <div id="a_2" class="row no-gutters" style="display: none;">
+                                    <!-- left_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="left_block">
+                                            <div class="grad d-flex align-items-center justify-content-center">
+                                                <div>
+                                                    <h1 class="grad_text">What kind of place will you host?</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- right_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div id="1" class="right_block">
+
+                                            <!-- Close Button -->
+                                            <div class="btn-close">
+                                                <a class="a-btn-close" href="/">Exit</a>
+                                            </div>
+
+                                            <!-- div-90 -->
+                                            <div class="div-90">
+                                                <div class="div-90-header"></div>
+                                                <div class="c-item">
+                                                    <t t-foreach="property_type" t-as="ptype">
+                                                        <div t-att-id="'pro_type_%s' % ptype.id"
+                                                             class="pro_type item d-flex justify-content-between">
+                                                            <div class="res_1"><t t-esc="ptype.name"/></div>
+                                                            <!-- <div></div> -->
+                                                        </div>
+                                                    </t>
+                                                </div>
+                                            </div>
+
+                                            <!-- div-10 -->
+                                            <div class="div-10">
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <div><a id="btn_back_a_2" class="ml-5 btn btn-primary" href="#">
+                                                            Back</a>
+                                                        </div>
+                                                    </div>
+                                                    <div><a id="btn_next_a_2" class="mr-5 btn btn-primary disabled"
+                                                            href="#">Next</a></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- end right_block -->
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <!-- end row -->
+
+
+                                <!-- row -->
+                                <!-- 4 What kind of space will guests have? -->
+                                <div id="a_4" class="row no-gutters" style="display: none;">
+                                    <!-- left_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="left_block">
+                                            <div
+                                                    class="grad d-flex align-items-center justify-content-center">
+                                                <div>
+                                                    <h1 class="grad_text">What kind of space will guests have?</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- right_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div id="1" class="right_block">
+
+                                            <!-- Close Button -->
+                                            <div class="btn-close">
+                                                <a class="a-btn-close" href="/">Exit</a>
+                                            </div>
+
+                                            <!-- div-90 -->
+                                            <div class="div-90">
+                                                <div class="div-90-header"></div>
+                                                <div class="c-item">
+                                                    <t t-foreach="place_type" t-as="pt">
+                                                        <div t-att-id="'place_type_%s' % pt.id"
+                                                             class="place_type item d-flex justify-content-between">
+                                                            <div class="res_1"><t t-esc="pt.name"/></div>
+                                                            <!--<div></div> -->
+                                                        </div>
+                                                    </t>
+                                                </div>
+                                            </div>
+
+                                            <!-- div-10 -->
+                                            <div class="div-10">
+                                                <div class="d-flex justify-content-between">
+                                                    <div><a id="btn_back_a_4" class="ml-5 btn btn-primary" href="#">
+                                                        Back</a></div>
+                                                    <div><a id="btn_next_a_4" class="mr-5 btn btn-primary disabled"
+                                                            href="#">Next</a></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- end right_block -->
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <!-- end row -->
+
+
+                                <!-- row -->
+                                <!-- 5 Your place location? -->
+                                <div id="a_5" class="row no-gutters" style="display: none;">
+                                    <!-- left_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="left_block">
+                                            <div
+                                                    class="grad d-flex align-items-center justify-content-center">
+                                                <div>
+                                                    <h1 class="grad_text">Your place location?</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- right_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="right_block">
+
+                                            <!-- Close Button -->
+                                            <div class="btn-close">
+                                                <a class="a-btn-close" href="/">Exit</a>
+                                            </div>
+
+                                            <!-- div-90 -->
+                                            <div class="div-90">
+                                                <div class="div-90-header"></div>
+                                                <div class="p-5">
+                                                    <div>
+                                                        <style>
+                                                            #c-map {
+                                                            position: relative;
+                                                            }
+
+                                                            #static_location {
+                                                            width: 25px;
+                                                            height: 25px;
+                                                            /* display: block; */
+                                                            position: absolute;
+                                                            top: 50%;
+                                                            left: 50%;
+                                                            pointer-events: none;
+                                                            }
+                                                            #location_icon {
+                                                            width: 100%;
+                                                            height: auto;
+                                                            }
+                                                        </style>
+                                                        <div class="form-group">
+                                                            <label for="input">Maps location</label>
+                                                            <input id="input" class="form-control" type="text"
+                                                                   style="width: 100%;" autocomplete="off"/>
+                                                            <input type="hidden" id="lat"/>
+                                                            <input type="hidden" id="lng"/>
+                                                            <div>
+                                                                <span class="text-muted" style="font-size: 13px;"
+                                                                      id="viewer_lat_lng"></span>
+                                                            </div>
+                                                            <div class="pt-2">
+                                                                <div id="c-map">
+                                                                    <div id="map"
+                                                                         style="height: 300px; width: 100%;"></div>
+                                                                    <div id="static_location">
+                                                                        <img id="location_icon"
+                                                                             src="/as_rental/static/images/location_icon.png"
+                                                                             alt=""/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label for="address">Address (*)</label>
+                                                            <input class="form-control" type="text" id="address"
+                                                                   name="address"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="city">City (*)</label>
+                                                            <input class="form-control" type="text" id="city"
+                                                                   name="city"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="zip_code">Zip Code</label>
+                                                            <input class="form-control" type="text" id="zip_code"
+                                                                   name="zip_code"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="country">Country (*)</label>
+                                                            <select class="form-control" id="country" name="country">
+                                                                <t t-foreach="countries" t-as="country">
+                                                                    <option t-att-value="country.id"
+                                                                            t-att-selected="country.code == 'BD'"><t
+                                                                            t-esc="country.name"/></option>
+                                                                </t>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- div-10 -->
+                                            <div class="div-10">
+                                                <div class="d-flex justify-content-between">
+                                                    <div><a id="btn_back_a_5" class="ml-5 btn btn-primary" href="#">
+                                                        Back</a></div>
+                                                    <div><a id="btn_next_a_5" class="mr-5 btn btn-primary disabled"
+                                                            href="#">Next</a></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- end right_block -->
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <!-- end row -->
+
+
+                                <!-- row -->
+                                <!-- 6 How many guests would you like to welcome? -->
+                                <div id="a_6" class="row no-gutters" style="display: none;">
+                                    <!-- left_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="left_block">
+                                            <div
+                                                    class="grad d-flex align-items-center justify-content-center">
+                                                <div>
+                                                    <h1 class="grad_text">How many guests would you like to
+                                                        welcome?</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- right_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div id="1" class="right_block">
+
+                                            <!-- Close Button -->
+                                            <div class="btn-close">
+                                                <a class="a-btn-close" href="/">Exit</a>
+                                            </div>
+
+                                            <!-- div-90 -->
+                                            <div class="div-90">
+                                                <div class="div-90-header"></div>
+                                                <div class="p-5">
+                                                    <div>
+                                                        <div class="form-group">
+                                                            <label for="guests">Guests (*)</label>
+                                                            <input class="form-control" type="number" id="guests"
+                                                                   name="guests"
+                                                                   value="1" min="1" required="1"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="adults">Adults</label>
+                                                            <input class="form-control"
+                                                                   type="number"
+                                                                   id="adults"
+                                                                   name="adults"
+                                                                   value="1"
+                                                                   min="1"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="childs">Childs</label>
+                                                            <input class="form-control"
+                                                                   type="number"
+                                                                   id="childs"
+                                                                   name="childs"
+                                                                   value="0"
+                                                                   min="0"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="beds">Beds (*)</label>
+                                                            <input class="form-control" type="number" id="beds"
+                                                                   name="beds"
+                                                                   value="1" min="1" required="1"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="bedrooms">Bedrooms (*)</label>
+                                                            <input class="form-control" type="number" id="bedrooms"
+                                                                   name="bedrooms"
+                                                                   value="1" min="1" required="1"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="bathrooms">Bathrooms (*)</label>
+                                                            <input class="form-control" type="number" id="bathrooms"
+                                                                   name="bathrooms" value="1" min="1" required="1"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="is_bath_private">Are any of these bathrooms
+                                                                private?
+                                                                (*)</label>
+                                                            <select class="form-control" id="is_bath_private"
+                                                                    name="is_bath_private"
+                                                                    required="1">
+                                                                <option value="no">No, they're all shared</option>
+                                                                <option value="yes">Yes</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- div-10 -->
+                                            <div class="div-10">
+                                                <div class="d-flex justify-content-between">
+                                                    <div><a id="btn_back_a_6" class="ml-5 btn btn-primary" href="#">
+                                                        Back</a></div>
+                                                    <div><a id="btn_next_a_6" class="mr-5 btn btn-primary" href="#">
+                                                        Next</a></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- end right_block -->
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <!-- end row -->
+
+
+                                <!-- row -->
+                                <!-- 7 Let guests know what your place has to offer -->
+                                <div id="a_7" class="row no-gutters" style="display: none;">
+                                    <!-- left_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="left_block">
+                                            <div
+                                                    class="grad d-flex align-items-center justify-content-center">
+                                                <div>
+                                                    <h1 class="grad_text">Let guests know what your place has to
+                                                        offer</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- right_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="right_block">
+
+                                            <!-- Close Button -->
+                                            <div class="btn-close">
+                                                <a class="a-btn-close" href="/">Exit</a>
+                                            </div>
+
+                                            <!-- div-90 -->
+                                            <div class="div-90">
+                                                <div class="div-90-header"></div>
+                                                <div class="p-5">
+                                                    <h4>Do you have any standout amenities?</h4>
+                                                    <div class="c-flex-offer d-flex flex-wrap">
+                                                        <t t-foreach="ame1" t-as="a1">
+                                                            <div t-att-id="a1.id" class="ame_itm_1">
+                                                                <span class="d-block">
+                                                                    <t t-esc="a1.name"/>
+                                                                </span>
+                                                            </div>
+                                                        </t>
+                                                    </div>
+
+                                                    <h4 class="pt-5">What about these guest favorites?</h4>
+                                                    <div class="c-flex-offer d-flex flex-wrap">
+                                                        <t t-foreach="ame2" t-as="a2">
+                                                            <div t-att-id="a2.id" class="ame_itm_2">
+                                                                <span class="d-block">
+                                                                    <t t-esc="a2.name"/>
+                                                                </span>
+                                                            </div>
+                                                        </t>
+                                                    </div>
+
+                                                    <h4 class="pt-5">Have any of these safety items?</h4>
+                                                    <div class="c-flex-offer d-flex flex-wrap">
+                                                        <t t-foreach="ame3" t-as="a3">
+                                                            <div t-att-id="a3.id" class="ame_itm_3">
+                                                                <span class="d-block">
+                                                                    <t t-esc="a3.name"/>
+                                                                </span>
+                                                            </div>
+                                                        </t>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- div-10 -->
+                                            <div class="div-10">
+                                                <div class="d-flex justify-content-between">
+                                                    <div><a id="btn_back_a_7" class="ml-5 btn btn-primary" href="#">
+                                                        Back</a></div>
+                                                    <div><a id="btn_next_a_7" class="mr-5 btn btn-primary" href="#">
+                                                        Next</a></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- end right_block -->
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <!-- end row -->
+
+
+                                <!-- row -->
+                                <!-- 8 let's add some photos of your place -->
+                                <div id="a_8" class="row no-gutters" style="display: none;">
+                                    <!-- left_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="left_block">
+                                            <div
+                                                    class="grad d-flex align-items-center justify-content-center">
+                                                <div>
+                                                    <h1 class="grad_text">let's add some photos of your place</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- right_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div id="1" class="right_block">
+
+                                            <!-- Close Button -->
+                                            <div class="btn-close">
+                                                <a class="a-btn-close" href="/">Exit</a>
+                                            </div>
+
+                                            <!-- div-90 -->
+                                            <div class="div-90">
+                                                <div class="div-90-header"></div>
+                                                <div class="p-5">
+                                                    <h4>Add at least 5 photos</h4>
+                                                    <!--<h5 id="demo">...</h5> -->
+                                                    <div>
+                                                        <div class="form-group">
+                                                            <label for="image_1">Photo 1 (*)</label>
+                                                            <input class="form-control" type="file" name="image_1"
+                                                                   id="image_1"
+                                                                   required="1"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="image_2">Photo 2 (*)</label>
+                                                            <input class="form-control" type="file" name="image_2"
+                                                                   id="image_2"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="image_3">Photo 3 (*)</label>
+                                                            <input class="form-control" type="file" name="image_3"
+                                                                   id="image_3"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="image_4">Photo 4 (*)</label>
+                                                            <input class="form-control" type="file" name="image_4"
+                                                                   id="image_4"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="image_5">Photo 5 (*)</label>
+                                                            <input class="form-control" type="file" name="image_5"
+                                                                   id="image_5"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- div-10 -->
+                                            <div class="div-10">
+                                                <div class="d-flex justify-content-between">
+                                                    <div><a id="btn_back_a_8" class="ml-5 btn btn-primary" href="#">
+                                                        Back</a></div>
+                                                    <div><a id="btn_next_a_8" class="mr-5 btn btn-primary" href="#">
+                                                        Next</a></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- end right_block -->
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <!-- end row -->
+
+
+                                <!-- row -->
+                                <!-- 9 Let's give your place a name -->
+                                <div id="a_9" class="row no-gutters" style="display: none;">
+                                    <!-- left_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="left_block">
+                                            <div
+                                                    class="grad d-flex align-items-center justify-content-center">
+                                                <div>
+                                                    <h1 class="grad_text">Let's give your place a name, description</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- right_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div id="1" class="right_block">
+
+                                            <!-- Close Button -->
+                                            <div class="btn-close">
+                                                <a class="a-btn-close" href="/">Exit</a>
+                                            </div>
+
+                                            <!-- div-90 -->
+                                            <div class="div-90">
+                                                <div class="div-90-header"></div>
+                                                <div class="p-5">
+                                                    <h4>Create your title *</h4>
+                                                    <div class="form-group">
+                                                        <textarea class="form-control" name="place_name" id="place_name"
+                                                                  cols="30"
+                                                                  rows="2" maxlength="50" required="1"></textarea>
+                                                        <small id="place_name_count" class="w-100">Max Character Length
+                                                            50</small>
+                                                    </div>
+
+                                                    <h4>Create your description *</h4>
+                                                    <div class="form-group">
+                                                        <textarea class="form-control" name="place_desc" id="place_desc"
+                                                                  cols="30"
+                                                                  rows="6" maxlength="500" required="1"></textarea>
+                                                        <small id="place_desc_count" class="w-100">Max Character Length
+                                                            500</small>
+                                                    </div>
+
+                                                    <h4>Date Range</h4>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="form-group">
+                                                                    <label for="start_date">Start Date</label>
+                                                                    <input class="form-control" type="date"
+                                                                           name="start_date"
+                                                                           id="start_date"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="form-group">
+                                                                    <label for="end_date">End Date</label>
+                                                                    <input class="form-control" type="date"
+                                                                           name="end_date"
+                                                                           id="end_date"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <!-- div-10 -->
+                                            <div class="div-10">
+                                                <div class="d-flex justify-content-between">
+                                                    <div><a id="btn_back_a_9" class="ml-5 btn btn-primary" href="#">
+                                                        Back</a></div>
+                                                    <div><a id="btn_next_a_9" class="mr-5 btn btn-primary disabled"
+                                                            href="#">Next</a></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- end right_block -->
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <!-- end row -->
+
+
+                                <!-- row -->
+                                <!-- 10 per night -->
+                                <div id="a_10" class="row no-gutters" style="display: none;">
+                                    <!-- left_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="left_block">
+                                            <div
+                                                    class="grad d-flex align-items-center justify-content-center">
+                                                <div>
+                                                    <h1 class="grad_text">Price</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- right_block -->
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div id="1" class="right_block">
+
+                                            <!-- Close Button -->
+                                            <div class="btn-close">
+                                                <a class="a-btn-close" href="/">Exit</a>
+                                            </div>
+
+                                            <!-- div-90 -->
+                                            <div class="div-90">
+                                                <div class="div-90-header"></div>
+
+                                                <div class="d-flex justify-content-center align-items-center h-100">
+                                                    <div>
+                                                        <div id="c_price" class="p-5">
+                                                            <h4>Price per night (BDT)</h4>
+                                                            <div id="c-price">
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                    <div id="price_sub" class="btn btn-outline-primary">
+                                                                        -</div>
+                                                                    <div id="price" contenteditable="true">50</div>
+                                                                    <div id="price_add" class="btn btn-outline-primary">
+                                                                        +</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="uploading" style="display: none;">
+                                                            <h4>Uploading...</h4>
+                                                        </div>
+                                                        <div id="congratulations" style="display: none;">
+                                                            <h4>Congratulations!</h4>
+                                                            <p>Successfully submitted</p>
+                                                            <a href="/" class="btn btn-outline-primary">Home</a>
+                                                        </div>
+                                                        <div id="error" style="display: none;">
+                                                            <h4>Something went wrong</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- div-10 -->
+                                            <div class="div-10">
+                                                <div class="d-flex justify-content-between">
+                                                    <div><a id="btn_back_a_10" class="ml-5 btn btn-primary" href="#">
+                                                        Back</a>
+                                                    </div>
+                                                    <div>
+                                                        <a id="btn_next_a_10" class="mr-5 btn btn-dark" href="#">
+                                                            Submit
+                                                        </a>
+                                                        <!-- <span class="btn btn-dark" id="btn_next_a_10">Submit.</span> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- end right_block -->
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <!-- end row -->
+
+
+                            </div>
+                            <!-- end container -->
+
+                        </div>
+
+                    </div>
+                    <!-- SECTION_BODY_END -->
+
+                </div>
+                <!-- end body-content -->
+
+                <!-- Optional JavaScript -->
+                <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                <script src="/as_rental/static/js/jquery-3.6.0.min.js"></script>
+                <script src="/as_rental/static/js/popper.min.js"></script>
+                <script src="/as_rental/static/js/bootstrap.min.js"></script>
+
+                <!-- Custom Javascript -->
+                <script src="/as_rental/static/js/font_awesome.js"></script>
+                <script src="/as_rental/static/js/become_a_host4.js"></script>
+                <!-- maps -->
+                <script src="/as_rental/static/js/google_maps.js"></script>
+                <script
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoECmOzLPkBVyRnQnN4yvLfUAY6-lr4iU&amp;libraries=places&amp;callback=initGoogle">
+                </script>
+
+            </body>
+
+        </html>
+    </template>
+</odoo>

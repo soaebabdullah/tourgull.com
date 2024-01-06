@@ -1,0 +1,254 @@
+<odoo>
+    <template id="test_form2">
+        <t t-call="website.layout">
+
+            <link rel="stylesheet" href="/as_rental/static/css/list-property.css"/>
+
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2"></div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+
+                        <div class="c-prop-info">
+                            <form action="/test13" method="post" enctype="multipart/form-data">
+
+                                <div class="block">
+                                    <h4 class="block-heading">What kind of place will you host?</h4>
+                                    <input type="hidden" name="rp_pro_type" id="rp_pro_type"/>
+                                    <t t-foreach="property_types" t-as="p_type">
+                                        <div class="item rp_pro_type_item"
+                                             t-att-id="'%s%s' % ('rp_pro_type_item_id_', p_type.id)"
+                                             t-esc="p_type.name">
+                                        </div>
+                                    </t>
+                                </div>
+                                <div class="block">
+                                    <h4 class="block-heading">What kind of space will guests have?</h4>
+                                    <input type="hidden" name="rp_place_type" id="rp_place_type"/>
+                                    <t t-foreach="place_types" t-as="p_type">
+                                        <div class="item rp_place_type_item"
+                                             t-att-id="'%s%s' % ('rp_place_type_item_id_', p_type.id)"
+                                             t-esc="p_type.name">
+                                        </div>
+                                    </t>
+                                </div>
+                                <div class="block">
+                                    <h4 class="block-heading">Your place location?</h4>
+
+
+                                    <style>
+                                        #c-map {
+                                        position: relative;
+                                        }
+
+                                        #static_location {
+                                        width: 25px;
+                                        height: 25px;
+                                        /* display: block; */
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 50%;
+                                        pointer-events: none;
+                                        }
+                                        #location_icon {
+                                        width: 100%;
+                                        height: auto;
+                                        }
+                                    </style>
+                                    <div class="form-group">
+                                        <label for="input">Maps location</label>
+                                        <input id="input" class="form-control" type="text"
+                                               style="width: 100%;" autocomplete="off"/>
+                                        <input type="hidden" id="lat"/>
+                                        <input type="hidden" id="lng"/>
+                                        <div>
+                                            <span class="text-muted" style="font-size: 13px;"
+                                                  id="viewer_lat_lng"></span>
+                                        </div>
+                                        <div class="pt-2">
+                                            <div id="c-map">
+                                                <div id="map"
+                                                     style="height: 300px; width: 100%;"></div>
+                                                <div id="static_location">
+                                                    <img id="location_icon"
+                                                         src="/as_rental/static/images/location_icon.png"
+                                                         alt=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="rp_address">Address <span class="required">*</span></label>
+                                        <input class="form-control" type="text" name="rp_address" id="rp_address"
+                                               required="1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rp_city">City <span class="required">*</span></label>
+                                        <input class="form-control" type="text" name="rp_city" id="rp_city"
+                                               required="1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="zip">Zip code</label>
+                                        <input class="form-control" type="text" name="" id=""/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rp_country">Country <span class="required">*</span></label>
+                                        <select class="form-control" name="rp_country" id="rp_country" required="1">
+                                            <t t-foreach="countries" t-as="country">
+                                                <option t-att-value="country.id" t-att-selected="country.code == 'BD'" t-esc="country.name"></option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="block">
+                                    <h4 class="block-heading">How many guests would you like to welcome?</h4>
+                                    <div class="form-group">
+                                        <label for="rp_adults">Adults <span class="required">*</span></label>
+                                        <input class="form-control" type="text" name="rp_adults" id="rp_adults"
+                                               required="1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rp_childs">Child's</label>
+                                        <input class="form-control" type="text" name="rp_childs" id="rp_childs"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rp_bedrooms">Bedrooms</label>
+                                        <input class="form-control" type="text" name="rp_bedrooms" id="rp_bedrooms"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rp_beds">Beds</label>
+                                        <input class="form-control" type="text" name="rp_beds" id="rp_beds"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rp_bathrooms">Bathrooms</label>
+                                        <input class="form-control" type="text" name="rp_bathrooms" id="rp_bathrooms"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rp_is_bath_private">Are any of these bathrooms private? (*)</label>
+                                        <select class="form-control" name="rp_is_bath_private" id="rp_is_bath_private">
+                                            <option value="no">No</option>
+                                            <option value="yes">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="block">
+                                    <h4 class="block-heading">Do you have any standout amenities?</h4>
+                                    <div class="c-ame-item-1">
+                                        <input type="hidden" name="rp_amenities_1" id="rp_amenities_1"/>
+                                        <!-- rp_amenities_1 -->
+                                        <t t-foreach="amenities1" t-as="amenitie1">
+                                            <div class="ame-item-1 rp_amenities_1_item"
+                                                 t-att-id="'%s%s' % ('rp_amenities_1_id_', amenitie1.id)"
+                                                 t-esc="amenitie1.name">
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+
+                                <div class="block">
+                                    <h4 class="block-heading">let's add some photos of your place</h4>
+                                    <div class="form-group">
+                                        <label for="">Photo-01 <span class="required">*</span></label>
+                                        <input class="form-control" type="file" name="image_1920" required="1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Photo-02 <span class="required">*</span></label>
+                                        <input class="form-control" type="file" name="rp_image_2" required="1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Photo-03 <span class="required">*</span></label>
+                                        <input class="form-control" type="file" name="rp_image_3" required="1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Photo-04 <span class="required">*</span></label>
+                                        <input class="form-control" type="file" name="rp_image_4" required="1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Photo-05 <span class="required">*</span></label>
+                                        <input class="form-control" type="file" name="rp_image_5" required="1"/>
+                                    </div>
+                                    <!--<div class="form-group">
+                                        <label for="">Add more photos</label>
+                                        <button class="btn btn-primary">Add</button>
+                                    </div>-->
+                                </div>
+
+                                <div class="block">
+                                    <h4 class="block-heading">Let's give your place a name, description</h4>
+                                    <div class="form-group">
+                                        <label for="name">Create your title <span class="required">*</span></label>
+                                        <textarea class="form-control" name="name" id="" cols="30" rows="2"
+                                                  maxlength="50" required="1"></textarea>
+                                        <small>Max Character Length 50</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rp_place_desc">Create your description <span class="required">
+                                            *</span></label>
+                                        <textarea class="form-control" name="rp_place_desc" id="rp_place_desc" cols="30"
+                                                  rows="6" required="1"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="block">
+                                    <h4 class="block-heading">Let's set your date range</h4>
+                                    <div class="form-group">
+                                        <label for="rp_start_date">Start date <span class="required">*</span></label>
+                                        <input class="form-control" type="date" name="rp_start_date"
+                                               id="rp_start_date" required="1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rp_end_date">End date <span class="required">*</span></label>
+                                        <input class="form-control" type="date" name="rp_end_date" id="rp_end_date"
+                                               required="1"/>
+                                    </div>
+                                </div>
+
+                                <div class="block">
+                                    <h4 class="block-heading">Price</h4>
+                                    <div class="form-group">
+                                        <label for="list_price">Price per night <span class="required">*</span></label>
+                                        <input class="form-control" type="text" name="list_price" id="list_price"
+                                               required="1"/>
+                                    </div>
+                                </div>
+
+                                <div class="block pb-3">
+                                    <h4 class="block-heading">Almost done</h4>
+                                    <div class="form-group">
+                                        <div class="d-flex justify-content-between">
+                                            <div></div>
+                                            <div>
+                                                <div id="info" class="alert alert-info">
+                                                    <span>Please fill/select minimum fields</span>
+                                                </div>
+                                                <button id="submit-button" class="btn btn-primary" type="submit">
+                                                    Submit</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2"></div>
+                </div>
+
+            </div>
+
+            <!-- Custom Javascript -->
+            <script src="/as_rental/static/js/jquery-3.6.0.min.js"></script>
+            <script src="/as_rental/static/js/list-property.js"></script>
+            <!-- maps -->
+            <script src="/as_rental/static/js/google_maps.js"></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoECmOzLPkBVyRnQnN4yvLfUAY6-lr4iU&amp;libraries=places&amp;callback=initGoogle">
+            </script>
+
+        </t>
+    </template>
+</odoo>

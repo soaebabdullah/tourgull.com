@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Display Image on File Browse</title>
+    <style>
+        img {
+            max-width: 200px;
+            max-height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Image Display</h1>
+    <input type="file" id="image-input">
+    <img id="image-display" src="" alt="Selected Image">
+    <script>
+        // Get the current URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Set a new parameter "param1" with the value "value1"
+        urlParams.set("param1", "value11");
+
+        // Set another parameter "param2" with the value "value2"
+        urlParams.set("param2", "value22");
+
+        // Get the new URL with the updated search parameters
+        const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+
+        // Push the new URL to the history stack without reloading the page
+        window.history.pushState({ path: newUrl }, '', newUrl);
+
+        // ----------------------------------------------------------------
+        // Get the current URL parameters ---------------------------------
+        const urlParams2 = new URLSearchParams(window.location.search);
+
+        // Set a new parameter "param1" with the value "value1"
+        urlParams2.set("param1", "value12");
+
+        // Get the new URL with the updated search parameters
+        const newUrl2 = `${window.location.pathname}?${urlParams2.toString()}`;
+
+        // Push the new URL to the history stack without reloading the page
+        window.history.pushState({ path: newUrl2 }, '', newUrl2);
+
+        alert('urlParams2', urlParams2);
+
+
+    </script>
+</body>
+
+</html>

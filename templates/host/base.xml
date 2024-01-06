@@ -1,0 +1,92 @@
+<odoo>
+    <template id="base">
+
+        <html lang="en">
+
+            <head>
+                <!-- Required meta tags -->
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+                <!-- Bootstrap CSS -->
+                <link rel="stylesheet" href="/as_rental/static/css/bootstrap.min.css"/>
+
+                <!-- Custom -->
+                <script src="/as_rental/static/js/font_awesome.js"></script>
+                <link rel="stylesheet" href="/as_rental/static/css/1_rent_prop_modal.css"/>
+                <link rel="stylesheet" href="/as_rental/static/css/rent_property_common.css"/>
+                <link rel="stylesheet" href="/as_rental/static/css/1_rent_prop2.css"/>
+            </head>
+
+            <body>
+
+
+                <!-- SECTION_NAVBAR-->
+                <header>
+                    <div class="container-fluid c-header">
+                        <div class="row py-2 py-sm-2 py-md-3 py-lg-3 no-gutters">
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                                <a href="/">
+                                    <img class="logo-prop-home" src="/web/image/website/1/logo/" alt=""/>
+                                </a>
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-4 col-lg-4 pl-2 pl-md-0 pl-lg-0">
+                                <div class="ph-c-search">
+                                    <div class="ph-search-flex d-flex justify-content-center">
+                                        <!--<div id="explore-search">
+                                            <i class="fa fa-search pr-2"></i>
+                                            SEARCH
+                                        </div>-->
+                                        <div id="explore-filter" class="explore-filter">
+                                            <i class="fas fa-sliders-h pr-2"></i>
+                                            FILTER
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-4">
+                                <div class="float-right">
+
+                                    <div t-if="login">
+                                        <div class="pt_first_letter" t-esc="pt_obj.name[0]"></div>
+                                    </div>
+                                    <div t-else="">
+                                        <a href="/web/login">Sign In</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+
+                <!-- SECTION_BODY -->
+                <div class="my-body">
+                    <t t-raw="0"/>
+                </div>
+
+
+                <!-- SECTION_FOOTER -->
+                <footer>
+                    <t t-call="as_rental.footer_rent_property"/>
+
+                    <!-- Optional JavaScript -->
+                    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                    <script src="/as_rental/static/js/jquery-3.6.0.min.js"></script>
+                    <script src="/as_rental/static/js/popper.min.js"></script>
+                    <script src="/as_rental/static/js/bootstrap.min.js"></script>
+
+                    <!-- Custom Javascript -->
+                    <script src="/as_rental/static/js/1_modal.js"></script>
+                    <!--<script src="/as_rental/static/js/2_rent_prop.js"></script>-->
+                </footer>
+
+
+            </body>
+
+        </html>
+
+
+    </template>
+</odoo>

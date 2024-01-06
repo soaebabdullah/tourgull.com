@@ -1,0 +1,134 @@
+<odoo>
+    <template id="host_signup" name="Host signup">
+        <t t-call="as_rental.guest__layout_01">
+            <t t-set="head">
+                <title>Host Signup | AvailabilityShare</title>
+            </t>
+            <style>
+                .guest-form {
+                background-color: white;
+                padding: 20px;
+                }
+                .required {
+                color: red;
+                }
+            </style>
+
+            <div class="container w-sm-100 w-lg-50fdf py-3">
+
+                <div class="guest-form">
+                    <form action="/host/web/signup/status" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                <div class="form-group">
+                                    <label for="name">Name <span class="required">*</span></label>
+                                    <input type="text" class="form-control form-control-sm" name="name" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone <span class="required">*</span></label>
+                                    <input type="text" class="form-control form-control-sm" name="phone" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email <span class="required">*</span></label>
+                                    <input type="text" class="form-control form-control-sm" name="email" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="emergency_phone2">Emergency phone <span class="required">*</span></label>
+                                    <input type="text" class="form-control form-control-sm" name="emergency_phone2" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="others_phone">Other's phone</label>
+                                    <input type="text" class="form-control form-control-sm" name="others_phone"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="company_name">Company Name</label>
+                                    <input type="text" class="form-control form-control-sm" name="company_name"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="street">Present Address <span class="required">*</span></label>
+                                    <input type="text" class="form-control form-control-sm" name="street" required="1"/>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                <div class="form-group">
+                                    <label for="street_permanent">Permanent Address <span class="required">*</span> </label>
+                                    <input type="text" class="form-control form-control-sm" name="street_permanent" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" class="form-control form-control-sm" name="city"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender2">Gender <span class="required">*</span></label>
+                                    <select type="text" class="form-control form-control-sm" name="gender2" required="1">
+                                        <option value="">Select</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fathers_name">Father’s Name</label>
+                                    <input type="text" class="form-control form-control-sm" name="fathers_name"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mothers_name">Mother's Name</label>
+                                    <input type="text" class="form-control form-control-sm" name="mothers_name"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="date_of_birth">Date of Birth <span class="required">*</span></label>
+                                    <input type="date" class="form-control form-control-sm" name="date_of_birth" required="1"/>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                <div class="form-group">
+                                    <label for="country_id">Country</label>
+                                    <select type="text" class="form-control form-control-sm" name="country_id">
+                                        <t t-foreach="countries" t-as="country">
+                                            <option t-att-value="country.id" t-esc="country.name"></option>
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="image_1920">Profile Image <span class="required">*</span></label>
+                                    <input type="file" class="form-control form-control-sm" name="image_1920" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nid_passport_front">NID/Passport photo (front side) <span class="required">*</span></label>
+                                    <input type="file" class="form-control form-control-sm" name="nid_passport_front" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nid_passport_back">NID/Passport photo (back side) <span class="required">*</span></label>
+                                    <input type="file" class="form-control form-control-sm" name="nid_passport_back" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nid_passport_no">NID/Passport No <span class="required">*</span></label>
+                                    <input type="text" class="form-control form-control-sm" name="nid_passport_no" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password <span class="required">*</span></label>
+                                    <input type="text" class="form-control form-control-sm" name="password" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <div class="d-flex justify-content-between">
+                                        <div></div>
+                                        <div>
+                                            <button type="submit" class="btn btn-primary" name="password"
+                                                    required="1">Signup</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+
+        </t>
+    </template>
+</odoo>

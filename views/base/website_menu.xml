@@ -1,0 +1,50 @@
+<odoo>
+
+
+    <!-- Tree view of - as.website_menu -->
+    <record model="ir.ui.view" id="as_website_menu_tree_id">
+        <field name="name">Menu</field>
+        <field name="model">as.website_menu</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="parent_id"/>
+                <field name="url"/>
+                <field name="icon_class"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form view of - as.website_menu -->
+    <record model="ir.ui.view" id="as_website_menu_form_id">
+        <field name="name">Menu</field>
+        <field name="model">as.website_menu</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="parent_id"/>
+                            <field name="url"/>
+                            <field name="icon_class"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="as_website_menu_action">
+        <field name="name">Menu</field>
+        <field name="res_model">as.website_menu</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

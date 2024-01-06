@@ -1,0 +1,814 @@
+<odoo>
+    <template id="rental_browse_property" name="Browse Property">
+        <t t-set="notification" t-value="request.env['as.def'].get_all_notifications()"/>
+
+        <html lang="en">
+
+            <head>
+                <!-- Required meta tags -->
+                <title>Properties | AvailabilityShare</title>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <link type="image/x-icon" rel="shortcut icon" href="/as_rental/static/images/logo/favicon.png"/>
+
+                <!-- Bootstrap CSS -->
+                <link rel="stylesheet" href="/as_rental/static/css/bootstrap.min.css"/>
+
+                <!-- Custom -->
+                <script src="/as_rental/static/js/font_awesome.js"></script>
+                <link rel="stylesheet" href="/as_rental/static/css/global.css?v=1"/>
+                <link rel="stylesheet" href="/as_rental/static/css/1_rent_prop_modal.css"/>
+                <link rel="stylesheet" href="/as_rental/static/css/rp-common-u1.css"/>
+                <link rel="stylesheet" href="/as_rental/static/css/browse-property.css?v=5"/>
+            </head>
+
+            <body id="body">
+
+                <!-- Some variables-->
+                <t t-if="kw.get('checkin') and kw.get('checkout')">
+                    <input type="hidden" id="loading_mode" value="search"/>
+                </t>
+                <t t-else="">
+                    <input type="hidden" id="loading_mode" value="normal"/>
+                </t>
+
+                <!-- SECTION_NAVBAR-->
+                <header>
+                    <div class="container-fluid c-header">
+                        <div class="row py-3 py-sm-2 py-md-3 py-lg-3 no-gutters align-items-center">
+                            <div class="col-4 col-sm-2 col-md-4 col-lg-4 bg-info2">
+                                <a id="logo__container" href="/">
+                                    <img class="logo-prop-home" src="/as_rental/static/images/logo/as_logo_tr.png"
+                                         alt=""/>
+                                </a>
+                                <a id="logo_only__container" href="/" style="display: none2;">
+                                    <img id="logo_only" style="height: 50px;" class="xxxxxx"
+                                         src="/as_rental/static/images/logo/logo_only.png"/>
+                                </a>
+                            </div>
+                            <div class="col-4 col-sm-8 col-md-4 col-lg-4 pl-2 pl-md-0 pl-lg-0 bg-warning2">
+                                <style>
+                                    .ph-c-search>div {
+                                    cursor: pointer;
+                                    }
+
+                                    #when {
+                                    border-left: 1px solid rgb(186, 186, 186);
+                                    border-right: 1px solid rgb(186, 186, 186);
+                                    }
+                                </style>
+                                <div class="ph-c-search">
+                                    <div class="ph-search-flex d-flex justify-content-center">
+                                        <!--<div id="explore-search">
+                                                <i class="fa fa-search pr-2"></i>
+                                                SEARCH
+                                            </div>-->
+                                        <div id="where">
+                                            <b>Where</b>
+                                        </div>
+                                        <div id="when">
+                                            <b>When</b>
+                                        </div>
+                                        <div id="guest">Guest</div>
+                                        <!--<div id="explore-filter" class="explore-filter">
+                                            <i class="fas fa-sliders-h pr-2"></i>
+                                            FILTER
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 col-sm-2 col-md-4 col-lg-4 bg-info2">
+                                <div class="d-flex flex-row-reverse align-items-center">
+                                    <div class="float-right2">
+
+                                        <div t-if="login">
+                                            <div id="c-right-menu">
+                                                <div>
+                                                    <i class="fa fa-bars pr-2" style="color: gray"></i>
+                                                </div>
+                                                <div>
+                                                    <img t-if="pt_obj.image_128" class="profile-img"
+                                                         t-att-src="image_data_uri(pt_obj.image_128)"
+                                                         alt="Profile image"/>
+                                                    <img t-else="" class="profile-img" title="My account"
+                                                         src="/as_rental/static/images/profile/default_profile_image.jpg"
+                                                         alt="profile image"/>
+                                                </div>
+                                            </div>
+
+                                            <div id="bp-mb-menu-icon" class="mobile-icon">
+                                                <i id="bp-mb-menu-icon-bars" class="fa fa-bars brand-color"></i>
+                                            </div>
+
+                                        </div>
+                                        <div t-else="">
+                                            <a href="/web/login">Sign In</a>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <!-- notification-popup -->
+                                        <div class="mr-4 click-notification-popup"
+                                             style="cursor: pointer; position: relative;">
+                                            <i class="click-notification-popup2 fa fa-bell"></i>
+                                            <div class="circle svg-data">
+                                                <span t-if="notification and notification.get('nts_unseen_count')"
+                                                      class="circle__content"
+                                                      t-esc="notification.get('nts_unseen_count')"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search form -->
+                    <style>
+                        .flex-search-input>div {
+                        padding-left: 10px;
+                        }
+                    </style>
+
+                    <!-- Search property (sp) -->
+                    <div class="c-search-form" style="display: none;">
+                        <form id="sp__form" action="" enctype="multipart/form-data" autocomplete="off">
+                            <div class="sp__flex">
+                                <div class="sp__flex-item-where">
+                                    <span>Where</span>
+                                    <input type="text" class="form-control" id="location" name="location" required="1"/>
+                                    <div id="sp__location-suggest" style="display: none;">
+                                        <ul id="sp__location-suggest-ul">
+                                            <t t-foreach="cities" t-as="city">
+                                                <li class="city-item" t-esc="city"></li>
+                                            </t>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>Check In</span>
+                                    <input type="date" class="form-control" id="checkin" name="checkin"
+                                           required="1"
+                                           t-att-min="date_today"
+                                    />
+                                    <small id="invalid_checkin" class="sp__invalid-input-small text-danger"
+                                           style="display: none;">Invalid
+                                        date</small>
+                                </div>
+                                <div>
+                                    <span>Check Out</span>
+                                    <input type="date" class="form-control" id="checkout" name="checkout"
+                                           t-att-min="date_today" required="1"/>
+                                    <small id="invalid_checkout" class="sp__invalid-input-small text-danger"
+                                           style="display: none;">Invalid
+                                        date</small>
+                                </div>
+                                <div class="sp__input-sm">
+                                    <span>Room's</span>
+                                    <input type="number" class="form-control" id="rooms" name="rooms" value="1"
+                                           min="1" required="1"/>
+                                </div>
+                                <div class="sp__input-sm">
+                                    <span>Adult's</span>
+                                    <input type="number" class="form-control" id="adults" name="adults" value="1"
+                                           min="1" required="1"/>
+                                </div>
+                                <div class="sp__input-sm">
+                                    <span>Child's</span>
+                                    <input type="number" class="form-control" id="childs" name="childs" value="0"
+                                           min="0" required="1"/>
+                                </div>
+                                <div class="sp__input-sm" style="align-self: end; padding-bottom: 2px;">
+                                    <button type="submit" class="sp__submit-btn btn-block btn btn-default">
+                                        <i class="fas fa-search-location"></i>
+                                        Search</button>
+                                    <small id="invalid-btn" class="text-danger" style="display: none; color: #eaeaea">
+                                        .</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </header>
+
+
+                <!-- SECTION_BODY -->
+                <div>
+
+                    <!-- Properties slider -->
+                    <style>
+                        /* Make the image fully responsive */
+                        .carousel-inner img {
+                        width: 100%;
+                        height: 500px;
+                        }
+
+                        .carousel-inner {
+                        position: relative;
+                        }
+                    </style>
+                    <div class="bg-info" style="display: none;">
+                        <div id="demo" class="carousel" data-ride="carousel" data-interval="5000" data-pause="false">
+                            <!-- The slideshow -->
+                            <div class="carousel-inner">
+                                <div class="cme">
+                                    <div class="c-search-form">
+                                        <form class="form-prop-search p-0 m-0" action="" enctype="multipart/form-data">
+                                            <style>
+                                                .flex-search-input>div {
+                                                padding-left: 10px;
+                                                }
+                                            </style>
+                                            <div class="d-flex flex-wrap justify-content-center flex-search-input">
+                                                <div>
+                                                    <label for="location">Where</label>
+                                                    <input list="loc-list"
+                                                           class="form-control form-control-sm rm-outline"
+                                                           name="location" required="1" id="location"/>
+                                                    <datalist id="loc-list">
+                                                        <t t-foreach="locations" t-as="location">
+                                                            <option t-att-value="location"/>
+                                                        </t>
+                                                    </datalist>
+                                                </div>
+                                                <div>
+                                                    <label for="checkin">Check In</label>
+                                                    <input type="date" class="form-control form-control-sm"
+                                                           name="checkin"
+                                                           id="checkin" required="1"/>
+                                                </div>
+                                                <div>
+                                                    <label for="checkout">Check Out</label>
+                                                    <input type="date" class="form-control form-control-sm"
+                                                           name="checkout"
+                                                           id="checkout" required="1"/>
+                                                </div>
+                                                <div>
+                                                    <label for="rooms">Rooms</label>
+                                                    <input type="number"
+                                                           class="form-control form-control-sm guests-count"
+                                                           value="1" style="width: 60px;" name="rooms" id="rooms"/>
+                                                </div>
+                                                <div>
+                                                    <label for="guests">Adult's</label>
+                                                    <input type="number"
+                                                           class="form-control form-control-sm guests-count"
+                                                           value="2" style="width: 60px;" name="adults" id="adults"/>
+                                                </div>
+                                                <div>
+                                                    <label for="childs">Child's</label>
+                                                    <input type="number"
+                                                           class="form-control form-control-sm guests-count"
+                                                           value="2" style="width: 60px;" name="childs" id="childs"/>
+                                                </div>
+                                                <div>
+                                                    <!--<div class="c-btn-search">
+                                                            <button type="submit" class="btn btn-dark btn-sm">
+                                                                <i class='fas fa-search' style='font-size:15px'></i>
+                                                            </button>
+                                                        </div>-->
+                                                    <br/>
+                                                    <button type="submit" class="btn btn-primary">Search</button>
+                                                </div>
+                                            </div>
+
+
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <t t-set="j" t-value="-1"/>
+                                <t t-foreach="carousels" t-as="slider">
+                                    <t t-set="j" t-value="j + 1"/>
+                                    <div t-if="j == 0" class="carousel-item active">
+                                        <img t-att-src="image_data_uri(slider.image)" alt=""/>
+                                    </div>
+                                    <div t-else="" class="carousel-item">
+                                        <img t-att-src="image_data_uri(slider.image)" alt=""/>
+                                    </div>
+                                </t>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="body-container">
+
+                        <!-- search-form -->
+                        <div id="searchform" style="display: none;">
+                            <div class="d-flex justify-content-center">
+                                <!-- remove -->
+                            </div>
+                        </div>
+
+                        <!-- amenities-tag -->
+                        <div class="c-ph-filter-flex">
+                            <div class="d-flex flex-wrap66 ph-filter-flex">
+                                <t t-foreach="ame_2" t-as="a2">
+                                    <div class="explore-filter"><span class="span-tag" t-esc="a2.name"></span></div>
+                                </t>
+                            </div>
+                        </div>
+
+                        <!-- modal -->
+                        <!-- Trigger/Open The Modal -->
+                        <!-- <button id="myBtn">Open Modal</button> -->
+
+                        <!-- The Modal -->
+                        <div id="myModal" class="modal" style="display: none;">
+                            <!-- Modal content -->
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <div class="d-flex justify-content-between">
+                                        <div class=""></div>
+                                        <div class="">
+                                            <h4 class="p-0 m-0">Filters</h4>
+                                        </div>
+                                        <div class="">
+                                            <span class="close">x</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-content-2">
+                                    <!-- filter -->
+                                    <div>
+                                        <form id="myform" action="" method="POST">
+                                            <div class="c-filter">
+
+                                                <!-- Price range -->
+                                                <div>
+                                                    <h5>Price range</h5>
+                                                    <div class="row">
+                                                        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                                                            <div class="form-group">
+                                                                <label for="price_min">Minimum</label>
+                                                                <input class="form-control" type="number"
+                                                                       name="price_min"
+                                                                       id="price_min"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                                                            <div class="form-group">
+                                                                <label for="price_max">Maximum</label>
+                                                                <input class="form-control" type="number"
+                                                                       name="price_max"
+                                                                       id="price_max"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Type of place -->
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="place_type">Place Type</label>
+                                                                <select class="form-control" id="place_type"
+                                                                        name="place_type">
+                                                                    <option value="all" selected="1">All</option>
+                                                                    <t t-foreach="place_types" t-as="place_type">
+                                                                        <option t-att-value="place_type.id" t-esc="place_type.name">
+                                                                        </option>
+                                                                    </t>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="location">Location (city)</label>
+                                                            <input list="loc-list" class="form-control" name="flocation"
+                                                                   id="flocation"/>
+                                                            <datalist id="loc-list">
+                                                                <t t-foreach="locations" t-as="location">
+                                                                    <option t-att-value="location"/>
+                                                                </t>
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- date range -->
+                                                <div>
+                                                    <h5>Date range</h5>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="fcheckin">Check In</label>
+                                                                <input type="date" class="form-control" name="fcheckin"
+                                                                       id="fcheckin"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="fcheckout">Check Out</label>
+                                                                <input type="date" class="form-control" name="fcheckout"
+                                                                       id="fcheckout"/>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <!-- Rooms and beds -->
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="rooms">Rooms:</label>
+                                                                <input type="number" class="form-control" id="rooms"
+                                                                       name="rooms"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="beds">Beds:</label>
+                                                                <input type="number" class="form-control" id="beds"
+                                                                       name="beds"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Guests adults and child's -->
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="adults">Adults:</label>
+                                                                <input type="number" class="form-control" id="adults"
+                                                                       name="adults"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="childs">Child's:</label>
+                                                                <input type="number" class="form-control" id="childs"
+                                                                       name="childs"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Amenities -->
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Amenities:</label>
+
+                                                                <!--<div class="form-check">
+                                                                        <label class="form-check-label" for="check1">
+                                                                            <input type="checkbox"
+                                                                                   class="form-check-input"
+                                                                                   id="check1"
+                                                                                   name="option1"
+                                                                                   value="something"
+                                                                                   checked="1"/>
+                                                                            Option 1
+                                                                        </label>
+                                                                    </div>-->
+
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <t t-foreach="ame_1" t-as="a1">
+                                                                            <div class="form-check">
+                                                                                <label class="form-check-label"
+                                                                                       t-att-for="'check%s' % a1.id">
+                                                                                    <input type="checkbox"
+                                                                                           class="form-check-input"
+                                                                                           id="ame_1"
+                                                                                           name="ame_1"
+                                                                                           t-att-value="a1.id"/>
+                                                                                    <t t-esc="a1.name"/>
+                                                                                </label>
+                                                                            </div>
+                                                                        </t>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <t t-foreach="ame_2" t-as="a2">
+                                                                            <div class="form-check">
+                                                                                <label class="form-check-label"
+                                                                                       t-att-for="'check%s' % a2.id">
+                                                                                    <input type="checkbox"
+                                                                                           class="form-check-input"
+                                                                                           id="ame_2"
+                                                                                           name="ame_2"
+                                                                                           t-att-value="a2.id"/>
+                                                                                    <t t-esc="a2.name"/>
+                                                                                </label>
+                                                                            </div>
+                                                                        </t>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <t t-foreach="ame_3" t-as="a3">
+                                                                            <div class="form-check">
+                                                                                <label class="form-check-label"
+                                                                                       t-att-for="'check%s' % a3.id">
+                                                                                    <input type="checkbox"
+                                                                                           class="form-check-input"
+                                                                                           id="ame_3"
+                                                                                           name="ame_3"
+                                                                                           t-att-value="a3.id"/>
+                                                                                    <t t-esc="a3.name"/>
+                                                                                </label>
+                                                                            </div>
+                                                                        </t>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                                <!-- end modal-content-2 -->
+                                <div class="modal-footer">
+                                    <div class="d-flex justify-content-between">
+
+                                        <div>
+                                            <!--Clear All-->
+                                        </div>
+                                        <div></div>
+                                        <div>
+                                            <!--<div class="btn btn-dark btn-sm">Filter</div>-->
+                                            <input type="submit" class="btn btn-dark btn-sm" form="myform"
+                                                   value="Filter"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <!-- Property card -->
+                        <div id="flex-products" class="d-flex flex-wrap py-2 flex-place">
+                            <t t-foreach="products" t-as="product">
+                                <div>
+                                    <t t-set="params" t-value="''"/>
+                                    <t t-if="kw.get('location') and kw.get('checkin') and kw.get('checkout')">
+                                        <t t-set="params"
+                                           t-value="'&amp;check_in=%s&amp;check_out=%s&amp;rooms=%s&amp;adults=%s&amp;childs=%s'% (check_in, check_out, rooms, adults, childs)"/>
+                                    </t>
+                                    <a class="a-place"
+                                       t-att-href="'/rental/browse-property-detail?id=%s%s' % (product.id, params)">
+                                        <div class="container_prop_img">
+                                            <img t-if="product.image_512" class="prop_img"
+                                                 t-att-src="image_data_uri(product.image_512)" alt=""/>
+                                        </div>
+                                        <div class="pt-2">
+                                            <t t-if="rating.get(product.id)">
+                                                <div class="pb-2">
+                                                    <t t-set="a" t-value="float(rating.get(product.id))"/>
+                                                    <t t-set="b" t-value="int(a)"/>
+                                                    <t t-foreach="b" t-as="c">
+                                                        <i class="fa fa-star color-star" style="font-size: 13px;"></i>
+                                                    </t>
+                                                    <span class="pb-2" style="font-size: 15px;">
+                                                        <t t-esc="rating.get(product.id)"/>
+                                                        (
+                                                        <t
+                                                                t-esc="request.env['rent.property.review'].get_review_count(product.id)"/>
+                                                        )
+                                                    </span>
+                                                </div>
+                                            </t>
+
+                                            <span class="prop-tilte" t-esc="product.name"></span>
+                                            <span class="h6 d-block m-0 mt-2 text-muted">
+                                                <t t-esc="product.rp_place_categ_id.name"/> in
+                                                <t t-esc="product.rp_city"/>
+                                            </span>
+                                            <p class="text-muted mb-1">
+                                                <t t-esc="product.rp_adults"/> adult .
+                                                <t t-esc="product.rp_childs"/> child .
+                                                <t t-esc="product.rp_bedrooms"/> bedroom .
+                                                <t t-esc="product.rp_beds"/> bed
+                                                <t t-if="product.rp_square_feet"
+                                                   t-esc="'%s . square feet' % product.rp_square_feet"/>
+                                            </p>
+                                            <p>
+                                                <span class="h5 font-weight-bold" style="color: black;">
+                                                    <t t-esc="setting.currency_symbol"/>
+                                                    <t t-esc="product.list_price"/>
+                                                </span> <span class="h5 text-muted">Night</span>
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </t>
+                        </div>
+
+                        <div t-if="not products" class="py-5">
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <div class="text-center2">
+                                        <img height="50" src="/as_rental/static/src/image/binocular.png"/>
+                                    </div>
+                                    <div class="pt-3">
+                                        <h5 style="color: dodgerblue;"><b>Property not found with your criteria</b></h5>
+                                        <h6>Please make sure your information was correct</h6>
+                                        <ul class="pt-4">
+                                            <li>
+                                                <b>Where</b> <br/>
+                                                <p>Location for your place. You can type some characters to search
+                                                    location</p>
+                                            </li>
+                                            <li>
+                                                <b>Check In, Check Out</b> <br/>
+                                                <p>Check In and Check Out dates</p>
+                                            </li>
+                                            <li>
+                                                <b>Persons</b> <br/>
+                                                <p>Adult count, Child count. <br/>
+                                                    Child will be "0" if you have no child.
+                                                </p>
+                                            </li>
+                                        </ul>
+                                        <div>
+                                            <a class="btn btn-warning" href="/rental/browse-property">Reset</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="right-menu">
+                    <ul class="right-menu-ul">
+                        <li>
+                            <a href="/wishlist">Wishlist</a>
+                        </li>
+                        <li>
+                            <a href="/my">Manage Listing</a>
+                        </li>
+                        <li>
+                            <a href="/my">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="/web/session/logout?redirect=/">Log Out</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- notification-popup -->
+                <div id="notification-popup" style="visibility: hidden;">
+                    <t t-if="notification and notification.get('nts')">
+                        <t t-foreach="notification.get('nts')" t-as="nt">
+                            <div t-if="nt.url" class="np__item">
+                                <a class="link" style="color: dodgerblue;" t-att-href="nt.url">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <i class="fa fa-stop mr-2"></i>
+                                        </div>
+                                        <div class="pl-1">
+                                            <t t-esc="nt.notification"/>
+                                            <div class="" style="font-size: 11px;"><t
+                                                    t-esc="nt.create_date"/></div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div t-else="" class="np__item">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <i class="fa fa-stop mr-2"></i>
+                                    </div>
+                                    <div class="pl-1">
+                                        <t t-esc="nt.notification"/>
+                                        <div class="" style="font-size: 11px;"><t
+                                                t-esc="nt.create_date"/></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="np__item_separator"></div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="np__item">
+                            <i class="fa fa-smile-o mr-2"></i>
+                            No notifications
+                        </div>
+                    </t>
+                </div>
+
+                <!-- mobile menu  -->
+                <div id="layout-01-mobile-menu" class="popup layout-01-mobile-menu" style="display: none;">
+                    <div id="layout-01-mobile-menu-left-block">
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    <i class="fa fa-home mr-2"></i>
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/wishlist">
+                                    <i class="fa fa-heart mr-2"></i>
+                                    Wishlist
+                                </a>
+                            </li>
+                            <t t-if="pt">
+                                <t t-if="pt.is_host">
+                                    <li><a href="/my/switch-to-guest">
+                                        <i class="fas fa-retweet mr-2"></i>
+                                        Switch to guest</a></li>
+                                </t>
+                                <t t-else="">
+                                    <li><a href="/my/switch-to-guest">
+                                        <i class="fas fa-retweet mr-2"></i>
+                                        Switch to hosting</a></li>
+                                </t>
+                            </t>
+                            <li>
+                                <a href="/become-a-host">
+                                    <i class="fas fa-list mr-2"></i>
+                                    List Property</a>
+                            </li>
+                            <li>
+                                <a href="/my">
+                                    <i class="fa fa-dashboard mr-2"></i>
+                                    Dashboard</a>
+                            </li>
+                            <li t-if="pt">
+                                <a href="/web/session/logout?redirect=/">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>
+                                    Logout
+                                </a>
+                            </li>
+                            <li t-else="pt">
+                                <a href="/web/login">
+                                    <i class="fa fa-user mr-2"></i>
+                                    Login
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="p-4 text-muted">Please go to home page to explore all services of
+                            AvailablityShare</div>
+                    </div>
+                    <div id="layout-01-mobile-menu-right-block"></div>
+                </div>
+
+                <!-- mobile footer -->
+                <div id="block-gm-footer">
+                    <div class="gm-c-footer">
+                        <div>
+                            <a href="/">
+                                <i class="fa fa-home"></i>
+                                Home
+                            </a>
+                        </div>
+                        <div>
+                            <a href="/wishlist">
+                                <i class="fa fa-heart"></i>
+                                Wishlist
+                            </a>
+                        </div>
+                        <div>
+                            <a href="/contact">
+                                <i class="fa fa-envelope"></i>
+                                Support
+                            </a>
+                        </div>
+                        <div>
+                            <a href="/my">
+                                <i class="fa fa-user"></i>
+                                Dashboard
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION_FOOTER -->
+                <footer>
+                    <t t-call="as_rental.rp_footer"/>
+
+                    <!-- Optional JavaScript -->
+                    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                    <script src="/as_rental/static/js/jquery-3.6.0.min.js"></script>
+                    <script src="/as_rental/static/js/popper.min.js"></script>
+                    <script src="/as_rental/static/js/bootstrap.min.js"></script>
+
+                    <!-- Custom Javascript -->
+                    <script src="/as_rental/static/js/1_modal.js"></script>
+                    <script src="/as_rental/static/js/browse-property-u2.js?v=2"></script>
+                </footer>
+            </body>
+
+        </html>
+
+    </template>
+</odoo>

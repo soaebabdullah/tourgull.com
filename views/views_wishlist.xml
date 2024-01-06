@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+
+
+        <!-- tree - as.wishlist -->
+        <!-- tree - as_wishlist -->
+        <record model="ir.ui.view" id="as_wishlist_tree_id">
+            <field name="name">Wishlist</field>
+            <field name="model">as.wishlist</field>
+            <field name="arch" type="xml">
+                <tree default_order="id desc">
+                    <field name="partner_id"/>
+                    <field name="type" widget="selection"/>
+                    <field name="record_id"/>
+                    <field name="create_date"/>
+                    <field name="write_date"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- form - as.wishlist -->
+        <!-- form - as_wishlist -->
+        <record model="ir.ui.view" id="as_wishlist_from_id">
+            <field name="name">Wishlist</field>
+            <field name="model">as.wishlist</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="type" widget="selection"/>
+                                <field name="record_id"/>
+                                <field name="create_date"/>
+                                <field name="write_date"/>
+                            </group>
+                            <group>
+                                <field name="product_id"/>
+                                <field name="date"/>
+                                <field name="hotel_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="as_wishlist_action">
+            <field name="name">Wishlist</field>
+            <field name="res_model">as.wishlist</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

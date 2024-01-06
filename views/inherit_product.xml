@@ -1,0 +1,170 @@
+<odoo>
+    <record id="product_template_view_form_rc" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.rc</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+
+            <!-- Rent a car -->
+            <!--<xpath expr="//page[@name='sales']" position="after">
+                <page name="Rent-Car" string="Rent A Car" attrs="{'invisible': [('rc_is_rent_car', '=', False)]}">
+                    <group>
+                        <group name="as_rental_group" string="Owner And Driver Information">
+                            <field name="rc_owner_s_name"/>
+                            <field name="rc_company_name"/>
+                            <field name="rc_address"/>
+                            <field name="rc_city"/>
+                            <field name="rc_mobile"/>
+                            <field name="rc_email"/>
+                            <field name="rc_dr_name"/>
+                            <field name="rc_dr_father_name"/>
+                            <field name="rc_dr_mother_name"/>
+                            <field name="rc_dr_dof"/>
+                            <field name="rc_dr_gender"/>
+                            <field name="rc_dr_marital_status"/>
+                            <field name="rc_dr_nid_no"/>
+                            <field name="rc_dr_nid_image_front" widget="image" class="oe_avatar"/>
+                            <field name="rc_dr_nid_image_back" widget="image" class="oe_avatar"/>
+                        </group>
+                        <group string="Car's Information">
+                            <field name="rc_is_rent_car"/>
+                            <field name="rc_book_price"/>
+                            <field name="rc_comm_percentage"/>
+                            <field name="rc_pkg"/>
+                            <field name="rc_exp_date"/>
+                            <field name="rc_brand_name"/>
+                            <field name="rc_car_type"/>
+                            <field name="rc_service_location"/>
+                            <field name="rc_model"/>
+                            <field name="rc_model_year"/>
+                            <field name="rc_cng"/>
+                            <field name="rc_reg_year"/>
+                            <field name="rc_reg_number"/>
+                            <field name="rc_cars_garage_location"/>
+                            <field name="rc_fitness_certificate" widget="image" class="oe_avatar"/>
+                            <field name="rc_reg_certificate" widget="image" class="oe_avatar"/>
+                            <field name="rc_tax_token"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath> -->
+
+            <!-- Host Properties -->
+            <xpath expr="//page[@name='sales']" position="after">
+                <page name="Host-Property" string="Property">
+                    <group>
+                        <group>
+                            <field name="rp_is_host_prop"/>
+                            <field name="rp_is_book"/>
+                            <field name="rp_book_temp_time" groups="base.group_no_one"/>
+                            <field name="rp_book_temp_datetime"/>
+                            <field name="rp_host"/>
+                            <field name="rp_contact_person"/>
+                            <field name="rp_contact_phone"/>
+                            <field name="rp_start_date"/>
+                            <field name="rp_end_date"/>
+                            <field name="rp_pro_type"/>
+                            <field name="rp_place_type"/>
+                            <field name="rp_country"/>
+                            <field name="rp_address"/>
+                            <field name="rp_apt"/>
+                            <field name="rp_city"/>
+                            <field name="rp_district_state"/>
+
+                        </group>
+                        <group>
+                            <field name="rp_zip"/>
+                            <field name="rp_guests"/>
+                            <field name="rp_adults"/>
+                            <field name="rp_childs"/>
+                            <field name="rp_bedrooms"/>
+                            <field name="rp_beds"/>
+                            <field name="rp_bathrooms"/>
+                            <field name="rp_is_bath_private"/>
+                            <field name="rp_amenities_1" widget="many2many_tags"/>
+                            <!--<field name="rp_amenities_2" widget="many2many_tags"/>-->
+                            <!--<field name="rp_amenities_3" widget="many2many_tags"/>-->
+
+                            <field name="rp_lat"/>
+                            <field name="rp_lng"/>
+                            <field name="rp_place_categ_id"/>
+                            <field name="rp_square_feet"/>
+                        </group>
+                    </group>
+
+                    <group string="Hotel Room" class="bg-light p-4 border">
+                        <group>
+                            <field name="rp_hotel"/>
+                            <field name="discount"/>
+                            <field name="available_room"/>
+                            <field name="rp_king_beds"/>
+                            <field name="rp_city_view"/>
+                        </group>
+                        <group></group>
+                    </group>
+                    <group string="Property Images">
+                        <group name="Property Media">
+                            <field name="rp_image_2" widget="image" class="oe_avatar"/>
+                            <field name="rp_image_3" widget="image" class="oe_avatar"/>
+                        </group>
+                        <group>
+                            <field name="rp_image_4" widget="image" class="oe_avatar"/>
+                            <field name="rp_image_5" widget="image" class="oe_avatar"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="rp_image_ids" widget="many2many_tags_avatar"/>
+                    </group>
+                    <group string="Description">
+                        <field name="rp_place_desc"/>
+                    </group>
+                </page>
+            </xpath>
+
+            <!-- Tourist Attraction -->
+            <xpath expr="//page[@name='sales']" position="after">
+                <page name="tourist_attraction" string="Tourist Attraction"
+                      attrs="{'invisible': [('ta_is_ta', '=', False)]}">
+                    <group name="Information">
+                        <group string="Information">
+                            <field name="ta_is_ta"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <group string="">
+                    </group>
+                </page>
+            </xpath>
+
+            <!-- Global boolean -->
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="rp_is_host_prop"/>
+                <field name="ta_is_ta"/>
+            </xpath>
+            <xpath expr="//field[@name='list_price']" position="after">
+                <div>
+                    <field name="price" widget="monetary"/>
+                </div>
+            </xpath>
+
+            <!-- website_description -->
+            <!--<xpath expr="//group[@name='product_template_images']" position="after">
+                <group name="website_description" string="Website Description">
+                    <field name="website_description"/>
+                    <field name="preview_url" widget="url" readonly="1"/>
+                </group>
+            </xpath>-->
+
+            <!-- Website Preview -->
+            <xpath expr="//field[@name='ta_is_ta']" position="after">
+                <!--<field name="preview_url" widget="url" readonly="1"/>-->
+            </xpath>
+            <!--<xpath expr="//field[@name='dr_label_id']" position="after">
+                <field name="external_url" widget="url"/>
+            </xpath>-->
+
+        </field>
+    </record>
+
+</odoo>

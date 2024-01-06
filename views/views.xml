@@ -1,0 +1,1757 @@
+<odoo>
+
+    <!-- Tree view of - av.tour_guide.hire -->
+    <record model="ir.ui.view" id="av_tour_guide_hire_tree_id">
+        <field name="name">Hire</field>
+        <field name="model">as.tour_guide.hire</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id"/>
+                <field name="date"/>
+                <field name="guide_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - av.tour_guide.hire -->
+    <record model="ir.ui.view" id="av_tour_guide_hire_form_id">
+        <field name="name">Hire</field>
+        <field name="model">as.tour_guide.hire</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="date"/>
+                        <field name="guide_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="av_tour_guide_hire_action">
+        <field name="name">Hire</field>
+        <field name="res_model">as.tour_guide.hire</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.message -->
+    <record model="ir.ui.view" id="as_message_tree_id">
+        <field name="name">Message</field>
+        <field name="model">as.message</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id"/>
+                <field name="message"/>
+                <field name="datetime"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form view of - as.message -->
+    <record model="ir.ui.view" id="as_message_form_id">
+        <field name="name">Message</field>
+        <field name="model">as.message</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="message"/>
+                            <field name="datetime"/>
+                        </group>
+                        <group></group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="as_message_action">
+        <field name="name">Message</field>
+        <field name="res_model">as.message</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Tree view of - as.family -->
+    <record model="ir.ui.view" id="as_family_tree_id">
+        <field name="name">Family</field>
+        <field name="model">as.family</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id"/>
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="date_of_birth"/>
+                <field name="gender"/>
+                <field name="image_1920"/>
+                <field name="relationship"/>
+                <field name="language"/>
+                <field name="parental_responsibility"/>
+                <field name="up_drop"/>
+                <field name="live_with"/>
+                <field name="notes"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form view of - as.family -->
+    <record model="ir.ui.view" id="as_family_form_id">
+        <field name="name">Family</field>
+        <field name="model">as.family</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="first_name"/>
+                            <field name="last_name"/>
+                            <field name="date_of_birth"/>
+                            <field name="gender"/>
+                            <field name="relationship"/>
+                            <field name="language"/>
+                        </group>
+                        <group>
+                            <field name="parental_responsibility"/>
+                            <field name="up_drop"/>
+                            <field name="live_with"/>
+                            <field name="notes"/>
+                            <field name="image_1920" widget="image" class="oe_avatar"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="as_family_action">
+        <field name="name">Family</field>
+        <field name="res_model">as.family</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Tree view of - as.point -->
+    <record model="ir.ui.view" id="as_point_tree_id">
+        <field name="name">Point</field>
+        <field name="model">as.point</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id"/>
+                <field name="point"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form view of - as.point -->
+    <record model="ir.ui.view" id="as_point_form_id">
+        <field name="name">Point</field>
+        <field name="model">as.point</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="point"/>
+                        </group>
+                        <group></group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="as_point_action">
+        <field name="name">Point</field>
+        <field name="res_model">as.point</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Tree view of - as.point_store -->
+    <record model="ir.ui.view" id="as_point_store_tree_id">
+        <field name="name">Store</field>
+        <field name="model">as.point_store</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="title"/>
+                <field name="point"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form view of - as.point_store -->
+    <record model="ir.ui.view" id="as_point_store_form_id">
+        <field name="name">Store</field>
+        <field name="model">as.point_store</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="title"/>
+                            <field name="point"/>
+                            <field name="image_1920" widget="image" class="oe_avatar"/>
+                        </group>
+                        <group></group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="as_point_store_action">
+        <field name="name">Store</field>
+        <field name="res_model">as.point_store</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Tree view of - as.gift_card -->
+    <record model="ir.ui.view" id="as_gift_card_tree_id">
+        <field name="name">Gift-Card</field>
+        <field name="model">as.gift_card</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="amount_of_gift_card"/>
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="shipping_address"/>
+                <field name="shipping_address_2"/>
+                <field name="city"/>
+                <field name="region"/>
+                <field name="zip"/>
+                <field name="country_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form view of - as.gift_card -->
+    <record model="ir.ui.view" id="as_gift_card_form_id">
+        <field name="name">Gift-Card</field>
+        <field name="model">as.gift_card</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group string="Receipt">
+                            <field name="amount_of_gift_card"/>
+                            <field name="first_name"/>
+                            <field name="last_name"/>
+                            <field name="shipping_address"/>
+                            <field name="shipping_address_2"/>
+                            <field name="city"/>
+                            <field name="region"/>
+                            <field name="zip"/>
+                            <field name="country_id"/>
+                        </group>
+                        <group string="Purchaser">
+                            <field name="pu_first_name"/>
+                            <field name="pu_last_name"/>
+                            <field name="pu_billing_address"/>
+                            <field name="pu_billing_address_2"/>
+                            <field name="pu_city"/>
+                            <field name="pu_region"/>
+                            <field name="pu_zip"/>
+                            <field name="pu_country_id"/>
+                            <field name="pu_phone"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="as_gift_card_action">
+        <field name="name">Gift-Card</field>
+        <field name="res_model">as.gift_card</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Tree view of - as.payment_acquirer -->
+    <record model="ir.ui.view" id="as_payment_acquirer_tree_id">
+        <field name="name">Payment-Acquirer</field>
+        <field name="model">as.payment_acquirer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="secret_id"/>
+                <field name="secret_password"/>
+                <field name="journal_id"/>
+                <field name="code"/>
+                <field name="method_active"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form view of - as.payment_acquirer -->
+    <record model="ir.ui.view" id="as_payment_acquirer_form_id">
+        <field name="name">Payment-Acquirer</field>
+        <field name="model">as.payment_acquirer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"
+                                   placeholder="Name"
+                                   class="oe_inline"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="secret_id"/>
+                            <field name="secret_password"/>
+                            <field name="journal_id"/>
+                            <field name="code"/>
+                            <field name="method_active"/>
+                        </group>
+                        <group>
+                            <field name="image_1920" widget="image" class="oe_avatar"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="as_payment_acquirer_action">
+        <field name="name">Payment Acquirer</field>
+        <field name="res_model">as.payment_acquirer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Tree view of - as.setting -->
+    <record model="ir.ui.view" id="as_setting_tree_id">
+        <field name="name">Setting</field>
+        <field name="model">as.setting</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="support_email"/>
+                <field name="support_phone"/>
+                <field name="currency_symbol"/>
+                <field name="commission"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form view of - as.setting -->
+    <record model="ir.ui.view" id="as_setting_form_id">
+        <field name="name">Setting</field>
+        <field name="model">as.setting</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="support_email"/>
+                            <field name="support_phone"/>
+                            <field name="currency_symbol"/>
+                            <field name="order_temp_time"/>
+                            <field name="commission"/>
+                        </group>
+                        <group></group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="as_setting_action">
+        <field name="name">Setting</field>
+        <field name="res_model">as.setting</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record model="ir.ui.view" id="as_image_tree_id">
+        <field name="name">Image</field>
+        <field name="model">as.image</field>
+        <field name="arch" type="xml">
+            <tree default_order="id desc">
+                <field name="image_1920"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form view of - as.image -->
+    <record model="ir.ui.view" id="as_image_form_id">
+        <field name="name">Image</field>
+        <field name="model">as.image</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="image_1920" widget="image" class="oe_avatar"/>
+                        </group>
+                        <group></group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="as_image_action">
+        <field name="name">Image</field>
+        <field name="res_model">as.image</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Tree view of - as.event -->
+    <record model="ir.ui.view" id="as_event_tree_id">
+        <field name="name">Event</field>
+        <field name="model">as.event</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="event_date"/>
+                <field name="package"/>
+                <field name="minimum_attendees"/>
+                <field name="maximum_attendees"/>
+                <field name="event_from"/>
+                <field name="destination"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form view of - as.event -->
+    <record model="ir.ui.view" id="as_event_form_id">
+        <field name="name">Event</field>
+        <field name="model">as.event</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="btn_publish"
+                            type="object"
+                            string="Publish"
+                            class="btn btn-danger"
+                            attrs="{'invisible':[('published','=', True)]}"/>
+                    <button name="btn_un_publish"
+                            type="object"
+                            string="Un-publish"
+                            class="btn btn-primary"
+                            attrs="{'invisible':[('published','=', False)]}"/>
+
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="event_date"/>
+                            <field name="minimum_attendees"/>
+                            <field name="maximum_attendees"/>
+                            <field name="event_from"/>
+                            <field name="destination"/>
+                            <field name="package"/>
+                        </group>
+                        <group>
+                            <field name="image_1920" widget="image" class="oe_avatar"/>
+                            <field name="image_ids" widget="many2many_tags_avatar"/>
+                            <field name="list_price"/>
+                            <field name="day"/>
+                            <field name="night"/>
+                            <field name="transport"/>
+                            <field name="category_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="event_ticket_ids"/>
+                    </group>
+                    <group>
+                        <field name="detail"/>
+                        <field name="published" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="as_event_action">
+        <field name="name">Event</field>
+        <field name="res_model">as.event</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Tree view of - as.event_registration -->
+    <record model="ir.ui.view" id="as_event_registration_tree_id">
+        <field name="name">Registration</field>
+        <field name="model">as.event_registration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="responsible_id"/>
+                <field name="name"/>
+                <field name="mobile"/>
+                <field name="registration_date"/>
+                <field name="order_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form view of - as.event_registration -->
+    <record model="ir.ui.view" id="as_event_registration_form_id">
+        <field name="name">Registration</field>
+        <field name="model">as.event_registration</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="responsible_id"/>
+                            <field name="name"/>
+                            <field name="mobile"/>
+                            <field name="email"/>
+                            <field name="registration_date"/>
+                            <field name="attended_date"/>
+                            <field name="order_id"/>
+                        </group>
+                        <group>
+                            <field name="create_date"/>
+                            <field name="write_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="as_event_registration_action">
+        <field name="name">Registration</field>
+        <field name="res_model">as.event_registration</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.event_category -->
+    <record model="ir.ui.view" id="as_event_category_tree_id">
+        <field name="name">Event-Category</field>
+        <field name="model">as.event_category</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.event_category -->
+    <record model="ir.ui.view" id="as_event_category_form_id">
+        <field name="name">Event-Category</field>
+        <field name="model">as.event_category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group></group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.event_category -->
+    <record model="ir.actions.act_window" id="as_event_category_action_id">
+        <field name="name">Event-Category</field>
+        <field name="res_model">as.event_category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.payment -->
+    <record model="ir.ui.view" id="as_payment_tree_id">
+        <field name="name">Payment</field>
+        <field name="model">as.payment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="payment_type"/>
+                <field name="partner_id"/>
+                <field name="amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.payment -->
+    <record model="ir.ui.view" id="as_payment_form_id">
+        <field name="name">Payment</field>
+        <field name="model">as.payment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="payment_type" widget="radio"/>
+                            <field name="partner_id"/>
+                            <field name="amount"/>
+                        </group>
+                        <group></group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.payment -->
+    <record model="ir.actions.act_window" id="as_payment_action_id">
+        <field name="name">Payment</field>
+        <field name="res_model">as.payment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.checking_out -->
+    <record model="ir.ui.view" id="as_checking_out_tree_id">
+        <field name="name">Checking-Out</field>
+        <field name="model">as.checking_out</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_id"/>
+                <field name="partner_id"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.checking_out -->
+    <record model="ir.ui.view" id="as_checking_out_form_id">
+        <field name="name">Checking-Out</field>
+        <field name="model">as.checking_out</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="product_id"/>
+                            <field name="partner_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group></group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.checking_out -->
+    <record model="ir.actions.act_window" id="as_checking_out_action_id">
+        <field name="name">Checking-Out</field>
+        <field name="res_model">as.checking_out</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.place_category -->
+    <record model="ir.ui.view" id="as_place_category_tree_id">
+        <field name="name">Category</field>
+        <field name="model">as.place_category</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="parent_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.place_category -->
+    <record model="ir.ui.view" id="as_place_category_form_id">
+        <field name="name">Category</field>
+        <field name="model">as.place_category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="parent_id"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.place_category -->
+    <record model="ir.actions.act_window" id="as_place_category_action_id">
+        <field name="name">Property Categories</field>
+        <field name="res_model">as.place_category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.deal -->
+    <record model="ir.ui.view" id="as_deal_tree_id">
+        <field name="name">Deal</field>
+        <field name="model">as.deal</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="deal"/>
+                <!--<field name="start_date"/>-->
+                <!--<field name="end_date"/>-->
+                <field name="create_date"/>
+                <field name="write_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.deal -->
+    <record model="ir.ui.view" id="as_deal_form_id">
+        <field name="name">Deal</field>
+        <field name="model">as.deal</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="deal"/>
+                            <!--<field name="start_date" required="1"/>-->
+                            <!--<field name="end_date" required="1"/>-->
+                        </group>
+                        <group>
+                            <field name="create_date"/>
+                            <field name="write_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.deal -->
+    <record model="ir.actions.act_window" id="as_deal_action_id">
+        <field name="name">Deal</field>
+        <field name="res_model">as.deal</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.deal.event -->
+    <record model="ir.ui.view" id="as_deal_event_tree_id">
+        <field name="name">Deal-Event</field>
+        <field name="model">as.deal.event</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="event_id"/>
+                <field name="create_date"/>
+                <field name="write_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.deal.event -->
+    <record model="ir.ui.view" id="as_deal_event_form_id">
+        <field name="name">Deal-Event</field>
+        <field name="model">as.deal.event</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="event_id"/>
+                        </group>
+                        <group>
+                            <field name="create_date"/>
+                            <field name="write_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.deal.event -->
+    <record model="ir.actions.act_window" id="as_deal_event_action_id">
+        <field name="name">Deal-Event</field>
+        <field name="res_model">as.deal.event</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.deal.stay -->
+    <record model="ir.ui.view" id="as_deal_stay_tree_id">
+        <field name="name">Deal-Stay</field>
+        <field name="model">as.deal.stay</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="stay_id"/>
+                <field name="create_date"/>
+                <field name="write_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.deal.stay -->
+    <record model="ir.ui.view" id="as_deal_stay_form_id">
+        <field name="name">Deal-Stay</field>
+        <field name="model">as.deal.stay</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="stay_id"/>
+                        </group>
+                        <group>
+                            <field name="create_date"/>
+                            <field name="write_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.deal.stay -->
+    <record model="ir.actions.act_window" id="as_deal_stay_action_id">
+        <field name="name">Deal-Stay</field>
+        <field name="res_model">as.deal.stay</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.search -->
+    <record model="ir.ui.view" id="as_search_tree_id">
+        <field name="name">Searches</field>
+        <field name="model">as.search</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="area"/>
+                <field name="query"/>
+                <field name="partner_id"/>
+                <field name="create_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.search -->
+    <record model="ir.ui.view" id="as_search_form_id">
+        <field name="name">Searches</field>
+        <field name="model">as.search</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="area"/>
+                            <field name="query"/>
+                            <field name="partner_id"/>
+                        </group>
+                        <group>
+                            <field name="create_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.search -->
+    <record model="ir.actions.act_window" id="as_search_action_id">
+        <field name="name">Searches</field>
+        <field name="res_model">as.search</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- *********** -->
+    <!-- Tree view of - as.hotel -->
+    <record model="ir.ui.view" id="as_hotel_tree_id">
+        <field name="name">Hotel</field>
+        <field name="model">as.hotel</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="city" required="1"/>
+                <field name="zip"/>
+                <field name="check_in"/>
+                <field name="check_out"/>
+                <field name="star"/>
+                <field name="published"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.hotel -->
+    <record model="ir.ui.view" id="as_hotel_form_id">
+        <field name="name">Hotel</field>
+        <field name="model">as.hotel</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <separator string="What's the name of your property?"/>
+                            <field name="name" required="1"/>
+                            <field name="star"/>
+
+                            <separator string="Facilities &amp; Services"/>
+                            <field name="parking_is_available_to_guests"/>
+                            <field name="parking_guests_reserve_required"/>
+                            <field name="parking_space"/>
+                            <field name="parking_location"/>
+                            <field name="parking_price"/>
+
+                            <separator string="Breakfast"/>
+                            <field name="breakfast_available"/>
+                            <field name="breakfast_price"/>
+                            <field name="breakfast_type"/>
+
+                            <separator string="Others"/>
+                            <field name="street" required="1"/>
+                            <field name="city" required="1"/>
+                            <field name="zip"/>
+                            <field name="country_id" required="1"/>
+                            <field name="maps_location"/>
+                            <field name="amenities" widget="many2many_tags"/>
+                            <field name="about_us"/>
+                            <field name="about_area"/>
+                            <field name="language_ids" widget="many2many_tags"/>
+                            <field name="check_in"/>
+                            <field name="check_out"/>
+                            <field name="age_restriction"/>
+                            <field name="accept_payment_methods" widget="many2many_tags"/>
+                            <field name="latitude"/>
+                            <field name="longitude"/>
+                            <field name="free_self_parking"/>
+
+                        </group>
+                        <group>
+                            <separator string="Options"/>
+                            <field name="published"/>
+                            <field name="discount"/>
+
+                            <separator string="Media"/>
+                            <field name="cover_1920" widget="image" class="oe_avatar"/>
+                            <field name="cover2_1920" widget="image" class="oe_avatar"/>
+                            <field name="cover3_1920" widget="image" class="oe_avatar"/>
+                            <field name="cover4_1920" widget="image" class="oe_avatar"/>
+                            <field name="static_map_1920" widget="image" class="oe_avatar"/>
+                            <field name="create_date"/>
+                            <field name="write_date"/>
+
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Why You Should Stay Here">
+                            <field name="why_you_should_stay_title_1"/>
+                            <field name="why_you_should_stay_description_1"/>
+                            <field name="why_you_should_stay_title_2"/>
+                            <field name="why_you_should_stay_description_2"/>
+                            <field name="why_you_should_stay_title_3"/>
+                            <field name="why_you_should_stay_description_3"/>
+                        </group>
+                        <group></group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.hotel -->
+    <record model="ir.actions.act_window" id="as_hotel_action_id">
+        <field name="name">Hotel</field>
+        <field name="res_model">as.hotel</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - hotel.breakfast_type -->
+    <record model="ir.ui.view" id="hotel_breakfast_type_tree_id">
+        <field name="name">hotel-breakfast_type</field>
+        <field name="model">hotel.breakfast_type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - hotel.breakfast_type -->
+    <record model="ir.ui.view" id="hotel_breakfast_type_form_id">
+        <field name="name">hotel-breakfast_type</field>
+        <field name="model">hotel.breakfast_type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - hotel.breakfast_type -->
+    <record model="ir.actions.act_window" id="hotel_breakfast_type_action_id">
+        <field name="name">hotel-breakfast_type</field>
+        <field name="res_model">hotel.breakfast_type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.hotel.amenities -->
+    <record model="ir.ui.view" id="as_hotel_amenities_tree_id">
+        <field name="name">Hotel-Amenities</field>
+        <field name="model">as.hotel.amenities</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="fa_class"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.hotel.amenities -->
+    <record model="ir.ui.view" id="as_hotel_amenities_form_id">
+        <field name="name">Hotel-Amenities</field>
+        <field name="model">as.hotel.amenities</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="fa_class"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="create_date"/>
+                            <field name="write_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.hotel.amenities -->
+    <record model="ir.actions.act_window" id="as_hotel_amenities_action_id">
+        <field name="name">Hotel-Amenities</field>
+        <field name="res_model">as.hotel.amenities</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.hotel.facility -->
+    <record model="ir.ui.view" id="as_hotel_facility_tree_id">
+        <field name="name">Hotel-Facility</field>
+        <field name="model">as.hotel.facility</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="parent_id"/>
+                <field name="hotel_id"/>
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.hotel.facility -->
+    <record model="ir.ui.view" id="as_hotel_facility_form_id">
+        <field name="name">Hotel-Facility</field>
+        <field name="model">as.hotel.facility</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="parent_id"/>
+                            <field name="type"/>
+                            <field name="hotel_id"/>
+                            <field name="fa_class"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <div>
+                        By default all facilities represents for <b>Hotel</b> <br/>
+                        if type select to <b>Room</b> it will also act for Room facilities
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.hotel.facility -->
+    <record model="ir.actions.act_window" id="as_hotel_facility_action_id">
+        <field name="name">Hotel-Facility</field>
+        <field name="res_model">as.hotel.facility</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.hotel.service -->
+    <record model="ir.ui.view" id="as_hotel_service_tree_id">
+        <field name="name">Hotel-Service</field>
+        <field name="model">as.hotel.service</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="hotel_id"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.hotel.service -->
+    <record model="ir.ui.view" id="as_hotel_service_form_id">
+        <field name="name">Hotel-Service</field>
+        <field name="model">as.hotel.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="hotel_id"/>
+                            <field name="description"/>
+                            <field name="fa_class"/>
+                            <!--<field name="fa" options="{'no_create_edit': True}"/>-->
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.hotel.service -->
+    <record model="ir.actions.act_window" id="as_hotel_service_action_id">
+        <field name="name">Hotel-Service</field>
+        <field name="res_model">as.hotel.service</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - fa.class -->
+    <record model="ir.ui.view" id="fa_class_tree_id">
+        <field name="name">Font-Awesome</field>
+        <field name="model">fa.class</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - fa.class -->
+    <record model="ir.ui.view" id="fa_class_form_id">
+        <field name="name">Font-Awesome</field>
+        <field name="model">fa.class</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - fa.class -->
+    <record model="ir.actions.act_window" id="fa_class_action_id">
+        <field name="name">Font-Awesome</field>
+        <field name="res_model">fa.class</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.hotel.policy -->
+    <record model="ir.ui.view" id="as_hotel_policy_tree_id">
+        <field name="name">Hotel-Policies</field>
+        <field name="model">as.hotel.policy</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="fa_class"/>
+                <field name="parent_id"/>
+                <field name="parent_fa_class"/>
+                <field name="hotel_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.hotel.policy -->
+    <record model="ir.ui.view" id="as_hotel_policy_form_id">
+        <field name="name">Hotel-Policies</field>
+        <field name="model">as.hotel.policy</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="section"/>
+                            <field name="parent_id"/>
+                            <field name="name"/>
+                            <field name="fa_class"/>
+                            <field name="parent_fa_class"/>
+                            <field name="hotel_id"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.hotel.policy -->
+    <record model="ir.actions.act_window" id="as_hotel_policy_action_id">
+        <field name="name">Hotel-Policies</field>
+        <field name="res_model">as.hotel.policy</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.hotel.accept_payment_method -->
+    <record model="ir.ui.view" id="as_hotel_accept_payment_method_tree_id">
+        <field name="name">Accepted-Payment-Methods</field>
+        <field name="model">as.hotel.accept_payment_method</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.hotel.accept_payment_method -->
+    <record model="ir.ui.view" id="as_hotel_accept_payment_method_form_id">
+        <field name="name">Accepted-Payment-Methods</field>
+        <field name="model">as.hotel.accept_payment_method</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="hotel_id"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="image_1920" widget="image" class="oe_avatar"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.hotel.accept_payment_method -->
+    <record model="ir.actions.act_window" id="as_hotel_accept_payment_method_action_id">
+        <field name="name">Accepted-Payment-Methods</field>
+        <field name="res_model">as.hotel.accept_payment_method</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.hotel.review -->
+    <record model="ir.ui.view" id="as_hotel_review_tree_id">
+        <field name="name">Hotel-Reviews</field>
+        <field name="model">as.hotel.review</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="hotel_id"/>
+                <field name="partner_id"/>
+                <field name="star"/>
+                <field name="review"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.hotel.review -->
+    <record model="ir.ui.view" id="as_hotel_review_form_id">
+        <field name="name">Hotel-Reviews</field>
+        <field name="model">as.hotel.review</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="hotel_id"/>
+                            <field name="partner_id"/>
+                            <field name="star"/>
+                            <field name="review"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.hotel.review -->
+    <record model="ir.actions.act_window" id="as_hotel_review_action_id">
+        <field name="name">Hotel-Reviews</field>
+        <field name="res_model">as.hotel.review</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.service -->
+    <record model="ir.ui.view" id="as_service_tree_id">
+        <field name="name">As-Services</field>
+        <field name="model">as.service</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.service -->
+    <record model="ir.ui.view" id="as_service_form_id">
+        <field name="name">As-Services</field>
+        <field name="model">as.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <div>
+                        <h5 class="text-danger">Warning</h5>
+                        <div class="text-warning">
+                            This is very sensitive records.
+                            Don't change any record without permission of Administrator/Developer of this application.
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.service -->
+    <record model="ir.actions.act_window" id="as_service_action_id">
+        <field name="name">As-Services</field>
+        <field name="res_model">as.service</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.hotel.cancellation_policy -->
+    <record model="ir.ui.view" id="as_hotel_cancellation_policy_tree_id">
+        <field name="name">Hotel-Cancellation-Policy</field>
+        <field name="model">as.hotel.cancellation_policy</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="hotel_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.hotel.cancellation_policy -->
+    <record model="ir.ui.view" id="as_hotel_cancellation_policy_form_id">
+        <field name="name">Hotel-Cancellation-Policy</field>
+        <field name="model">as.hotel.cancellation_policy</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="hotel_id"/>
+                            <field name="type"/>
+                            <field name="description"/>
+                            <field name="code"/>
+                            <field name="checked"/>
+                            <field name="refund_before_number"/>
+                            <field name="refund_amount"/>
+                            <field name="free_cancellation"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.hotel.cancellation_policy -->
+    <record model="ir.actions.act_window" id="as_hotel_cancellation_policy_action_id">
+        <field name="name">Hotel-Cancellation-Policy</field>
+        <field name="res_model">as.hotel.cancellation_policy</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.hotel.extra -->
+    <record model="ir.ui.view" id="as_hotel_extra_tree_id">
+        <field name="name">Hotel-Extra</field>
+        <field name="model">as.hotel.extra</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="hotel_id"/>
+                <field name="amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.hotel.extra -->
+    <record model="ir.ui.view" id="as_hotel_extra_form_id">
+        <field name="name">Hotel-Extra</field>
+        <field name="model">as.hotel.extra</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="hotel_id"/>
+                            <field name="amount" widget="monetary"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.hotel.extra -->
+    <record model="ir.actions.act_window" id="as_hotel_extra_action_id">
+        <field name="name">Hotel-Extra</field>
+        <field name="res_model">as.hotel.extra</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.hotel.nearby -->
+    <record model="ir.ui.view" id="as_hotel_nearby_tree_id">
+        <field name="name">Hotel-Nearby</field>
+        <field name="model">as.hotel.nearby</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="hotel_id"/>
+                <field name="type"/>
+                <field name="distance"/>
+                <field name="distance_unit"/>
+                <field name="mode"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.hotel.nearby -->
+    <record model="ir.ui.view" id="as_hotel_nearby_form_id">
+        <field name="name">Hotel-Nearby</field>
+        <field name="model">as.hotel.nearby</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="hotel_id"/>
+                            <field name="type"/>
+                            <field name="distance"/>
+                            <field name="distance_unit"/>
+                            <field name="mode"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.hotel.nearby -->
+    <record model="ir.actions.act_window" id="as_hotel_nearby_action_id">
+        <field name="name">Hotel-Nearby</field>
+        <field name="res_model">as.hotel.nearby</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.alert -->
+    <record model="ir.ui.view" id="as_alert_tree_id">
+        <field name="name">as-alert</field>
+        <field name="model">as.alert</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="alert"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.alert -->
+    <record model="ir.ui.view" id="as_alert_form_id">
+        <field name="name">as-alert</field>
+        <field name="model">as.alert</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="alert"/>
+                            <field name="create_date"/>
+                            <field name="write_date"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.alert -->
+    <record model="ir.actions.act_window" id="as_alert_action_id">
+        <field name="name">Alert</field>
+        <field name="res_model">as.alert</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - as.stay -->
+    <record model="ir.ui.view" id="as_stay_tree_id">
+        <field name="name">as-stay</field>
+        <field name="model">as.stay</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - as.stay -->
+    <record model="ir.ui.view" id="as_stay_form_id">
+        <field name="name">as-stay</field>
+        <field name="model">as.stay</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="description"/>
+                            <field name="link"/>
+                            <field name="code"/>
+                            <field name="stay_item_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - as.stay -->
+    <record model="ir.actions.act_window" id="as_stay_action_id">
+        <field name="name">Stays</field>
+        <field name="res_model">as.stay</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - stay.item -->
+    <record model="ir.ui.view" id="stay_item_tree_id">
+        <field name="name">stay-item</field>
+        <field name="model">stay.item</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - stay.item -->
+    <record model="ir.ui.view" id="stay_item_form_id">
+        <field name="name">stay-item</field>
+        <field name="model">stay.item</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="description"/>
+                            <field name="link"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - stay.item -->
+    <record model="ir.actions.act_window" id="stay_item_action_id">
+        <field name="name">Stay Item</field>
+        <field name="res_model">stay.item</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - hotel.room -->
+    <record model="ir.ui.view" id="hotel_room_tree_id">
+        <field name="name">hotel-room</field>
+        <field name="model">hotel.room</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - hotel.room -->
+    <record model="ir.ui.view" id="hotel_room_form_id">
+        <field name="name">hotel-room</field>
+        <field name="model">hotel.room</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="hotel_id"/>
+                            <field name="type"/>
+                            <field name="name_id"/>
+                            <field name="custom_name"/>
+                            <field name="num_rooms"/>
+                            <field name="size"/>
+                            <field name="meas_unit"/>
+                            <field name="num_rooms"/>
+                            <field name="price"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - hotel.room -->
+    <record model="ir.actions.act_window" id="hotel_room_action_id">
+        <field name="name">hotel-room</field>
+        <field name="res_model">hotel.room</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - hotel.room_name -->
+    <record model="ir.ui.view" id="hotel_room_name_tree_id">
+        <field name="name">hotel-room_name</field>
+        <field name="model">hotel.room_name</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - hotel.room_name -->
+    <record model="ir.ui.view" id="hotel_room_name_form_id">
+        <field name="name">hotel-room_name</field>
+        <field name="model">hotel.room_name</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - hotel.room_name -->
+    <record model="ir.actions.act_window" id="hotel_room_name_action_id">
+        <field name="name">hotel-room_name</field>
+        <field name="res_model">hotel.room_name</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view of - hotel.room_bed_type -->
+    <record model="ir.ui.view" id="hotel_room_bed_type_tree_id">
+        <field name="name">hotel-room_bed_type</field>
+        <field name="model">hotel.room_bed_type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="capacity"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view of - hotel.room_bed_type -->
+    <record model="ir.ui.view" id="hotel_room_bed_type_form_id">
+        <field name="name">hotel-room_bed_type</field>
+        <field name="model">hotel.room_bed_type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="capacity"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action view of - hotel.room_bed_type -->
+    <record model="ir.actions.act_window" id="hotel_room_bed_type_action_id">
+        <field name="name">hotel-room_bed_type</field>
+        <field name="res_model">hotel.room_bed_type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
+

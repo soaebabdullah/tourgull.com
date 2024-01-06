@@ -1,0 +1,111 @@
+<odoo>
+    <record id="inherit_partner_view2" model="ir.ui.view">
+        <field name="name">Partner</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority" eval="50"/>
+        <field name="mode">primary</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <field name="email" position="attributes">
+                <attribute name="required">0</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="inherit_partner_view" model="ir.ui.view">
+        <field name="name">Partner</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="company_name"/>
+                <field name="street_permanent"/>
+                <field name="gender2"/>
+                <field name="fathers_name"/>
+                <field name="mothers_name"/>
+                <field name="date_of_birth"/>
+                <!--<field name="partner_type"/>-->
+                <field name="tg_is_tour_guide"/>
+                <field name="invite_code"/>
+                <!--<field name="rp_is_host"/>-->
+                <!--<field name="is_guest"/>-->
+                <field name="apt"/>
+                <field name="state"/>
+            </xpath>
+
+            <xpath expr="//field[@name='type']" position="before">
+                <field name="middle_name"/>
+                <field name="last_name"/>
+            </xpath>
+
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="emergency_phone2"/>
+                <field name="others_phone"/>
+                <field name="nid_number"/>
+                <field name="nid_front_1920" widget="image" class="oe_avatar"/>
+                <field name="nid_back_1920" widget="image" class="oe_avatar"/>
+                <field name="passport_number"/>
+                <field name="passport_photo_page_1920" widget="image" class="oe_avatar"/>
+                <field name="passport_contact_page_1920" widget="image" class="oe_avatar"/>
+                <field name="commission"/>
+            </xpath>
+
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="Tour-guides" string="Tour guide"
+                      attrs="{'invisible': [('tg_is_tour_guide', '=', False)]}">
+                    <group>
+                        <group string="More guide information">
+                            <field name="tg_about_me"/>
+                            <field name="tg_description"/>
+                            <field name="tg_tours"/>
+                            <field name="tg_views"/>
+                            <field name="tg_lang" widget="many2many_tags"/>
+                            <field name="tg_hourly_rate"/>
+                            <field name="tg_review" widget="many2many_tags"/>
+                            <field name="tg_place" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="Others" string="Others">
+                    <group>
+                        <group string="Setting">
+                            <field name="setting_message"/>
+                            <field name="setting_notification"/>
+                            <field name="document_ok"/>
+                            <field name="is_host"/>
+                            <field name="is_host_approved"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Business Profile">
+                            <field name="bp_business_name"/>
+                            <field name="bp_tl_name"/>
+                            <field name="bp_business_category"/>
+                            <field name="bp_street"/>
+                            <field name="bp_mobile"/>
+                            <field name="bp_email"/>
+                        </group>
+                        <group string="Present address">
+                            <field name="pre_country_id"/>
+                            <field name="pre_street"/>
+                            <field name="pre_apt"/>
+                            <field name="pre_city"/>
+                            <field name="pre_state"/>
+                            <field name="pre_zip"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

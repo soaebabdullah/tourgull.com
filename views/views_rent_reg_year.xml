@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+
+
+        <!-- tree - rent.car.reg_year -->
+        <!-- tree - rent_car_reg_year -->
+        <record model="ir.ui.view" id="rent_car_reg_year_tree_id">
+            <field name="name">rent_car_reg_year_tree</field>
+            <field name="model">rent.car.reg_year</field>
+            <field name="arch" type="xml">
+                <tree default_order="id desc">
+                    <field name="year"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- form -->
+        <record model="ir.ui.view" id="rent_car_reg_year_form_id">
+            <field name="name">rent_car_reg_year_tree</field>
+            <field name="model">rent.car.reg_year</field>
+            <field name="arch" type="xml">
+                <form default_order="id desc">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="year"/>
+                            </group>
+                            <group></group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- actions -->
+        <record model="ir.actions.act_window" id="car_reg_year_action">
+            <field name="name">Registration Year</field>
+            <field name="res_model">rent.car.reg_year</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+    </data>
+</odoo>

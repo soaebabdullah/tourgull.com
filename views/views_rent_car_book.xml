@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+
+
+        <!-- tree - rent_car_book -->
+        <!-- tree - rent.car.book -->
+        <record model="ir.ui.view" id="rent_car_book_tree_id">
+            <field name="name">rent_car_book_tree</field>
+            <field name="model">rent.car.book</field>
+            <field name="arch" type="xml">
+                <tree default_order="id desc">
+                    <field name="partner_id"/>
+                    <field name="product"/>
+                    <field name="date"/>
+                    <field name="paid"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- form - rent.car.book -->
+        <record model="ir.ui.view" id="rent_car_book_form_id">
+            <field name="name">rent_car_book_form</field>
+            <field name="model">rent.car.book</field>
+            <field name="arch" type="xml">
+                <form default_order="id desc">
+                    <header>
+                        <button name="btn_paid" type="object" string="Paid" class="btn btn-primary"
+                                attrs="{'invisible':[('paid','=', True)]}"/>
+                        <button name="btn_unpaid" type="object" string="Unpaid" class="btn btn-primary"
+                                attrs="{'invisible':[('paid','=', False)]}"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="product"/>
+                                <field name="date"/>
+                                <field name="paid"/>
+                            </group>
+                            <group></group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="car_book_action">
+            <field name="name">Car Book</field>
+            <field name="res_model">rent.car.book</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+    </data>
+</odoo>
